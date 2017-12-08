@@ -121,7 +121,7 @@
 
 // Default EEPROM data
 typedef unsigned char eeprom ;
-__code eeprom __at 0xf00000 __EEPROM[] = { I2C_ADDRESS, STEP_16, SET_AMP, 
+__code eeprom __at 0xf00000 __EEPROM[] = { I2C_ADDRESS, STEP_8, SET_AMP, 
                                            SET_AMP >> 8, MAX_AMP, 
                                            MAX_AMP >> 8, T_OFF,
                                            T_BLANK_LOW, T_BLANK_HIGH};
@@ -277,7 +277,7 @@ static void highInt(void) __interrupt(1) {
 
 // Low priority interrupt
 static void lowInt(void) __interrupt(2) {
-    uint8_t i2c_buf ;
+    uint8_t i2c_buf = 0 ;
     
     // I2C Interrupt
     if (PIR1bits.SSP1IF) {
@@ -496,8 +496,8 @@ int main(void) {
                 pwmSetup() ;            // Activate PWM
                 activeInts() ;          // Set active state interrupts
                 
-                T1CONbits.TMR1ON = 0 ;          // Toff timer off
-                TMR1L = 0 ;                     // Clear off timer
+                T1CONbits.TMR1ON = 0 ;  // Toff timer off
+                TMR1L = 0 ;             // Clear off timer
                 TMR1H = 0 ;
                 
                 T3CONbits.TMR3ON = 0 ;  // Toff timer off
@@ -729,4 +729,3 @@ int main(void) {
         }
     }
 }
-
