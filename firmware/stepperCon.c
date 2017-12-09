@@ -84,7 +84,7 @@
 
 
 #define MAX_AMP 3700        // [mA] Maximum driver amperage
-#define SET_AMP 1500        // [mA] Default driver limit
+#define SET_AMP 1800        // [mA] Default driver limit
 #define T_OFF   20          // [usec.] fixed phase time off
 #define T_BLANK_HIGH 1
 #define T_BLANK_LOW  10
@@ -128,11 +128,14 @@ __code eeprom __at 0xf00000 __EEPROM[] = { I2C_ADDRESS, STEP_8, SET_AMP,
 
 // PWM micro-stepping base table
 static const __data int16_t pwm_base[] = {  
-     0, 50, 100, 148, 196, 241, 284, 324, 362, 395, 425, 451, 473, 489, 502, 
-     509, 512, 509, 502, 489, 473, 451, 425, 395, 362, 324, 284, 241, 196, 148, 
-     100, 50, 0, -50, -100, -148, -196, -241, -284, -324, -362, -395, -425, 
-     -451, -473, -489, -502, -509, -512, -509, -502, -489, -473, -451, -425, 
-     -395, -362, -324, -284, -241, -196, -148, -100, -50
+        0,   50,  100,  149,  196,  241,  284,  325,    //  0-7 
+      362,  396,  426,  452,  473,  490,  502,  510,    //  8-15
+      512,  510,  502,  490,  473,  452,  426,  396,    // 16-23 
+      362,  325,  284,  241,  196,  149,  100,   50,    // 24-31
+        0,  -50, -100, -149, -196, -241, -284, -325,    // 32-39
+     -362, -396, -426, -453, -473, -490, -502, -510,    // 40-47
+     -512, -510, -502, -490, -473, -452, -426, -396,    // 48-55
+     -362, -325, -284, -241, -196, -149, -100,  -50     // 56-63
 } ;
 
 uint8_t state ;             // Current state of operation state machine
@@ -148,8 +151,8 @@ uint8_t t_off ;             // Phase fixed off time, Reg 0x06
 uint8_t t_blank_low ;       // Phase blanking in reverse current Reg 0x7
 uint8_t t_blank_high ;      // Phase blanking in forward current Reg 0x8
 
-uint8_t step_a ;            // Current phase A step
-uint8_t step_b ;            // Current phase B step
+int8_t step_a ;            // Current phase A step
+int8_t step_b ;            // Current phase B step
 uint8_t pol_a ;             // Phase A polarity
 uint8_t pol_b ;             // Phase B polarity
 int8_t  dir ;               // Direction
@@ -632,22 +635,26 @@ int main(void) {
                 
                 // Forward motion
                 if (dir == 1) {
-                    if (step_a++ == FULL_CYCLE - 1) step_a = 0 ;
-                    if (step_b++ == FULL_CYCLE - 1) step_b = 0 ;
+                    step_a += skip ;
+                    step_b += skip ;
+                    if (step_a > FULL_CYCLE - 1) step_a -= FULL_CYCLE ;
+                    if (step_b > FULL_CYCLE - 1) step_b -= FULL_CYCLE ;
                 }
                 // Reverse motion
                 else {
-                    if (step_a-- == 0) step_a = FULL_CYCLE - 1 ;
-                    if (step_b-- == 0) step_b = FULL_CYCLE - 1 ;
+                    step_a -= skip ;
+                    step_b -= skip ;
+                    if (step_a < 0) step_a += FULL_CYCLE ;
+                    if (step_b < 0) step_b += FULL_CYCLE ;
                 }
                 
                 // Set current polarity
-                if (step_a == HALF_CYCLE || step_a == 0 || pwm_lu[step_a] == zero_cross) pol_a = 2 ;
-                else if (pwm_lu[step_a] < zero_cross) pol_a = 0 ;
+                if (step_a == HALF_CYCLE || step_a == 0) pol_a = 2 ;
+                else if (step_a > HALF_CYCLE) pol_a = 0 ;
                 else pol_a = 1 ;
                 
-                if (step_b == HALF_CYCLE || step_b == 0 || pwm_lu[step_b] == zero_cross) pol_b = 2 ;
-                else if (pwm_lu[step_b] < zero_cross) pol_b = 0 ;
+                if (step_b == HALF_CYCLE || step_b == 0) pol_b = 2 ;
+                else if (step_b > HALF_CYCLE) pol_b = 0 ;
                 else pol_b = 1 ;
                                
                 // Pre-calculate PWM duty-cycle registers values
