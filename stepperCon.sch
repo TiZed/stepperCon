@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:stepperCon-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -614,7 +615,7 @@ En_B
 Text GLabel 6950 4350 2    60   Input ~ 0
 ENABLE_B
 $Comp
-L BSS138 Q101
+L BSS138-RESCUE-stepperCon Q101
 U 1 1 57A5214E
 P 4650 6800
 F 0 "Q101" V 4889 6800 50  0000 C CNN
@@ -625,7 +626,7 @@ F 3 "" H 4650 6800 50  0000 L CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L BSS138 Q102
+L BSS138-RESCUE-stepperCon Q102
 U 1 1 57A52242
 P 4675 7350
 F 0 "Q102" V 4914 7350 50  0000 C CNN
@@ -1129,7 +1130,7 @@ F 3 "" H 10500 1775 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L BSS138 Q103
+L BSS138-RESCUE-stepperCon Q103
 U 1 1 57A6DCAA
 P 9050 1725
 F 0 "Q103" H 9275 1725 50  0000 C CNN

@@ -86,8 +86,8 @@
 #define MAX_AMP 3700        // [mA] Maximum driver amperage
 #define SET_AMP 1800        // [mA] Default driver limit
 #define T_OFF   20          // [usec.] fixed phase time off
-#define T_BLANK_HIGH 1
-#define T_BLANK_LOW  10
+#define T_BLANK_HIGH 1      // [usec.] blank time for forward current
+#define T_BLANK_LOW  10     // [usec.] blank time for revers current
 
 // Stepping modes
 #define STEP_16  1
@@ -321,6 +321,7 @@ static void lowInt(void) __interrupt(2) {
     } 
 }
 
+// Setup I2C I/F
 void i2cSetup(void) {
     TRISCbits.TRISC3 = 1 ;      // Set I2C pins as input
     TRISCbits.TRISC4 = 1 ;
@@ -335,6 +336,7 @@ void i2cSetup(void) {
     SSP1CON1bits.SSPM = 0x6 ;   // I2C Slave mode, 7-bit address
 }
 
+// Prepare interrupts
 void activeInts(void) {
     PIE1bits.SSP1IE = 0 ;       // Disable I2C interrupt
     SSP1CON1bits.SSPEN = 0 ;    // Disable I2C port
@@ -379,6 +381,7 @@ void idleInts(void) {
     SSP1CON1bits.SSPEN = 1 ;    // Enable I2C port
 }
 
+// Calculate PWM lookup table
 void prep_pwm_lu(void) {
     float ratio, set, bias ;
     uint8_t i ;
@@ -394,6 +397,7 @@ void prep_pwm_lu(void) {
     }
 }
 
+// Get operation variables
 void set_op_vars(void) {
     i2c_address = i2c_regs[0x00] ;
     skip        = i2c_regs[0x01] ;
@@ -406,6 +410,7 @@ void set_op_vars(void) {
     t_blank_high= i2c_regs[0x08] * 2 * TMR_500NS ;
 }
 
+// Basic msec. delay loop
 void delay_ms(uint16_t time) {
     uint16_t i = time ;
     
@@ -736,3 +741,4 @@ int main(void) {
         }
     }
 }
+
