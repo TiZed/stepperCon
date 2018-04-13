@@ -83,8 +83,8 @@
 #define I2C_REGISTERS 9
 
 
-#define MAX_AMP 3700        // [mA] Maximum driver amperage
-#define SET_AMP 1800        // [mA] Default driver limit
+#define MAX_AMP 3704        // [mA] Maximum driver amperage
+#define SET_AMP 1500        // [mA] Default driver limit
 #define T_OFF   20          // [usec.] fixed phase time off
 #define T_BLANK_HIGH 1      // [usec.] blank time for forward current
 #define T_BLANK_LOW  10     // [usec.] blank time for revers current

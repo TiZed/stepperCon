@@ -1,6 +1,6 @@
 gplink-1.5.2 #1312 (Dec  8 2017)
 Copyright (c) 1998-2016 gputils project
-Listing File Generated: 09/02/18  20:29:35
+Listing File Generated: 10/02/18  11:49:29
 
 
 Address  Value    Disassembly              Source
@@ -624,26 +624,26 @@ Address  Value    Disassembly              Source
                                            ; ; Starting pCode block
                                            S_stepperCon__main	code
                                            _main:
-                                           ;	.line	429; stepperCon.c	uint8_t pwm_a_l = 0, pwm_a_h = 0, pwm_b_l = 0, pwm_b_h = 0 ;
+                                           ;	.line	434; stepperCon.c	uint8_t pwm_a_l = 0, pwm_a_h = 0, pwm_b_l = 0, pwm_b_h = 0 ;
 00001c   6a00     clrf    0x00, 0x0        	CLRF	r0x00
 00001e   6a01     clrf    0x01, 0x0        	CLRF	r0x01
 000020   6a02     clrf    0x02, 0x0        	CLRF	r0x02
 000022   6a03     clrf    0x03, 0x0        	CLRF	r0x03
-                                           ;	.line	431; stepperCon.c	ioSetup() ;                 // Setup IO ports
+                                           ;	.line	436; stepperCon.c	ioSetup() ;                 // Setup IO ports
 000024   eca1     call    0x002142, 0x0    	CALL	_ioSetup
 000026   f010
-                                           ;	.line	434; stepperCon.c	if(RCONbits.POR) {
+                                           ;	.line	439; stepperCon.c	if(RCONbits.POR) {
 000028   a2d0     btfss   0xd0, 0x1, 0x0   	BTFSS	_RCONbits, 1
 00002a   d002     bra     0x000030         	BRA	_00299_DS_
-                                           ;	.line	435; stepperCon.c	resetCheck() ;
+                                           ;	.line	440; stepperCon.c	resetCheck() ;
 00002c   ec67     call    0x001cce, 0x0    	CALL	_resetCheck
 00002e   f00e
                                            _00299_DS_:
-                                           ;	.line	440; stepperCon.c	RCONbits.POR = 1 ;
+                                           ;	.line	445; stepperCon.c	RCONbits.POR = 1 ;
 000030   82d0     bsf     0xd0, 0x1, 0x0   	BSF	_RCONbits, 1
-                                           ;	.line	441; stepperCon.c	RCONbits.BOR = 1 ;
+                                           ;	.line	446; stepperCon.c	RCONbits.BOR = 1 ;
 000032   80d0     bsf     0xd0, 0x0, 0x0   	BSF	_RCONbits, 0
-                                           ;	.line	443; stepperCon.c	read_regs(i2c_regs, sizeof(i2c_regs)) ;  // Populate I2C registers from EEPROM
+                                           ;	.line	448; stepperCon.c	read_regs(i2c_regs, sizeof(i2c_regs)) ;  // Populate I2C registers from EEPROM
 000034   0e00     movlw   0x00             	MOVLW	HIGH(_i2c_regs)
 000036   6e05     movwf   0x05, 0x0        	MOVWF	r0x05
 000038   0ee1     movlw   0xe1             	MOVLW	LOW(_i2c_regs)
@@ -662,33 +662,33 @@ Address  Value    Disassembly              Source
 000052   f00e
 000054   0e04     movlw   0x04             	MOVLW	0x04
 000056   26e1     addwf   0xe1, 0x1, 0x0   	ADDWF	FSR1L, F
-                                           ;	.line	444; stepperCon.c	set_op_vars() ;             // Set operation variables from I2C registers
+                                           ;	.line	449; stepperCon.c	set_op_vars() ;             // Set operation variables from I2C registers
 000058   ec15     call    0x001c2a, 0x0    	CALL	_set_op_vars
 00005a   f00e
 00005c   010f     movlb   0xf              	BANKSEL	_i2c_dirty
-                                           ;	.line	445; stepperCon.c	i2c_dirty = 0 ;             // Clear I2C dirty flag
+                                           ;	.line	450; stepperCon.c	i2c_dirty = 0 ;             // Clear I2C dirty flag
 00005e   6b31     clrf    0x31, 0x1        	CLRF	_i2c_dirty, B
-                                           ;	.line	447; stepperCon.c	i2cSetup() ;                // Setup I2C I/F
+                                           ;	.line	452; stepperCon.c	i2cSetup() ;                // Setup I2C I/F
 000060   ec1e     call    0x00223c, 0x0    	CALL	_i2cSetup
 000062   f011
-                                           ;	.line	448; stepperCon.c	intSetup() ;                // Interrupts setup
+                                           ;	.line	453; stepperCon.c	intSetup() ;                // Interrupts setup
 000064   ec32     call    0x002264, 0x0    	CALL	_intSetup
 000066   f011
-                                           ;	.line	449; stepperCon.c	compsSetup() ;              // Comparators setup
+                                           ;	.line	454; stepperCon.c	compsSetup() ;              // Comparators setup
 000068   ec05     call    0x00220a, 0x0    	CALL	_compsSetup
 00006a   f011
-                                           ;	.line	450; stepperCon.c	idleInts() ;                // Set interrupts to 'idle' state
+                                           ;	.line	455; stepperCon.c	idleInts() ;                // Set interrupts to 'idle' state
 00006c   ec46     call    0x00228c, 0x0    	CALL	_idleInts
 00006e   f011
 000070   010f     movlb   0xf              	BANKSEL	_state
-                                           ;	.line	453; stepperCon.c	state = IDLE ;              // Start in 'idle' state
+                                           ;	.line	458; stepperCon.c	state = IDLE ;              // Start in 'idle' state
 000072   6b24     clrf    0x24, 0x1        	CLRF	_state, B
-                                           ;	.line	455; stepperCon.c	phTimersSetup() ;
+                                           ;	.line	460; stepperCon.c	phTimersSetup() ;
 000074   ec73     call    0x0020e6, 0x0    	CALL	_phTimersSetup
 000076   f010
-                                           ;	.line	458; stepperCon.c	PORTDbits.RD2 = 1 ;     // Turn blue LED on
+                                           ;	.line	463; stepperCon.c	PORTDbits.RD2 = 1 ;     // Turn blue LED on
 000078   8483     bsf     0x83, 0x2, 0x0   	BSF	_PORTDbits, 2
-                                           ;	.line	459; stepperCon.c	delay_ms(300) ;    
+                                           ;	.line	464; stepperCon.c	delay_ms(300) ;    
 00007a   0e01     movlw   0x01             	MOVLW	0x01
 00007c   6ee5     movwf   0xe5, 0x0        	MOVWF	POSTDEC1
 00007e   0e2c     movlw   0x2c             	MOVLW	0x2c
@@ -697,15 +697,15 @@ Address  Value    Disassembly              Source
 000084   f010
 000086   52e6     movf    0xe6, 0x1, 0x0   	MOVF	POSTINC1, F
 000088   52e6     movf    0xe6, 0x1, 0x0   	MOVF	POSTINC1, F
-                                           ;	.line	460; stepperCon.c	PORTDbits.RD2 = 0 ;     // Turn blue LED off
+                                           ;	.line	465; stepperCon.c	PORTDbits.RD2 = 0 ;     // Turn blue LED off
 00008a   9483     bcf     0x83, 0x2, 0x0   	BCF	_PORTDbits, 2
-                                           ;	.line	462; stepperCon.c	WDTCON = 1 ;        // Enable watchdog timer
+                                           ;	.line	467; stepperCon.c	WDTCON = 1 ;        // Enable watchdog timer
 00008c   0e01     movlw   0x01             	MOVLW	0x01
 00008e   6ed1     movwf   0xd1, 0x0        	MOVWF	_WDTCON
                                            _00435_DS_:
 000090   0004     clrwdt                   	clrwdt	
 000092   010f     movlb   0xf              	BANKSEL	_state
-                                           ;	.line	468; stepperCon.c	switch(state) {
+                                           ;	.line	473; stepperCon.c	switch(state) {
 000094   5124     movf    0x24, 0x0, 0x1   	MOVF	_state, W, B
 000096   e102     bnz     0x00009c         	BNZ	_00602_DS_
 000098   ef3e     goto    0x00067c         	GOTO	_00428_DS_
@@ -738,7 +738,7 @@ Address  Value    Disassembly              Source
                                            _00610_DS_:
 0000c6   d7e4     bra     0x000090         	BRA	_00435_DS_
                                            _00300_DS_:
-                                           ;	.line	470; stepperCon.c	LATDbits.LATD2 = !LATDbits.LATD2 ;
+                                           ;	.line	475; stepperCon.c	LATDbits.LATD2 = !LATDbits.LATD2 ;
 0000c8   6a04     clrf    0x04, 0x0        	CLRF	r0x04
 0000ca   b48c     btfsc   0x8c, 0x2, 0x0   	BTFSC	_LATDbits, 2
 0000cc   2a04     incf    0x04, 0x1, 0x0   	INCF	r0x04, F
@@ -758,7 +758,7 @@ Address  Value    Disassembly              Source
 0000e8   10f4     iorwf   0xf4, 0x0, 0x0   	IORWF	PRODH, W
 0000ea   6e8c     movwf   0x8c, 0x0        	MOVWF	_LATDbits
 0000ec   010f     movlb   0xf              	BANKSEL	_skip
-                                           ;	.line	474; stepperCon.c	if (skip == STEP_1) step_a = STEPS / 2 ;
+                                           ;	.line	479; stepperCon.c	if (skip == STEP_1) step_a = STEPS / 2 ;
 0000ee   5133     movf    0x33, 0x0, 0x1   	MOVF	_skip, W, B
 0000f0   0a10     xorlw   0x10             	XORLW	0x10
 0000f2   e104     bnz     0x0000fc         	BNZ	_00302_DS_
@@ -768,27 +768,27 @@ Address  Value    Disassembly              Source
 0000fa   d002     bra     0x000100         	BRA	_00303_DS_
                                            _00302_DS_:
 0000fc   010f     movlb   0xf              	BANKSEL	_step_a
-                                           ;	.line	475; stepperCon.c	else step_a = 0 ;
+                                           ;	.line	480; stepperCon.c	else step_a = 0 ;
 0000fe   6b34     clrf    0x34, 0x1        	CLRF	_step_a, B
                                            _00303_DS_:
-                                           ;	.line	478; stepperCon.c	step_b = step_a + STEPS ;
+                                           ;	.line	483; stepperCon.c	step_b = step_a + STEPS ;
 000100   0e10     movlw   0x10             	MOVLW	0x10
 000102   010f     movlb   0xf              	BANKSEL	_step_a
 000104   2534     addwf   0x34, 0x0, 0x1   	ADDWF	_step_a, W, B
 000106   010f     movlb   0xf              	BANKSEL	_step_b
 000108   6f35     movwf   0x35, 0x1        	MOVWF	_step_b, B
-                                           ;	.line	481; stepperCon.c	CCPR1H = 0 ;
+                                           ;	.line	486; stepperCon.c	CCPR1H = 0 ;
 00010a   6abf     clrf    0xbf, 0x0        	CLRF	_CCPR1H
-                                           ;	.line	482; stepperCon.c	CCPR1L = t_off ;
+                                           ;	.line	487; stepperCon.c	CCPR1L = t_off ;
 00010c   cf29     movff   0xf29, 0xfbe     	MOVFF	_t_off, _CCPR1L
 00010e   ffbe
-                                           ;	.line	484; stepperCon.c	CCPR2H = 0 ;
+                                           ;	.line	489; stepperCon.c	CCPR2H = 0 ;
 000110   6a68     clrf    0x68, 0x0        	CLRF	_CCPR2H
-                                           ;	.line	485; stepperCon.c	CCPR2L = t_off ;
+                                           ;	.line	490; stepperCon.c	CCPR2L = t_off ;
 000112   cf29     movff   0xf29, 0xf67     	MOVFF	_t_off, _CCPR2L
 000114   ff67
 000116   010f     movlb   0xf              	BANKSEL	_step_a
-                                           ;	.line	487; stepperCon.c	if (step_a > THREE_QUARTERS) a_decay = FAST_DECAY ;
+                                           ;	.line	492; stepperCon.c	if (step_a > THREE_QUARTERS) a_decay = FAST_DECAY ;
 000118   5134     movf    0x34, 0x0, 0x1   	MOVF	_step_a, W, B
 00011a   0f80     addlw   0x80             	ADDLW	0x80
 00011c   0f4f     addlw   0x4f             	ADDLW	0x4f
@@ -799,7 +799,7 @@ Address  Value    Disassembly              Source
 000126   d013     bra     0x00014e         	BRA	_00312_DS_
                                            _00311_DS_:
 000128   010f     movlb   0xf              	BANKSEL	_step_a
-                                           ;	.line	488; stepperCon.c	else if (step_a >= HALF_CYCLE) a_decay = SLOW_DECAY ;
+                                           ;	.line	493; stepperCon.c	else if (step_a >= HALF_CYCLE) a_decay = SLOW_DECAY ;
 00012a   5134     movf    0x34, 0x0, 0x1   	MOVF	_step_a, W, B
 00012c   0f80     addlw   0x80             	ADDLW	0x80
 00012e   0f60     addlw   0x60             	ADDLW	0x60
@@ -809,7 +809,7 @@ Address  Value    Disassembly              Source
 000136   d00b     bra     0x00014e         	BRA	_00312_DS_
                                            _00308_DS_:
 000138   010f     movlb   0xf              	BANKSEL	_step_a
-                                           ;	.line	489; stepperCon.c	else if (step_a > STEPS) a_decay = FAST_DECAY ;
+                                           ;	.line	494; stepperCon.c	else if (step_a > STEPS) a_decay = FAST_DECAY ;
 00013a   5134     movf    0x34, 0x0, 0x1   	MOVF	_step_a, W, B
 00013c   0f80     addlw   0x80             	ADDLW	0x80
 00013e   0f6f     addlw   0x6f             	ADDLW	0x6f
@@ -820,11 +820,11 @@ Address  Value    Disassembly              Source
 000148   d002     bra     0x00014e         	BRA	_00312_DS_
                                            _00305_DS_:
 00014a   010f     movlb   0xf              	BANKSEL	_a_decay
-                                           ;	.line	490; stepperCon.c	else a_decay = SLOW_DECAY ;
+                                           ;	.line	495; stepperCon.c	else a_decay = SLOW_DECAY ;
 00014c   6b2b     clrf    0x2b, 0x1        	CLRF	_a_decay, B
                                            _00312_DS_:
 00014e   010f     movlb   0xf              	BANKSEL	_step_b
-                                           ;	.line	492; stepperCon.c	if (step_b > THREE_QUARTERS) b_decay = FAST_DECAY ;
+                                           ;	.line	497; stepperCon.c	if (step_b > THREE_QUARTERS) b_decay = FAST_DECAY ;
 000150   5135     movf    0x35, 0x0, 0x1   	MOVF	_step_b, W, B
 000152   0f80     addlw   0x80             	ADDLW	0x80
 000154   0f4f     addlw   0x4f             	ADDLW	0x4f
@@ -835,7 +835,7 @@ Address  Value    Disassembly              Source
 00015e   d013     bra     0x000186         	BRA	_00321_DS_
                                            _00320_DS_:
 000160   010f     movlb   0xf              	BANKSEL	_step_b
-                                           ;	.line	493; stepperCon.c	else if (step_b >= HALF_CYCLE) b_decay = SLOW_DECAY ;
+                                           ;	.line	498; stepperCon.c	else if (step_b >= HALF_CYCLE) b_decay = SLOW_DECAY ;
 000162   5135     movf    0x35, 0x0, 0x1   	MOVF	_step_b, W, B
 000164   0f80     addlw   0x80             	ADDLW	0x80
 000166   0f60     addlw   0x60             	ADDLW	0x60
@@ -845,7 +845,7 @@ Address  Value    Disassembly              Source
 00016e   d00b     bra     0x000186         	BRA	_00321_DS_
                                            _00317_DS_:
 000170   010f     movlb   0xf              	BANKSEL	_step_b
-                                           ;	.line	494; stepperCon.c	else if (step_b > STEPS) b_decay = FAST_DECAY ;
+                                           ;	.line	499; stepperCon.c	else if (step_b > STEPS) b_decay = FAST_DECAY ;
 000172   5135     movf    0x35, 0x0, 0x1   	MOVF	_step_b, W, B
 000174   0f80     addlw   0x80             	ADDLW	0x80
 000176   0f6f     addlw   0x6f             	ADDLW	0x6f
@@ -856,40 +856,40 @@ Address  Value    Disassembly              Source
 000180   d002     bra     0x000186         	BRA	_00321_DS_
                                            _00314_DS_:
 000182   010f     movlb   0xf              	BANKSEL	_b_decay
-                                           ;	.line	495; stepperCon.c	else b_decay = SLOW_DECAY ;
+                                           ;	.line	500; stepperCon.c	else b_decay = SLOW_DECAY ;
 000184   6b2d     clrf    0x2d, 0x1        	CLRF	_b_decay, B
                                            _00321_DS_:
-                                           ;	.line	497; stepperCon.c	prep_pwm_lu() ;         // prepare PWM lookup table
+                                           ;	.line	502; stepperCon.c	prep_pwm_lu() ;         // prepare PWM lookup table
 000186   ec85     call    0x00130a, 0x0    	CALL	_prep_pwm_lu
 000188   f009
-                                           ;	.line	499; stepperCon.c	pwmSetup() ;            // Activate PWM
+                                           ;	.line	504; stepperCon.c	pwmSetup() ;            // Activate PWM
 00018a   ecc7     call    0x00218e, 0x0    	CALL	_pwmSetup
 00018c   f010
-                                           ;	.line	500; stepperCon.c	activeInts() ;          // Set active state interrupts
+                                           ;	.line	505; stepperCon.c	activeInts() ;          // Set active state interrupts
 00018e   ecea     call    0x0021d4, 0x0    	CALL	_activeInts
 000190   f010
-                                           ;	.line	502; stepperCon.c	T1CONbits.TMR1ON = 0 ;  // Toff timer off
+                                           ;	.line	507; stepperCon.c	T1CONbits.TMR1ON = 0 ;  // Toff timer off
 000192   90cd     bcf     0xcd, 0x0, 0x0   	BCF	_T1CONbits, 0
-                                           ;	.line	503; stepperCon.c	TMR1L = 0 ;             // Clear off timer
+                                           ;	.line	508; stepperCon.c	TMR1L = 0 ;             // Clear off timer
 000194   6ace     clrf    0xce, 0x0        	CLRF	_TMR1L
-                                           ;	.line	504; stepperCon.c	TMR1H = 0 ;
+                                           ;	.line	509; stepperCon.c	TMR1H = 0 ;
 000196   6acf     clrf    0xcf, 0x0        	CLRF	_TMR1H
-                                           ;	.line	506; stepperCon.c	T3CONbits.TMR3ON = 0 ;  // Toff timer off
+                                           ;	.line	511; stepperCon.c	T3CONbits.TMR3ON = 0 ;  // Toff timer off
 000198   90b1     bcf     0xb1, 0x0, 0x0   	BCF	_T3CONbits, 0
-                                           ;	.line	507; stepperCon.c	TMR3L = 0 ;             // Clear off timer 
+                                           ;	.line	512; stepperCon.c	TMR3L = 0 ;             // Clear off timer 
 00019a   6ab2     clrf    0xb2, 0x0        	CLRF	_TMR3L
-                                           ;	.line	508; stepperCon.c	TMR3H = 0 ;
+                                           ;	.line	513; stepperCon.c	TMR3H = 0 ;
 00019c   6ab3     clrf    0xb3, 0x0        	CLRF	_TMR3H
-                                           ;	.line	510; stepperCon.c	a_state = T_DRIVE ;
+                                           ;	.line	515; stepperCon.c	a_state = T_DRIVE ;
 00019e   0e02     movlw   0x02             	MOVLW	0x02
 0001a0   010f     movlb   0xf              	BANKSEL	_a_state
 0001a2   6f28     movwf   0x28, 0x1        	MOVWF	_a_state, B
-                                           ;	.line	511; stepperCon.c	b_state = T_DRIVE ;
+                                           ;	.line	516; stepperCon.c	b_state = T_DRIVE ;
 0001a4   0e02     movlw   0x02             	MOVLW	0x02
 0001a6   010f     movlb   0xf              	BANKSEL	_b_state
 0001a8   6f2a     movwf   0x2a, 0x1        	MOVWF	_b_state, B
 0001aa   010f     movlb   0xf              	BANKSEL	_step_a
-                                           ;	.line	514; stepperCon.c	if (step_a == HALF_CYCLE || step_a == 0) pol_a = 2 ;
+                                           ;	.line	519; stepperCon.c	if (step_a == HALF_CYCLE || step_a == 0) pol_a = 2 ;
 0001ac   5134     movf    0x34, 0x0, 0x1   	MOVF	_step_a, W, B
 0001ae   0a20     xorlw   0x20             	XORLW	0x20
 0001b0   e003     bz      0x0001b8         	BZ	_00325_DS_
@@ -904,7 +904,7 @@ Address  Value    Disassembly              Source
 0001be   d00b     bra     0x0001d6         	BRA	_00327_DS_
                                            _00326_DS_:
 0001c0   010f     movlb   0xf              	BANKSEL	_step_a
-                                           ;	.line	515; stepperCon.c	else if (step_a > HALF_CYCLE) pol_a = 0 ;
+                                           ;	.line	520; stepperCon.c	else if (step_a > HALF_CYCLE) pol_a = 0 ;
 0001c2   5134     movf    0x34, 0x0, 0x1   	MOVF	_step_a, W, B
 0001c4   0f80     addlw   0x80             	ADDLW	0x80
 0001c6   0f5f     addlw   0x5f             	ADDLW	0x5f
@@ -913,13 +913,13 @@ Address  Value    Disassembly              Source
 0001cc   6b2c     clrf    0x2c, 0x1        	CLRF	_pol_a, B
 0001ce   d003     bra     0x0001d6         	BRA	_00327_DS_
                                            _00323_DS_:
-                                           ;	.line	516; stepperCon.c	else pol_a = 1 ;
+                                           ;	.line	521; stepperCon.c	else pol_a = 1 ;
 0001d0   0e01     movlw   0x01             	MOVLW	0x01
 0001d2   010f     movlb   0xf              	BANKSEL	_pol_a
 0001d4   6f2c     movwf   0x2c, 0x1        	MOVWF	_pol_a, B
                                            _00327_DS_:
 0001d6   010f     movlb   0xf              	BANKSEL	_step_b
-                                           ;	.line	518; stepperCon.c	if (step_b == HALF_CYCLE || step_b == 0) pol_b = 2 ;
+                                           ;	.line	523; stepperCon.c	if (step_b == HALF_CYCLE || step_b == 0) pol_b = 2 ;
 0001d8   5135     movf    0x35, 0x0, 0x1   	MOVF	_step_b, W, B
 0001da   0a20     xorlw   0x20             	XORLW	0x20
 0001dc   e003     bz      0x0001e4         	BZ	_00332_DS_
@@ -934,7 +934,7 @@ Address  Value    Disassembly              Source
 0001ea   d00b     bra     0x000202         	BRA	_00334_DS_
                                            _00333_DS_:
 0001ec   010f     movlb   0xf              	BANKSEL	_step_b
-                                           ;	.line	519; stepperCon.c	else if (step_b > HALF_CYCLE) pol_b = 0 ;
+                                           ;	.line	524; stepperCon.c	else if (step_b > HALF_CYCLE) pol_b = 0 ;
 0001ee   5135     movf    0x35, 0x0, 0x1   	MOVF	_step_b, W, B
 0001f0   0f80     addlw   0x80             	ADDLW	0x80
 0001f2   0f5f     addlw   0x5f             	ADDLW	0x5f
@@ -943,84 +943,84 @@ Address  Value    Disassembly              Source
 0001f8   6b2e     clrf    0x2e, 0x1        	CLRF	_pol_b, B
 0001fa   d003     bra     0x000202         	BRA	_00334_DS_
                                            _00330_DS_:
-                                           ;	.line	520; stepperCon.c	else pol_b = 1 ;
+                                           ;	.line	525; stepperCon.c	else pol_b = 1 ;
 0001fc   0e01     movlw   0x01             	MOVLW	0x01
 0001fe   010f     movlb   0xf              	BANKSEL	_pol_b
 000200   6f2e     movwf   0x2e, 0x1        	MOVWF	_pol_b, B
                                            _00334_DS_:
-                                           ;	.line	522; stepperCon.c	CM1CON0 = 0x09 ;
+                                           ;	.line	527; stepperCon.c	CM1CON0 = 0x09 ;
 000202   0e09     movlw   0x09             	MOVLW	0x09
 000204   6e79     movwf   0x79, 0x0        	MOVWF	_CM1CON0
-                                           ;	.line	523; stepperCon.c	CM2CON0 = 0x08 ;
+                                           ;	.line	528; stepperCon.c	CM2CON0 = 0x08 ;
 000206   0e08     movlw   0x08             	MOVLW	0x08
 000208   6e78     movwf   0x78, 0x0        	MOVWF	_CM2CON0
 00020a   010f     movlb   0xf              	BANKSEL	_pol_a
-                                           ;	.line	525; stepperCon.c	if (pol_a == 2) {
+                                           ;	.line	530; stepperCon.c	if (pol_a == 2) {
 00020c   512c     movf    0x2c, 0x0, 0x1   	MOVF	_pol_a, W, B
 00020e   0a02     xorlw   0x02             	XORLW	0x02
 000210   e103     bnz     0x000218         	BNZ	_00340_DS_
-                                           ;	.line	526; stepperCon.c	LATCbits.LATC1 = 0 ;
+                                           ;	.line	531; stepperCon.c	LATCbits.LATC1 = 0 ;
 000212   928b     bcf     0x8b, 0x1, 0x0   	BCF	_LATCbits, 1
-                                           ;	.line	527; stepperCon.c	LATCbits.LATC0 = 0 ;
+                                           ;	.line	532; stepperCon.c	LATCbits.LATC0 = 0 ;
 000214   908b     bcf     0x8b, 0x0, 0x0   	BCF	_LATCbits, 0
 000216   d00c     bra     0x000230         	BRA	_00341_DS_
                                            _00340_DS_:
 000218   010f     movlb   0xf              	BANKSEL	_pol_a
-                                           ;	.line	529; stepperCon.c	else if (pol_a) {               // Forward current, Phase-A
+                                           ;	.line	534; stepperCon.c	else if (pol_a) {               // Forward current, Phase-A
 00021a   512c     movf    0x2c, 0x0, 0x1   	MOVF	_pol_a, W, B
 00021c   e005     bz      0x000228         	BZ	_00337_DS_
-                                           ;	.line	530; stepperCon.c	LATCbits.LATC1 = 0 ;
+                                           ;	.line	535; stepperCon.c	LATCbits.LATC1 = 0 ;
 00021e   928b     bcf     0x8b, 0x1, 0x0   	BCF	_LATCbits, 1
-                                           ;	.line	531; stepperCon.c	LATCbits.LATC0 = 1 ;
+                                           ;	.line	536; stepperCon.c	LATCbits.LATC0 = 1 ;
 000220   808b     bsf     0x8b, 0x0, 0x0   	BSF	_LATCbits, 0
-                                           ;	.line	532; stepperCon.c	CM1CON0 = 0x99 ; 
+                                           ;	.line	537; stepperCon.c	CM1CON0 = 0x99 ; 
 000222   0e99     movlw   0x99             	MOVLW	0x99
 000224   6e79     movwf   0x79, 0x0        	MOVWF	_CM1CON0
 000226   d004     bra     0x000230         	BRA	_00341_DS_
                                            _00337_DS_:
-                                           ;	.line	535; stepperCon.c	LATCbits.LATC0 = 0 ;
+                                           ;	.line	540; stepperCon.c	LATCbits.LATC0 = 0 ;
 000228   908b     bcf     0x8b, 0x0, 0x0   	BCF	_LATCbits, 0
-                                           ;	.line	536; stepperCon.c	LATCbits.LATC1 = 1 ;
+                                           ;	.line	541; stepperCon.c	LATCbits.LATC1 = 1 ;
 00022a   828b     bsf     0x8b, 0x1, 0x0   	BSF	_LATCbits, 1
-                                           ;	.line	537; stepperCon.c	CM1CON0 = 0x89 ; 
+                                           ;	.line	542; stepperCon.c	CM1CON0 = 0x89 ; 
 00022c   0e89     movlw   0x89             	MOVLW	0x89
 00022e   6e79     movwf   0x79, 0x0        	MOVWF	_CM1CON0
                                            _00341_DS_:
 000230   010f     movlb   0xf              	BANKSEL	_pol_b
-                                           ;	.line	540; stepperCon.c	if(pol_b == 2) {
+                                           ;	.line	545; stepperCon.c	if(pol_b == 2) {
 000232   512e     movf    0x2e, 0x0, 0x1   	MOVF	_pol_b, W, B
 000234   0a02     xorlw   0x02             	XORLW	0x02
 000236   e103     bnz     0x00023e         	BNZ	_00346_DS_
-                                           ;	.line	541; stepperCon.c	LATCbits.LATC2 = 0 ;
+                                           ;	.line	546; stepperCon.c	LATCbits.LATC2 = 0 ;
 000238   948b     bcf     0x8b, 0x2, 0x0   	BCF	_LATCbits, 2
-                                           ;	.line	542; stepperCon.c	LATDbits.LATD5 = 0 ;
+                                           ;	.line	547; stepperCon.c	LATDbits.LATD5 = 0 ;
 00023a   9a8c     bcf     0x8c, 0x5, 0x0   	BCF	_LATDbits, 5
 00023c   d00c     bra     0x000256         	BRA	_00347_DS_
                                            _00346_DS_:
 00023e   010f     movlb   0xf              	BANKSEL	_pol_b
-                                           ;	.line	544; stepperCon.c	else if (pol_b) {               // Forward current, Phase-B
+                                           ;	.line	549; stepperCon.c	else if (pol_b) {               // Forward current, Phase-B
 000240   512e     movf    0x2e, 0x0, 0x1   	MOVF	_pol_b, W, B
 000242   e005     bz      0x00024e         	BZ	_00343_DS_
-                                           ;	.line	545; stepperCon.c	LATCbits.LATC2 = 0 ;
+                                           ;	.line	550; stepperCon.c	LATCbits.LATC2 = 0 ;
 000244   948b     bcf     0x8b, 0x2, 0x0   	BCF	_LATCbits, 2
-                                           ;	.line	546; stepperCon.c	LATDbits.LATD5 = 1 ;
+                                           ;	.line	551; stepperCon.c	LATDbits.LATD5 = 1 ;
 000246   8a8c     bsf     0x8c, 0x5, 0x0   	BSF	_LATDbits, 5
-                                           ;	.line	547; stepperCon.c	CM2CON0 = 0x98 ;
+                                           ;	.line	552; stepperCon.c	CM2CON0 = 0x98 ;
 000248   0e98     movlw   0x98             	MOVLW	0x98
 00024a   6e78     movwf   0x78, 0x0        	MOVWF	_CM2CON0
 00024c   d004     bra     0x000256         	BRA	_00347_DS_
                                            _00343_DS_:
-                                           ;	.line	550; stepperCon.c	LATDbits.LATD5 = 0 ;
+                                           ;	.line	555; stepperCon.c	LATDbits.LATD5 = 0 ;
 00024e   9a8c     bcf     0x8c, 0x5, 0x0   	BCF	_LATDbits, 5
-                                           ;	.line	551; stepperCon.c	LATCbits.LATC2 = 1 ;
+                                           ;	.line	556; stepperCon.c	LATCbits.LATC2 = 1 ;
 000250   848b     bsf     0x8b, 0x2, 0x0   	BSF	_LATCbits, 2
-                                           ;	.line	552; stepperCon.c	CM2CON0 = 0x88 ;
+                                           ;	.line	557; stepperCon.c	CM2CON0 = 0x88 ;
 000252   0e88     movlw   0x88             	MOVLW	0x88
 000254   6e78     movwf   0x78, 0x0        	MOVWF	_CM2CON0
                                            ; ;multiply lit val:0x02 by variable _step_a and store in r0x04
                                            _00347_DS_:
 000256   010f     movlb   0xf              	BANKSEL	_step_a
-                                           ;	.line	556; stepperCon.c	CCP5CONbits.DC5B = 0x0c + (pwm_lu[step_a] & 0x3) << 4 ;
+                                           ;	.line	561; stepperCon.c	CCP5CONbits.DC5B = 0x0c + (pwm_lu[step_a] & 0x3) << 4 ;
 000258   5134     movf    0x34, 0x0, 0x1   	MOVF	_step_a, W, B
 00025a   0d02     mullw   0x02             	MULLW	0x02
 00025c   50f4     movf    0xf4, 0x0, 0x0   	MOVF	PRODH, W
@@ -1059,7 +1059,7 @@ Address  Value    Disassembly              Source
 00029e   6f54     movwf   0x54, 0x1        	MOVWF	_CCP5CONbits, B
                                            ; ;multiply lit val:0x02 by variable _step_a and store in r0x04
 0002a0   010f     movlb   0xf              	BANKSEL	_step_a
-                                           ;	.line	557; stepperCon.c	CCPR5L = pwm_lu[step_a] >> 2 ;
+                                           ;	.line	562; stepperCon.c	CCPR5L = pwm_lu[step_a] >> 2 ;
 0002a2   5134     movf    0x34, 0x0, 0x1   	MOVF	_step_a, W, B
 0002a4   0d02     mullw   0x02             	MULLW	0x02
 0002a6   50f4     movf    0xf4, 0x0, 0x0   	MOVF	PRODH, W
@@ -1092,7 +1092,7 @@ Address  Value    Disassembly              Source
 0002dc   6f55     movwf   0x55, 0x1        	MOVWF	_CCPR5L, B
                                            ; ;multiply lit val:0x02 by variable _step_b and store in r0x04
 0002de   010f     movlb   0xf              	BANKSEL	_step_b
-                                           ;	.line	559; stepperCon.c	CCP4CONbits.DC4B = 0x0c + (pwm_lu[step_b] & 0x3) << 4 ;
+                                           ;	.line	564; stepperCon.c	CCP4CONbits.DC4B = 0x0c + (pwm_lu[step_b] & 0x3) << 4 ;
 0002e0   5135     movf    0x35, 0x0, 0x1   	MOVF	_step_b, W, B
 0002e2   0d02     mullw   0x02             	MULLW	0x02
 0002e4   50f4     movf    0xf4, 0x0, 0x0   	MOVF	PRODH, W
@@ -1131,7 +1131,7 @@ Address  Value    Disassembly              Source
 000326   6f57     movwf   0x57, 0x1        	MOVWF	_CCP4CONbits, B
                                            ; ;multiply lit val:0x02 by variable _step_b and store in r0x04
 000328   010f     movlb   0xf              	BANKSEL	_step_b
-                                           ;	.line	560; stepperCon.c	CCPR4L = pwm_lu[step_b] >> 2 ;
+                                           ;	.line	565; stepperCon.c	CCPR4L = pwm_lu[step_b] >> 2 ;
 00032a   5135     movf    0x35, 0x0, 0x1   	MOVF	_step_b, W, B
 00032c   0d02     mullw   0x02             	MULLW	0x02
 00032e   50f4     movf    0xf4, 0x0, 0x0   	MOVF	PRODH, W
@@ -1162,24 +1162,24 @@ Address  Value    Disassembly              Source
 000360   5004     movf    0x04, 0x0, 0x0   	MOVF	r0x04, W
 000362   010f     movlb   0xf              	BANKSEL	_CCPR4L
 000364   6f58     movwf   0x58, 0x1        	MOVWF	_CCPR4L, B
-                                           ;	.line	562; stepperCon.c	PORTAbits.RA4 = 1 ;
+                                           ;	.line	567; stepperCon.c	PORTAbits.RA4 = 1 ;
 000366   8880     bsf     0x80, 0x4, 0x0   	BSF	_PORTAbits, 4
-                                           ;	.line	563; stepperCon.c	PORTAbits.RA5 = 1 ; 
+                                           ;	.line	568; stepperCon.c	PORTAbits.RA5 = 1 ; 
 000368   8a80     bsf     0x80, 0x5, 0x0   	BSF	_PORTAbits, 5
-                                           ;	.line	565; stepperCon.c	state = NEXT_STEP ;
+                                           ;	.line	570; stepperCon.c	state = NEXT_STEP ;
 00036a   0e06     movlw   0x06             	MOVLW	0x06
 00036c   010f     movlb   0xf              	BANKSEL	_state
 00036e   6f24     movwf   0x24, 0x1        	MOVWF	_state, B
-                                           ;	.line	566; stepperCon.c	break ;
+                                           ;	.line	571; stepperCon.c	break ;
 000370   d68f     bra     0x000090         	BRA	_00435_DS_
                                            _00348_DS_:
-                                           ;	.line	569; stepperCon.c	CM1CON0 = 0x09 ;
+                                           ;	.line	574; stepperCon.c	CM1CON0 = 0x09 ;
 000372   0e09     movlw   0x09             	MOVLW	0x09
 000374   6e79     movwf   0x79, 0x0        	MOVWF	_CM1CON0
-                                           ;	.line	570; stepperCon.c	CM2CON0 = 0x08 ;
+                                           ;	.line	575; stepperCon.c	CM2CON0 = 0x08 ;
 000376   0e08     movlw   0x08             	MOVLW	0x08
 000378   6e78     movwf   0x78, 0x0        	MOVWF	_CM2CON0
-                                           ;	.line	572; stepperCon.c	CCP5CONbits.DC5B = pwm_a_l ;             // Set PWM duty cycle, Phase-A
+                                           ;	.line	577; stepperCon.c	CCP5CONbits.DC5B = pwm_a_l ;             // Set PWM duty cycle, Phase-A
 00037a   5000     movf    0x00, 0x0, 0x0   	MOVF	r0x00, W
 00037c   0b03     andlw   0x03             	ANDLW	0x03
 00037e   38e8     swapf   0xe8, 0x0, 0x0   	SWAPF	WREG, W
@@ -1190,10 +1190,10 @@ Address  Value    Disassembly              Source
 000388   10f4     iorwf   0xf4, 0x0, 0x0   	IORWF	PRODH, W
 00038a   010f     movlb   0xf              	BANKSEL	_CCP5CONbits
 00038c   6f54     movwf   0x54, 0x1        	MOVWF	_CCP5CONbits, B
-                                           ;	.line	573; stepperCon.c	CCPR5L = pwm_a_h ;
+                                           ;	.line	578; stepperCon.c	CCPR5L = pwm_a_h ;
 00038e   c001     movff   0x001, 0xf55     	MOVFF	r0x01, _CCPR5L
 000390   ff55
-                                           ;	.line	575; stepperCon.c	CCP4CONbits.DC4B = pwm_b_l ;             // Set PWM duty cycle, Phase-B
+                                           ;	.line	580; stepperCon.c	CCP4CONbits.DC4B = pwm_b_l ;             // Set PWM duty cycle, Phase-B
 000392   5002     movf    0x02, 0x0, 0x0   	MOVF	r0x02, W
 000394   0b03     andlw   0x03             	ANDLW	0x03
 000396   38e8     swapf   0xe8, 0x0, 0x0   	SWAPF	WREG, W
@@ -1204,11 +1204,11 @@ Address  Value    Disassembly              Source
 0003a0   10f4     iorwf   0xf4, 0x0, 0x0   	IORWF	PRODH, W
 0003a2   010f     movlb   0xf              	BANKSEL	_CCP4CONbits
 0003a4   6f57     movwf   0x57, 0x1        	MOVWF	_CCP4CONbits, B
-                                           ;	.line	576; stepperCon.c	CCPR4L = pwm_b_h ;
+                                           ;	.line	581; stepperCon.c	CCPR4L = pwm_b_h ;
 0003a6   c003     movff   0x003, 0xf58     	MOVFF	r0x03, _CCPR4L
 0003a8   ff58
 0003aa   010f     movlb   0xf              	BANKSEL	_step_a
-                                           ;	.line	578; stepperCon.c	if (step_a > THREE_QUARTERS && step_a < (FULL_CYCLE - 1)) {
+                                           ;	.line	583; stepperCon.c	if (step_a > THREE_QUARTERS && step_a < (FULL_CYCLE - 1)) {
 0003ac   5134     movf    0x34, 0x0, 0x1   	MOVF	_step_a, W, B
 0003ae   0f80     addlw   0x80             	ADDLW	0x80
 0003b0   0f4f     addlw   0x4f             	ADDLW	0x4f
@@ -1218,16 +1218,16 @@ Address  Value    Disassembly              Source
 0003b8   0f80     addlw   0x80             	ADDLW	0x80
 0003ba   0f41     addlw   0x41             	ADDLW	0x41
 0003bc   e205     bc      0x0003c8         	BC	_00356_DS_
-                                           ;	.line	579; stepperCon.c	a_decay = FAST_DECAY ;
+                                           ;	.line	584; stepperCon.c	a_decay = FAST_DECAY ;
 0003be   0e01     movlw   0x01             	MOVLW	0x01
 0003c0   010f     movlb   0xf              	BANKSEL	_a_decay
 0003c2   6f2b     movwf   0x2b, 0x1        	MOVWF	_a_decay, B
-                                           ;	.line	580; stepperCon.c	PORTAbits.RA4 = 1 ;
+                                           ;	.line	585; stepperCon.c	PORTAbits.RA4 = 1 ;
 0003c4   8880     bsf     0x80, 0x4, 0x0   	BSF	_PORTAbits, 4
 0003c6   d014     bra     0x0003f0         	BRA	_00357_DS_
                                            _00356_DS_:
 0003c8   010f     movlb   0xf              	BANKSEL	_step_a
-                                           ;	.line	582; stepperCon.c	else if (step_a >= HALF_CYCLE) a_decay = SLOW_DECAY ;
+                                           ;	.line	587; stepperCon.c	else if (step_a >= HALF_CYCLE) a_decay = SLOW_DECAY ;
 0003ca   5134     movf    0x34, 0x0, 0x1   	MOVF	_step_a, W, B
 0003cc   0f80     addlw   0x80             	ADDLW	0x80
 0003ce   0f60     addlw   0x60             	ADDLW	0x60
@@ -1237,25 +1237,25 @@ Address  Value    Disassembly              Source
 0003d6   d00c     bra     0x0003f0         	BRA	_00357_DS_
                                            _00353_DS_:
 0003d8   010f     movlb   0xf              	BANKSEL	_step_a
-                                           ;	.line	583; stepperCon.c	else if (step_a > STEPS) {
+                                           ;	.line	588; stepperCon.c	else if (step_a > STEPS) {
 0003da   5134     movf    0x34, 0x0, 0x1   	MOVF	_step_a, W, B
 0003dc   0f80     addlw   0x80             	ADDLW	0x80
 0003de   0f6f     addlw   0x6f             	ADDLW	0x6f
 0003e0   e305     bnc     0x0003ec         	BNC	_00350_DS_
-                                           ;	.line	584; stepperCon.c	a_decay = FAST_DECAY ;
+                                           ;	.line	589; stepperCon.c	a_decay = FAST_DECAY ;
 0003e2   0e01     movlw   0x01             	MOVLW	0x01
 0003e4   010f     movlb   0xf              	BANKSEL	_a_decay
 0003e6   6f2b     movwf   0x2b, 0x1        	MOVWF	_a_decay, B
-                                           ;	.line	585; stepperCon.c	PORTAbits.RA4 = 1 ;
+                                           ;	.line	590; stepperCon.c	PORTAbits.RA4 = 1 ;
 0003e8   8880     bsf     0x80, 0x4, 0x0   	BSF	_PORTAbits, 4
 0003ea   d002     bra     0x0003f0         	BRA	_00357_DS_
                                            _00350_DS_:
 0003ec   010f     movlb   0xf              	BANKSEL	_a_decay
-                                           ;	.line	587; stepperCon.c	else a_decay = SLOW_DECAY ;
+                                           ;	.line	592; stepperCon.c	else a_decay = SLOW_DECAY ;
 0003ee   6b2b     clrf    0x2b, 0x1        	CLRF	_a_decay, B
                                            _00357_DS_:
 0003f0   010f     movlb   0xf              	BANKSEL	_step_b
-                                           ;	.line	589; stepperCon.c	if (step_b > THREE_QUARTERS && step_b < (FULL_CYCLE - 1)) {
+                                           ;	.line	594; stepperCon.c	if (step_b > THREE_QUARTERS && step_b < (FULL_CYCLE - 1)) {
 0003f2   5135     movf    0x35, 0x0, 0x1   	MOVF	_step_b, W, B
 0003f4   0f80     addlw   0x80             	ADDLW	0x80
 0003f6   0f4f     addlw   0x4f             	ADDLW	0x4f
@@ -1265,16 +1265,16 @@ Address  Value    Disassembly              Source
 0003fe   0f80     addlw   0x80             	ADDLW	0x80
 000400   0f41     addlw   0x41             	ADDLW	0x41
 000402   e205     bc      0x00040e         	BC	_00366_DS_
-                                           ;	.line	590; stepperCon.c	b_decay = FAST_DECAY ;
+                                           ;	.line	595; stepperCon.c	b_decay = FAST_DECAY ;
 000404   0e01     movlw   0x01             	MOVLW	0x01
 000406   010f     movlb   0xf              	BANKSEL	_b_decay
 000408   6f2d     movwf   0x2d, 0x1        	MOVWF	_b_decay, B
-                                           ;	.line	591; stepperCon.c	PORTAbits.RA5 = 1 ;
+                                           ;	.line	596; stepperCon.c	PORTAbits.RA5 = 1 ;
 00040a   8a80     bsf     0x80, 0x5, 0x0   	BSF	_PORTAbits, 5
 00040c   d014     bra     0x000436         	BRA	_00367_DS_
                                            _00366_DS_:
 00040e   010f     movlb   0xf              	BANKSEL	_step_b
-                                           ;	.line	593; stepperCon.c	else if (step_b >= HALF_CYCLE) b_decay = SLOW_DECAY ;
+                                           ;	.line	598; stepperCon.c	else if (step_b >= HALF_CYCLE) b_decay = SLOW_DECAY ;
 000410   5135     movf    0x35, 0x0, 0x1   	MOVF	_step_b, W, B
 000412   0f80     addlw   0x80             	ADDLW	0x80
 000414   0f60     addlw   0x60             	ADDLW	0x60
@@ -1284,118 +1284,118 @@ Address  Value    Disassembly              Source
 00041c   d00c     bra     0x000436         	BRA	_00367_DS_
                                            _00363_DS_:
 00041e   010f     movlb   0xf              	BANKSEL	_step_b
-                                           ;	.line	594; stepperCon.c	else if (step_b > STEPS) {
+                                           ;	.line	599; stepperCon.c	else if (step_b > STEPS) {
 000420   5135     movf    0x35, 0x0, 0x1   	MOVF	_step_b, W, B
 000422   0f80     addlw   0x80             	ADDLW	0x80
 000424   0f6f     addlw   0x6f             	ADDLW	0x6f
 000426   e305     bnc     0x000432         	BNC	_00360_DS_
-                                           ;	.line	595; stepperCon.c	b_decay = FAST_DECAY ;
+                                           ;	.line	600; stepperCon.c	b_decay = FAST_DECAY ;
 000428   0e01     movlw   0x01             	MOVLW	0x01
 00042a   010f     movlb   0xf              	BANKSEL	_b_decay
 00042c   6f2d     movwf   0x2d, 0x1        	MOVWF	_b_decay, B
-                                           ;	.line	596; stepperCon.c	PORTAbits.RA5 = 1 ;
+                                           ;	.line	601; stepperCon.c	PORTAbits.RA5 = 1 ;
 00042e   8a80     bsf     0x80, 0x5, 0x0   	BSF	_PORTAbits, 5
 000430   d002     bra     0x000436         	BRA	_00367_DS_
                                            _00360_DS_:
 000432   010f     movlb   0xf              	BANKSEL	_b_decay
-                                           ;	.line	598; stepperCon.c	else b_decay = SLOW_DECAY ;
+                                           ;	.line	603; stepperCon.c	else b_decay = SLOW_DECAY ;
 000434   6b2d     clrf    0x2d, 0x1        	CLRF	_b_decay, B
                                            _00367_DS_:
 000436   010f     movlb   0xf              	BANKSEL	_pol_a
-                                           ;	.line	600; stepperCon.c	if (pol_a == 2) {
+                                           ;	.line	605; stepperCon.c	if (pol_a == 2) {
 000438   512c     movf    0x2c, 0x0, 0x1   	MOVF	_pol_a, W, B
 00043a   0a02     xorlw   0x02             	XORLW	0x02
 00043c   e103     bnz     0x000444         	BNZ	_00373_DS_
-                                           ;	.line	601; stepperCon.c	LATCbits.LATC1 = 0 ;
+                                           ;	.line	606; stepperCon.c	LATCbits.LATC1 = 0 ;
 00043e   928b     bcf     0x8b, 0x1, 0x0   	BCF	_LATCbits, 1
-                                           ;	.line	602; stepperCon.c	LATCbits.LATC0 = 0 ;
+                                           ;	.line	607; stepperCon.c	LATCbits.LATC0 = 0 ;
 000440   908b     bcf     0x8b, 0x0, 0x0   	BCF	_LATCbits, 0
 000442   d00c     bra     0x00045c         	BRA	_00374_DS_
                                            _00373_DS_:
 000444   010f     movlb   0xf              	BANKSEL	_pol_a
-                                           ;	.line	604; stepperCon.c	else if (pol_a) {               // Forward current, Phase-A
+                                           ;	.line	609; stepperCon.c	else if (pol_a) {               // Forward current, Phase-A
 000446   512c     movf    0x2c, 0x0, 0x1   	MOVF	_pol_a, W, B
 000448   e005     bz      0x000454         	BZ	_00370_DS_
-                                           ;	.line	605; stepperCon.c	LATCbits.LATC1 = 0 ;
+                                           ;	.line	610; stepperCon.c	LATCbits.LATC1 = 0 ;
 00044a   928b     bcf     0x8b, 0x1, 0x0   	BCF	_LATCbits, 1
-                                           ;	.line	606; stepperCon.c	LATCbits.LATC0 = 1 ;
+                                           ;	.line	611; stepperCon.c	LATCbits.LATC0 = 1 ;
 00044c   808b     bsf     0x8b, 0x0, 0x0   	BSF	_LATCbits, 0
-                                           ;	.line	607; stepperCon.c	CM1CON0 = 0x99 ; 
+                                           ;	.line	612; stepperCon.c	CM1CON0 = 0x99 ; 
 00044e   0e99     movlw   0x99             	MOVLW	0x99
 000450   6e79     movwf   0x79, 0x0        	MOVWF	_CM1CON0
 000452   d004     bra     0x00045c         	BRA	_00374_DS_
                                            _00370_DS_:
-                                           ;	.line	610; stepperCon.c	LATCbits.LATC0 = 0 ;
+                                           ;	.line	615; stepperCon.c	LATCbits.LATC0 = 0 ;
 000454   908b     bcf     0x8b, 0x0, 0x0   	BCF	_LATCbits, 0
-                                           ;	.line	611; stepperCon.c	LATCbits.LATC1 = 1 ;
+                                           ;	.line	616; stepperCon.c	LATCbits.LATC1 = 1 ;
 000456   828b     bsf     0x8b, 0x1, 0x0   	BSF	_LATCbits, 1
-                                           ;	.line	612; stepperCon.c	CM1CON0 = 0x89 ; 
+                                           ;	.line	617; stepperCon.c	CM1CON0 = 0x89 ; 
 000458   0e89     movlw   0x89             	MOVLW	0x89
 00045a   6e79     movwf   0x79, 0x0        	MOVWF	_CM1CON0
                                            _00374_DS_:
 00045c   010f     movlb   0xf              	BANKSEL	_pol_b
-                                           ;	.line	615; stepperCon.c	if(pol_b == 2) {
+                                           ;	.line	620; stepperCon.c	if(pol_b == 2) {
 00045e   512e     movf    0x2e, 0x0, 0x1   	MOVF	_pol_b, W, B
 000460   0a02     xorlw   0x02             	XORLW	0x02
 000462   e103     bnz     0x00046a         	BNZ	_00379_DS_
-                                           ;	.line	616; stepperCon.c	LATCbits.LATC2 = 0 ;
+                                           ;	.line	621; stepperCon.c	LATCbits.LATC2 = 0 ;
 000464   948b     bcf     0x8b, 0x2, 0x0   	BCF	_LATCbits, 2
-                                           ;	.line	617; stepperCon.c	LATDbits.LATD5 = 0 ;
+                                           ;	.line	622; stepperCon.c	LATDbits.LATD5 = 0 ;
 000466   9a8c     bcf     0x8c, 0x5, 0x0   	BCF	_LATDbits, 5
 000468   d00c     bra     0x000482         	BRA	_00380_DS_
                                            _00379_DS_:
 00046a   010f     movlb   0xf              	BANKSEL	_pol_b
-                                           ;	.line	619; stepperCon.c	else if (pol_b) {               // Forward current, Phase-B
+                                           ;	.line	624; stepperCon.c	else if (pol_b) {               // Forward current, Phase-B
 00046c   512e     movf    0x2e, 0x0, 0x1   	MOVF	_pol_b, W, B
 00046e   e005     bz      0x00047a         	BZ	_00376_DS_
-                                           ;	.line	620; stepperCon.c	LATCbits.LATC2 = 0 ;
+                                           ;	.line	625; stepperCon.c	LATCbits.LATC2 = 0 ;
 000470   948b     bcf     0x8b, 0x2, 0x0   	BCF	_LATCbits, 2
-                                           ;	.line	621; stepperCon.c	LATDbits.LATD5 = 1 ;
+                                           ;	.line	626; stepperCon.c	LATDbits.LATD5 = 1 ;
 000472   8a8c     bsf     0x8c, 0x5, 0x0   	BSF	_LATDbits, 5
-                                           ;	.line	622; stepperCon.c	CM2CON0 = 0x98 ;
+                                           ;	.line	627; stepperCon.c	CM2CON0 = 0x98 ;
 000474   0e98     movlw   0x98             	MOVLW	0x98
 000476   6e78     movwf   0x78, 0x0        	MOVWF	_CM2CON0
 000478   d004     bra     0x000482         	BRA	_00380_DS_
                                            _00376_DS_:
-                                           ;	.line	625; stepperCon.c	LATDbits.LATD5 = 0 ;
+                                           ;	.line	630; stepperCon.c	LATDbits.LATD5 = 0 ;
 00047a   9a8c     bcf     0x8c, 0x5, 0x0   	BCF	_LATDbits, 5
-                                           ;	.line	626; stepperCon.c	LATCbits.LATC2 = 1 ;
+                                           ;	.line	631; stepperCon.c	LATCbits.LATC2 = 1 ;
 00047c   848b     bsf     0x8b, 0x2, 0x0   	BSF	_LATCbits, 2
-                                           ;	.line	627; stepperCon.c	CM2CON0 = 0x88 ;
+                                           ;	.line	632; stepperCon.c	CM2CON0 = 0x88 ;
 00047e   0e88     movlw   0x88             	MOVLW	0x88
 000480   6e78     movwf   0x78, 0x0        	MOVWF	_CM2CON0
                                            _00380_DS_:
-                                           ;	.line	630; stepperCon.c	state = NEXT_STEP ;
+                                           ;	.line	635; stepperCon.c	state = NEXT_STEP ;
 000482   0e06     movlw   0x06             	MOVLW	0x06
 000484   010f     movlb   0xf              	BANKSEL	_state
 000486   6f24     movwf   0x24, 0x1        	MOVWF	_state, B
-                                           ;	.line	631; stepperCon.c	break ;
+                                           ;	.line	636; stepperCon.c	break ;
 000488   ef48     goto    0x000090         	GOTO	_00435_DS_
 00048a   f000
                                            _00381_DS_:
-                                           ;	.line	634; stepperCon.c	state = RUNNING ;
+                                           ;	.line	639; stepperCon.c	state = RUNNING ;
 00048c   0e02     movlw   0x02             	MOVLW	0x02
 00048e   010f     movlb   0xf              	BANKSEL	_state
 000490   6f24     movwf   0x24, 0x1        	MOVWF	_state, B
 000492   010f     movlb   0xf              	BANKSEL	_dir
-                                           ;	.line	637; stepperCon.c	if (dir == 1) {
+                                           ;	.line	642; stepperCon.c	if (dir == 1) {
 000494   5125     movf    0x25, 0x0, 0x1   	MOVF	_dir, W, B
 000496   0a01     xorlw   0x01             	XORLW	0x01
 000498   e11a     bnz     0x0004ce         	BNZ	_00391_DS_
                                            _00644_DS_:
 00049a   010f     movlb   0xf              	BANKSEL	_skip
-                                           ;	.line	638; stepperCon.c	step_a += skip ;
+                                           ;	.line	643; stepperCon.c	step_a += skip ;
 00049c   5133     movf    0x33, 0x0, 0x1   	MOVF	_skip, W, B
 00049e   6e04     movwf   0x04, 0x0        	MOVWF	r0x04
 0004a0   5004     movf    0x04, 0x0, 0x0   	MOVF	r0x04, W
 0004a2   010f     movlb   0xf              	BANKSEL	_step_a
 0004a4   2734     addwf   0x34, 0x1, 0x1   	ADDWF	_step_a, F, B
-                                           ;	.line	639; stepperCon.c	step_b += skip ;
+                                           ;	.line	644; stepperCon.c	step_b += skip ;
 0004a6   5004     movf    0x04, 0x0, 0x0   	MOVF	r0x04, W
 0004a8   010f     movlb   0xf              	BANKSEL	_step_b
 0004aa   2735     addwf   0x35, 0x1, 0x1   	ADDWF	_step_b, F, B
 0004ac   010f     movlb   0xf              	BANKSEL	_step_a
-                                           ;	.line	640; stepperCon.c	if (step_a > FULL_CYCLE - 1) step_a -= FULL_CYCLE ;
+                                           ;	.line	645; stepperCon.c	if (step_a > FULL_CYCLE - 1) step_a -= FULL_CYCLE ;
 0004ae   5134     movf    0x34, 0x0, 0x1   	MOVF	_step_a, W, B
 0004b0   0f80     addlw   0x80             	ADDLW	0x80
 0004b2   0f40     addlw   0x40             	ADDLW	0x40
@@ -1405,7 +1405,7 @@ Address  Value    Disassembly              Source
 0004ba   2734     addwf   0x34, 0x1, 0x1   	ADDWF	_step_a, F, B
                                            _00383_DS_:
 0004bc   010f     movlb   0xf              	BANKSEL	_step_b
-                                           ;	.line	641; stepperCon.c	if (step_b > FULL_CYCLE - 1) step_b -= FULL_CYCLE ;
+                                           ;	.line	646; stepperCon.c	if (step_b > FULL_CYCLE - 1) step_b -= FULL_CYCLE ;
 0004be   5135     movf    0x35, 0x0, 0x1   	MOVF	_step_b, W, B
 0004c0   0f80     addlw   0x80             	ADDLW	0x80
 0004c2   0f40     addlw   0x40             	ADDLW	0x40
@@ -1416,17 +1416,17 @@ Address  Value    Disassembly              Source
 0004cc   d019     bra     0x000500         	BRA	_00392_DS_
                                            _00391_DS_:
 0004ce   010f     movlb   0xf              	BANKSEL	_skip
-                                           ;	.line	645; stepperCon.c	step_a -= skip ;
+                                           ;	.line	650; stepperCon.c	step_a -= skip ;
 0004d0   5133     movf    0x33, 0x0, 0x1   	MOVF	_skip, W, B
 0004d2   6e04     movwf   0x04, 0x0        	MOVWF	r0x04
 0004d4   5004     movf    0x04, 0x0, 0x0   	MOVF	r0x04, W
 0004d6   010f     movlb   0xf              	BANKSEL	_step_a
 0004d8   5f34     subwf   0x34, 0x1, 0x1   	SUBWF	_step_a, F, B
-                                           ;	.line	646; stepperCon.c	step_b -= skip ;
+                                           ;	.line	651; stepperCon.c	step_b -= skip ;
 0004da   5004     movf    0x04, 0x0, 0x0   	MOVF	r0x04, W
 0004dc   010f     movlb   0xf              	BANKSEL	_step_b
 0004de   5f35     subwf   0x35, 0x1, 0x1   	SUBWF	_step_b, F, B
-                                           ;	.line	647; stepperCon.c	if (step_a < 0) step_a += FULL_CYCLE ;
+                                           ;	.line	652; stepperCon.c	if (step_a < 0) step_a += FULL_CYCLE ;
 0004e0   80d8     bsf     0xd8, 0x0, 0x0   	BSF	STATUS, 0
 0004e2   010f     movlb   0xf              	BANKSEL	_step_a
 0004e4   af34     btfss   0x34, 0x7, 0x1   	BTFSS	_step_a, 7, B
@@ -1436,7 +1436,7 @@ Address  Value    Disassembly              Source
 0004ec   010f     movlb   0xf              	BANKSEL	_step_a
 0004ee   2734     addwf   0x34, 0x1, 0x1   	ADDWF	_step_a, F, B
                                            _00387_DS_:
-                                           ;	.line	648; stepperCon.c	if (step_b < 0) step_b += FULL_CYCLE ;
+                                           ;	.line	653; stepperCon.c	if (step_b < 0) step_b += FULL_CYCLE ;
 0004f0   80d8     bsf     0xd8, 0x0, 0x0   	BSF	STATUS, 0
 0004f2   010f     movlb   0xf              	BANKSEL	_step_b
 0004f4   af35     btfss   0x35, 0x7, 0x1   	BTFSS	_step_b, 7, B
@@ -1447,7 +1447,7 @@ Address  Value    Disassembly              Source
 0004fe   2735     addwf   0x35, 0x1, 0x1   	ADDWF	_step_b, F, B
                                            _00392_DS_:
 000500   010f     movlb   0xf              	BANKSEL	_step_a
-                                           ;	.line	652; stepperCon.c	if (step_a == HALF_CYCLE || step_a == 0) pol_a = 2 ;
+                                           ;	.line	657; stepperCon.c	if (step_a == HALF_CYCLE || step_a == 0) pol_a = 2 ;
 000502   5134     movf    0x34, 0x0, 0x1   	MOVF	_step_a, W, B
 000504   0a20     xorlw   0x20             	XORLW	0x20
 000506   e003     bz      0x00050e         	BZ	_00396_DS_
@@ -1462,7 +1462,7 @@ Address  Value    Disassembly              Source
 000514   d00b     bra     0x00052c         	BRA	_00398_DS_
                                            _00397_DS_:
 000516   010f     movlb   0xf              	BANKSEL	_step_a
-                                           ;	.line	653; stepperCon.c	else if (step_a > HALF_CYCLE) pol_a = 0 ;
+                                           ;	.line	658; stepperCon.c	else if (step_a > HALF_CYCLE) pol_a = 0 ;
 000518   5134     movf    0x34, 0x0, 0x1   	MOVF	_step_a, W, B
 00051a   0f80     addlw   0x80             	ADDLW	0x80
 00051c   0f5f     addlw   0x5f             	ADDLW	0x5f
@@ -1471,13 +1471,13 @@ Address  Value    Disassembly              Source
 000522   6b2c     clrf    0x2c, 0x1        	CLRF	_pol_a, B
 000524   d003     bra     0x00052c         	BRA	_00398_DS_
                                            _00394_DS_:
-                                           ;	.line	654; stepperCon.c	else pol_a = 1 ;
+                                           ;	.line	659; stepperCon.c	else pol_a = 1 ;
 000526   0e01     movlw   0x01             	MOVLW	0x01
 000528   010f     movlb   0xf              	BANKSEL	_pol_a
 00052a   6f2c     movwf   0x2c, 0x1        	MOVWF	_pol_a, B
                                            _00398_DS_:
 00052c   010f     movlb   0xf              	BANKSEL	_step_b
-                                           ;	.line	656; stepperCon.c	if (step_b == HALF_CYCLE || step_b == 0) pol_b = 2 ;
+                                           ;	.line	661; stepperCon.c	if (step_b == HALF_CYCLE || step_b == 0) pol_b = 2 ;
 00052e   5135     movf    0x35, 0x0, 0x1   	MOVF	_step_b, W, B
 000530   0a20     xorlw   0x20             	XORLW	0x20
 000532   e003     bz      0x00053a         	BZ	_00403_DS_
@@ -1492,7 +1492,7 @@ Address  Value    Disassembly              Source
 000540   d00b     bra     0x000558         	BRA	_00405_DS_
                                            _00404_DS_:
 000542   010f     movlb   0xf              	BANKSEL	_step_b
-                                           ;	.line	657; stepperCon.c	else if (step_b > HALF_CYCLE) pol_b = 0 ;
+                                           ;	.line	662; stepperCon.c	else if (step_b > HALF_CYCLE) pol_b = 0 ;
 000544   5135     movf    0x35, 0x0, 0x1   	MOVF	_step_b, W, B
 000546   0f80     addlw   0x80             	ADDLW	0x80
 000548   0f5f     addlw   0x5f             	ADDLW	0x5f
@@ -1501,14 +1501,14 @@ Address  Value    Disassembly              Source
 00054e   6b2e     clrf    0x2e, 0x1        	CLRF	_pol_b, B
 000550   d003     bra     0x000558         	BRA	_00405_DS_
                                            _00401_DS_:
-                                           ;	.line	658; stepperCon.c	else pol_b = 1 ;
+                                           ;	.line	663; stepperCon.c	else pol_b = 1 ;
 000552   0e01     movlw   0x01             	MOVLW	0x01
 000554   010f     movlb   0xf              	BANKSEL	_pol_b
 000556   6f2e     movwf   0x2e, 0x1        	MOVWF	_pol_b, B
                                            ; ;multiply lit val:0x02 by variable _step_a and store in r0x04
                                            _00405_DS_:
 000558   010f     movlb   0xf              	BANKSEL	_step_a
-                                           ;	.line	661; stepperCon.c	pwm_a_l = 0x0c + (pwm_lu[step_a] & 0x3) << 4 ;
+                                           ;	.line	666; stepperCon.c	pwm_a_l = 0x0c + (pwm_lu[step_a] & 0x3) << 4 ;
 00055a   5134     movf    0x34, 0x0, 0x1   	MOVF	_step_a, W, B
 00055c   0d02     mullw   0x02             	MULLW	0x02
 00055e   50f4     movf    0xf4, 0x0, 0x0   	MOVF	PRODH, W
@@ -1539,7 +1539,7 @@ Address  Value    Disassembly              Source
 000590   3806     swapf   0x06, 0x0, 0x0   	SWAPF	r0x06, W
 000592   0bf0     andlw   0xf0             	ANDLW	0xf0
 000594   6e00     movwf   0x00, 0x0        	MOVWF	r0x00
-                                           ;	.line	662; stepperCon.c	pwm_a_h = pwm_lu[step_a] >> 2 ;
+                                           ;	.line	667; stepperCon.c	pwm_a_h = pwm_lu[step_a] >> 2 ;
 000596   90d8     bcf     0xd8, 0x0, 0x0   	BCF	STATUS, 0
 000598   3205     rrcf    0x05, 0x1, 0x0   	RRCF	r0x05, F
 00059a   3204     rrcf    0x04, 0x1, 0x0   	RRCF	r0x04, F
@@ -1550,7 +1550,7 @@ Address  Value    Disassembly              Source
 0005a4   6e01     movwf   0x01, 0x0        	MOVWF	r0x01
                                            ; ;multiply lit val:0x02 by variable _step_b and store in r0x04
 0005a6   010f     movlb   0xf              	BANKSEL	_step_b
-                                           ;	.line	664; stepperCon.c	pwm_b_l = 0x0c + (pwm_lu[step_b] & 0x3) << 4 ;
+                                           ;	.line	669; stepperCon.c	pwm_b_l = 0x0c + (pwm_lu[step_b] & 0x3) << 4 ;
 0005a8   5135     movf    0x35, 0x0, 0x1   	MOVF	_step_b, W, B
 0005aa   0d02     mullw   0x02             	MULLW	0x02
 0005ac   50f4     movf    0xf4, 0x0, 0x0   	MOVF	PRODH, W
@@ -1581,7 +1581,7 @@ Address  Value    Disassembly              Source
 0005de   3806     swapf   0x06, 0x0, 0x0   	SWAPF	r0x06, W
 0005e0   0bf0     andlw   0xf0             	ANDLW	0xf0
 0005e2   6e02     movwf   0x02, 0x0        	MOVWF	r0x02
-                                           ;	.line	665; stepperCon.c	pwm_b_h = pwm_lu[step_b] >> 2 ;
+                                           ;	.line	670; stepperCon.c	pwm_b_h = pwm_lu[step_b] >> 2 ;
 0005e4   90d8     bcf     0xd8, 0x0, 0x0   	BCF	STATUS, 0
 0005e6   3205     rrcf    0x05, 0x1, 0x0   	RRCF	r0x05, F
 0005e8   3204     rrcf    0x04, 0x1, 0x0   	RRCF	r0x04, F
@@ -1590,11 +1590,11 @@ Address  Value    Disassembly              Source
 0005ee   3204     rrcf    0x04, 0x1, 0x0   	RRCF	r0x04, F
 0005f0   5004     movf    0x04, 0x0, 0x0   	MOVF	r0x04, W
 0005f2   6e03     movwf   0x03, 0x0        	MOVWF	r0x03
-                                           ;	.line	667; stepperCon.c	break ;
+                                           ;	.line	672; stepperCon.c	break ;
 0005f4   ef48     goto    0x000090         	GOTO	_00435_DS_
 0005f6   f000
                                            _00407_DS_:
-                                           ;	.line	670; stepperCon.c	if(CM1CON0bits.C1OUT && a_state == T_DRIVE) {
+                                           ;	.line	675; stepperCon.c	if(CM1CON0bits.C1OUT && a_state == T_DRIVE) {
 0005f8   ac79     btfss   0x79, 0x6, 0x0   	BTFSS	_CM1CON0bits, 6
 0005fa   d016     bra     0x000628         	BRA	_00415_DS_
 0005fc   010f     movlb   0xf              	BANKSEL	_a_state
@@ -1603,38 +1603,38 @@ Address  Value    Disassembly              Source
 000602   e112     bnz     0x000628         	BNZ	_00415_DS_
                                            _00656_DS_:
 000604   010f     movlb   0xf              	BANKSEL	_a_decay
-                                           ;	.line	671; stepperCon.c	if (a_decay == FAST_DECAY) {            
+                                           ;	.line	676; stepperCon.c	if (a_decay == FAST_DECAY) {            
 000606   512b     movf    0x2b, 0x0, 0x1   	MOVF	_a_decay, W, B
 000608   0a01     xorlw   0x01             	XORLW	0x01
 00060a   e109     bnz     0x00061e         	BNZ	_00412_DS_
                                            _00658_DS_:
 00060c   010f     movlb   0xf              	BANKSEL	_pol_a
-                                           ;	.line	672; stepperCon.c	if (pol_a) {                    // Forward current, Phase-A
+                                           ;	.line	677; stepperCon.c	if (pol_a) {                    // Forward current, Phase-A
 00060e   512c     movf    0x2c, 0x0, 0x1   	MOVF	_pol_a, W, B
 000610   e003     bz      0x000618         	BZ	_00409_DS_
-                                           ;	.line	673; stepperCon.c	LATCbits.LATC0 = 0 ;
+                                           ;	.line	678; stepperCon.c	LATCbits.LATC0 = 0 ;
 000612   908b     bcf     0x8b, 0x0, 0x0   	BCF	_LATCbits, 0
-                                           ;	.line	674; stepperCon.c	LATCbits.LATC1 = 1 ;  
+                                           ;	.line	679; stepperCon.c	LATCbits.LATC1 = 1 ;  
 000614   828b     bsf     0x8b, 0x1, 0x0   	BSF	_LATCbits, 1
 000616   d004     bra     0x000620         	BRA	_00413_DS_
                                            _00409_DS_:
-                                           ;	.line	677; stepperCon.c	LATCbits.LATC1 = 0 ;
+                                           ;	.line	682; stepperCon.c	LATCbits.LATC1 = 0 ;
 000618   928b     bcf     0x8b, 0x1, 0x0   	BCF	_LATCbits, 1
-                                           ;	.line	678; stepperCon.c	LATCbits.LATC0 = 1 ;
+                                           ;	.line	683; stepperCon.c	LATCbits.LATC0 = 1 ;
 00061a   808b     bsf     0x8b, 0x0, 0x0   	BSF	_LATCbits, 0
 00061c   d001     bra     0x000620         	BRA	_00413_DS_
                                            _00412_DS_:
-                                           ;	.line	681; stepperCon.c	else PORTAbits.RA4 = 0 ;
+                                           ;	.line	686; stepperCon.c	else PORTAbits.RA4 = 0 ;
 00061e   9880     bcf     0x80, 0x4, 0x0   	BCF	_PORTAbits, 4
                                            _00413_DS_:
-                                           ;	.line	683; stepperCon.c	a_state = PH_OFF ;
+                                           ;	.line	688; stepperCon.c	a_state = PH_OFF ;
 000620   0e01     movlw   0x01             	MOVLW	0x01
 000622   010f     movlb   0xf              	BANKSEL	_a_state
 000624   6f28     movwf   0x28, 0x1        	MOVWF	_a_state, B
-                                           ;	.line	684; stepperCon.c	T1CONbits.TMR1ON = 1 ;
+                                           ;	.line	689; stepperCon.c	T1CONbits.TMR1ON = 1 ;
 000626   80cd     bsf     0xcd, 0x0, 0x0   	BSF	_T1CONbits, 0
                                            _00415_DS_:
-                                           ;	.line	687; stepperCon.c	if(CM2CON0bits.C2OUT && b_state == T_DRIVE) {
+                                           ;	.line	692; stepperCon.c	if(CM2CON0bits.C2OUT && b_state == T_DRIVE) {
 000628   ac78     btfss   0x78, 0x6, 0x0   	BTFSS	_CM2CON0bits, 6
 00062a   d016     bra     0x000658         	BRA	_00424_DS_
 00062c   010f     movlb   0xf              	BANKSEL	_b_state
@@ -1643,70 +1643,70 @@ Address  Value    Disassembly              Source
 000632   e112     bnz     0x000658         	BNZ	_00424_DS_
                                            _00660_DS_:
 000634   010f     movlb   0xf              	BANKSEL	_b_decay
-                                           ;	.line	688; stepperCon.c	if (b_decay == FAST_DECAY) {
+                                           ;	.line	693; stepperCon.c	if (b_decay == FAST_DECAY) {
 000636   512d     movf    0x2d, 0x0, 0x1   	MOVF	_b_decay, W, B
 000638   0a01     xorlw   0x01             	XORLW	0x01
 00063a   e109     bnz     0x00064e         	BNZ	_00421_DS_
                                            _00662_DS_:
 00063c   010f     movlb   0xf              	BANKSEL	_pol_b
-                                           ;	.line	689; stepperCon.c	if (pol_b) {                    // Forward current, Phase-B
+                                           ;	.line	694; stepperCon.c	if (pol_b) {                    // Forward current, Phase-B
 00063e   512e     movf    0x2e, 0x0, 0x1   	MOVF	_pol_b, W, B
 000640   e003     bz      0x000648         	BZ	_00418_DS_
-                                           ;	.line	690; stepperCon.c	LATDbits.LATD5 = 0 ;
+                                           ;	.line	695; stepperCon.c	LATDbits.LATD5 = 0 ;
 000642   9a8c     bcf     0x8c, 0x5, 0x0   	BCF	_LATDbits, 5
-                                           ;	.line	691; stepperCon.c	LATCbits.LATC2 = 1 ;
+                                           ;	.line	696; stepperCon.c	LATCbits.LATC2 = 1 ;
 000644   848b     bsf     0x8b, 0x2, 0x0   	BSF	_LATCbits, 2
 000646   d004     bra     0x000650         	BRA	_00422_DS_
                                            _00418_DS_:
-                                           ;	.line	694; stepperCon.c	LATCbits.LATC2 = 0 ;
+                                           ;	.line	699; stepperCon.c	LATCbits.LATC2 = 0 ;
 000648   948b     bcf     0x8b, 0x2, 0x0   	BCF	_LATCbits, 2
-                                           ;	.line	695; stepperCon.c	LATDbits.LATD5 = 1 ;
+                                           ;	.line	700; stepperCon.c	LATDbits.LATD5 = 1 ;
 00064a   8a8c     bsf     0x8c, 0x5, 0x0   	BSF	_LATDbits, 5
 00064c   d001     bra     0x000650         	BRA	_00422_DS_
                                            _00421_DS_:
-                                           ;	.line	698; stepperCon.c	else PORTAbits.RA5 = 0 ;
+                                           ;	.line	703; stepperCon.c	else PORTAbits.RA5 = 0 ;
 00064e   9a80     bcf     0x80, 0x5, 0x0   	BCF	_PORTAbits, 5
                                            _00422_DS_:
-                                           ;	.line	700; stepperCon.c	b_state = PH_OFF ;
+                                           ;	.line	705; stepperCon.c	b_state = PH_OFF ;
 000650   0e01     movlw   0x01             	MOVLW	0x01
 000652   010f     movlb   0xf              	BANKSEL	_b_state
 000654   6f2a     movwf   0x2a, 0x1        	MOVWF	_b_state, B
-                                           ;	.line	701; stepperCon.c	T3CONbits.TMR3ON = 1 ;
+                                           ;	.line	706; stepperCon.c	T3CONbits.TMR3ON = 1 ;
 000656   80b1     bsf     0xb1, 0x0, 0x0   	BSF	_T3CONbits, 0
                                            _00424_DS_:
-                                           ;	.line	705; stepperCon.c	if (!PORTBbits.RB3) {
+                                           ;	.line	710; stepperCon.c	if (!PORTBbits.RB3) {
 000658   b681     btfsc   0x81, 0x3, 0x0   	BTFSC	_PORTBbits, 3
 00065a   ef48     goto    0x000090         	GOTO	_00435_DS_
 00065c   f000
-                                           ;	.line	706; stepperCon.c	INTCONbits.GIE = 0 ;
+                                           ;	.line	711; stepperCon.c	INTCONbits.GIE = 0 ;
 00065e   9ef2     bcf     0xf2, 0x7, 0x0   	BCF	_INTCONbits, 7
-                                           ;	.line	707; stepperCon.c	idleInts() ;
+                                           ;	.line	712; stepperCon.c	idleInts() ;
 000660   ec46     call    0x00228c, 0x0    	CALL	_idleInts
 000662   f011
-                                           ;	.line	709; stepperCon.c	CM1CON0bits.C1ON = 0 ;
+                                           ;	.line	714; stepperCon.c	CM1CON0bits.C1ON = 0 ;
 000664   9e79     bcf     0x79, 0x7, 0x0   	BCF	_CM1CON0bits, 7
-                                           ;	.line	710; stepperCon.c	CM2CON0bits.C2ON = 0 ;
+                                           ;	.line	715; stepperCon.c	CM2CON0bits.C2ON = 0 ;
 000666   9e78     bcf     0x78, 0x7, 0x0   	BCF	_CM2CON0bits, 7
-                                           ;	.line	712; stepperCon.c	CM1CON0bits.C1ON = 0 ; 
+                                           ;	.line	717; stepperCon.c	CM1CON0bits.C1ON = 0 ; 
 000668   9e79     bcf     0x79, 0x7, 0x0   	BCF	_CM1CON0bits, 7
-                                           ;	.line	713; stepperCon.c	CM2CON0bits.C2OE = 0 ;
+                                           ;	.line	718; stepperCon.c	CM2CON0bits.C2OE = 0 ;
 00066a   9a78     bcf     0x78, 0x5, 0x0   	BCF	_CM2CON0bits, 5
-                                           ;	.line	715; stepperCon.c	LATAbits.LATA4 = 0 ;    // Shut phases down
+                                           ;	.line	720; stepperCon.c	LATAbits.LATA4 = 0 ;    // Shut phases down
 00066c   9889     bcf     0x89, 0x4, 0x0   	BCF	_LATAbits, 4
-                                           ;	.line	716; stepperCon.c	LATAbits.LATA5 = 0 ; 
+                                           ;	.line	721; stepperCon.c	LATAbits.LATA5 = 0 ; 
 00066e   9a89     bcf     0x89, 0x5, 0x0   	BCF	_LATAbits, 5
-                                           ;	.line	718; stepperCon.c	PORTDbits.RD2 = 0 ;     // Turn blue LED off
+                                           ;	.line	723; stepperCon.c	PORTDbits.RD2 = 0 ;     // Turn blue LED off
 000670   9483     bcf     0x83, 0x2, 0x0   	BCF	_PORTDbits, 2
 000672   010f     movlb   0xf              	BANKSEL	_state
-                                           ;	.line	719; stepperCon.c	state = IDLE ;
+                                           ;	.line	724; stepperCon.c	state = IDLE ;
 000674   6b24     clrf    0x24, 0x1        	CLRF	_state, B
-                                           ;	.line	720; stepperCon.c	INTCONbits.GIE = 1 ;
+                                           ;	.line	725; stepperCon.c	INTCONbits.GIE = 1 ;
 000676   8ef2     bsf     0xf2, 0x7, 0x0   	BSF	_INTCONbits, 7
-                                           ;	.line	722; stepperCon.c	break ;
+                                           ;	.line	727; stepperCon.c	break ;
 000678   ef48     goto    0x000090         	GOTO	_00435_DS_
 00067a   f000
                                            _00428_DS_:
-                                           ;	.line	726; stepperCon.c	if (PORTBbits.RB3) state = START ;
+                                           ;	.line	731; stepperCon.c	if (PORTBbits.RB3) state = START ;
 00067c   a681     btfss   0x81, 0x3, 0x0   	BTFSS	_PORTBbits, 3
 00067e   d003     bra     0x000686         	BRA	_00430_DS_
 000680   0e01     movlw   0x01             	MOVLW	0x01
@@ -1714,12 +1714,12 @@ Address  Value    Disassembly              Source
 000684   6f24     movwf   0x24, 0x1        	MOVWF	_state, B
                                            _00430_DS_:
 000686   010f     movlb   0xf              	BANKSEL	_i2c_dirty
-                                           ;	.line	729; stepperCon.c	if (i2c_dirty) {
+                                           ;	.line	734; stepperCon.c	if (i2c_dirty) {
 000688   5131     movf    0x31, 0x0, 0x1   	MOVF	_i2c_dirty, W, B
 00068a   b4d8     btfsc   0xd8, 0x2, 0x0   	BTFSC	STATUS, 2
 00068c   ef48     goto    0x000090         	GOTO	_00435_DS_
 00068e   f000
-                                           ;	.line	730; stepperCon.c	store_regs(i2c_regs, sizeof(i2c_regs)) ;
+                                           ;	.line	735; stepperCon.c	store_regs(i2c_regs, sizeof(i2c_regs)) ;
 000690   0e00     movlw   0x00             	MOVLW	HIGH(_i2c_regs)
 000692   6e05     movwf   0x05, 0x0        	MOVWF	r0x05
 000694   0ee1     movlw   0xe1             	MOVLW	LOW(_i2c_regs)
@@ -1739,21 +1739,21 @@ Address  Value    Disassembly              Source
 0006b0   0e04     movlw   0x04             	MOVLW	0x04
 0006b2   26e1     addwf   0xe1, 0x1, 0x0   	ADDWF	FSR1L, F
 0006b4   010f     movlb   0xf              	BANKSEL	_i2c_dirty
-                                           ;	.line	731; stepperCon.c	i2c_dirty = 0 ;
+                                           ;	.line	736; stepperCon.c	i2c_dirty = 0 ;
 0006b6   6b31     clrf    0x31, 0x1        	CLRF	_i2c_dirty, B
-                                           ;	.line	732; stepperCon.c	set_op_vars() ; 
+                                           ;	.line	737; stepperCon.c	set_op_vars() ; 
 0006b8   ec15     call    0x001c2a, 0x0    	CALL	_set_op_vars
 0006ba   f00e
-                                           ;	.line	736; stepperCon.c	}
+                                           ;	.line	741; stepperCon.c	}
 0006bc   ef48     goto    0x000090         	GOTO	_00435_DS_
 0006be   f000
-                                           ;	.line	738; stepperCon.c	}
+                                           ;	.line	743; stepperCon.c	}
 0006c0   0012     return  0x0              	RETURN	
 
                                            ; ; Starting pCode block
                                            S_stepperCon__delay_ms	code
                                            _delay_ms:
-                                           ;	.line	409; stepperCon.c	void delay_ms(uint16_t time) {
+                                           ;	.line	414; stepperCon.c	void delay_ms(uint16_t time) {
 00200c   cfd9     movff   0xfd9, 0xfe5     	MOVFF	FSR2L, POSTDEC1
 00200e   ffe5
 002010   cfe1     movff   0xfe1, 0xfd9     	MOVFF	FSR1L, FSR2L
@@ -1772,11 +1772,11 @@ Address  Value    Disassembly              Source
 00202a   0e03     movlw   0x03             	MOVLW	0x03
 00202c   cfdb     movff   0xfdb, 0x001     	MOVFF	PLUSW2, r0x01
 00202e   f001
-                                           ;	.line	412; stepperCon.c	T0CON = 0x02 ;
+                                           ;	.line	417; stepperCon.c	T0CON = 0x02 ;
 002030   0e02     movlw   0x02             	MOVLW	0x02
 002032   6ed5     movwf   0xd5, 0x0        	MOVWF	_T0CON
                                            _00290_DS_:
-                                           ;	.line	414; stepperCon.c	while(--i) {
+                                           ;	.line	419; stepperCon.c	while(--i) {
 002034   5000     movf    0x00, 0x0, 0x0   	MOVF	r0x00, W
 002036   0fff     addlw   0xff             	ADDLW	0xff
 002038   6e02     movwf   0x02, 0x0        	MOVWF	r0x02
@@ -1790,29 +1790,29 @@ Address  Value    Disassembly              Source
 002048   5002     movf    0x02, 0x0, 0x0   	MOVF	r0x02, W
 00204a   1003     iorwf   0x03, 0x0, 0x0   	IORWF	r0x03, W
 00204c   e00a     bz      0x002062         	BZ	_00292_DS_
-                                           ;	.line	415; stepperCon.c	T0CONbits.TMR0ON = 0 ;
+                                           ;	.line	420; stepperCon.c	T0CONbits.TMR0ON = 0 ;
 00204e   9ed5     bcf     0xd5, 0x7, 0x0   	BCF	_T0CONbits, 7
-                                           ;	.line	416; stepperCon.c	INTCONbits.TMR0IF = 0 ;
+                                           ;	.line	421; stepperCon.c	INTCONbits.TMR0IF = 0 ;
 002050   94f2     bcf     0xf2, 0x2, 0x0   	BCF	_INTCONbits, 2
-                                           ;	.line	417; stepperCon.c	TMR0H = TMR_1MS >> 8 ;
+                                           ;	.line	422; stepperCon.c	TMR0H = TMR_1MS >> 8 ;
 002052   0ef8     movlw   0xf8             	MOVLW	0xf8
 002054   6ed7     movwf   0xd7, 0x0        	MOVWF	_TMR0H
-                                           ;	.line	418; stepperCon.c	TMR0L = TMR_1MS ;
+                                           ;	.line	423; stepperCon.c	TMR0L = TMR_1MS ;
 002056   0e30     movlw   0x30             	MOVLW	0x30
 002058   6ed6     movwf   0xd6, 0x0        	MOVWF	_TMR0L
-                                           ;	.line	419; stepperCon.c	T0CONbits.TMR0ON = 1 ;
+                                           ;	.line	424; stepperCon.c	T0CONbits.TMR0ON = 1 ;
 00205a   8ed5     bsf     0xd5, 0x7, 0x0   	BSF	_T0CONbits, 7
                                            _00287_DS_:
-                                           ;	.line	421; stepperCon.c	while(!INTCONbits.TMR0IF) ;
+                                           ;	.line	426; stepperCon.c	while(!INTCONbits.TMR0IF) ;
 00205c   b4f2     btfsc   0xf2, 0x2, 0x0   	BTFSC	_INTCONbits, 2
 00205e   d7ea     bra     0x002034         	BRA	_00290_DS_
 002060   d7fd     bra     0x00205c         	BRA	_00287_DS_
                                            _00292_DS_:
-                                           ;	.line	424; stepperCon.c	T0CONbits.TMR0ON = 0 ;
+                                           ;	.line	429; stepperCon.c	T0CONbits.TMR0ON = 0 ;
 002062   9ed5     bcf     0xd5, 0x7, 0x0   	BCF	_T0CONbits, 7
-                                           ;	.line	425; stepperCon.c	INTCONbits.TMR0IF = 0 ;
+                                           ;	.line	430; stepperCon.c	INTCONbits.TMR0IF = 0 ;
 002064   94f2     bcf     0xf2, 0x2, 0x0   	BCF	_INTCONbits, 2
-                                           ;	.line	426; stepperCon.c	}
+                                           ;	.line	431; stepperCon.c	}
 002066   cfe4     movff   0xfe4, 0x003     	MOVFF	PREINC1, r0x03
 002068   f003
 00206a   cfe4     movff   0xfe4, 0x002     	MOVFF	PREINC1, r0x02
@@ -1828,7 +1828,7 @@ Address  Value    Disassembly              Source
                                            ; ; Starting pCode block
                                            S_stepperCon__set_op_vars	code
                                            _set_op_vars:
-                                           ;	.line	397; stepperCon.c	void set_op_vars(void) {
+                                           ;	.line	401; stepperCon.c	void set_op_vars(void) {
 001c2a   cfd9     movff   0xfd9, 0xfe5     	MOVFF	FSR2L, POSTDEC1
 001c2c   ffe5
 001c2e   cfe1     movff   0xfe1, 0xfd9     	MOVFF	FSR1L, FSR2L
@@ -1841,18 +1841,18 @@ Address  Value    Disassembly              Source
 001c3c   ffe5
 001c3e   c003     movff   0x003, 0xfe5     	MOVFF	r0x03, POSTDEC1
 001c40   ffe5
-                                           ;	.line	398; stepperCon.c	i2c_address = i2c_regs[0x00] ;
+                                           ;	.line	402; stepperCon.c	i2c_address = i2c_regs[0x00] ;
 001c42   c0e1     movff   0x0e1, 0xf32     	MOVFF	_i2c_regs, _i2c_address
 001c44   ff32
-                                           ;	.line	399; stepperCon.c	skip        = i2c_regs[0x01] ;
+                                           ;	.line	403; stepperCon.c	skip        = i2c_regs[0x01] ;
 001c46   c0e2     movff   0x0e2, 0xf33     	MOVFF	(_i2c_regs + 1), _skip
 001c48   ff33
-                                           ;	.line	400; stepperCon.c	set_amp     = i2c_regs[0x02] ;
+                                           ;	.line	404; stepperCon.c	set_amp     = i2c_regs[0x02] ;
 001c4a   c0e3     movff   0x0e3, 0xf20     	MOVFF	(_i2c_regs + 2), _set_amp
 001c4c   ff20
 001c4e   010f     movlb   0xf              	BANKSEL	(_set_amp + 1)
 001c50   6b21     clrf    0x21, 0x1        	CLRF	(_set_amp + 1), B
-                                           ;	.line	401; stepperCon.c	set_amp    += i2c_regs[0x03] << 8 ;
+                                           ;	.line	405; stepperCon.c	set_amp    += i2c_regs[0x03] << 8 ;
 001c52   c0e4     movff   0x0e4, 0x000     	MOVFF	(_i2c_regs + 3), r0x00
 001c54   f000
 001c56   6a01     clrf    0x01, 0x0        	CLRF	r0x01
@@ -1869,12 +1869,12 @@ Address  Value    Disassembly              Source
 001c6c   5001     movf    0x01, 0x0, 0x0   	MOVF	r0x01, W
 001c6e   010f     movlb   0xf              	BANKSEL	(_set_amp + 1)
 001c70   2321     addwfc  0x21, 0x1, 0x1   	ADDWFC	(_set_amp + 1), F, B
-                                           ;	.line	402; stepperCon.c	max_amp     = i2c_regs[0x04] ;
+                                           ;	.line	406; stepperCon.c	max_amp     = i2c_regs[0x04] ;
 001c72   c0e5     movff   0x0e5, 0xf22     	MOVFF	(_i2c_regs + 4), _max_amp
 001c74   ff22
 001c76   010f     movlb   0xf              	BANKSEL	(_max_amp + 1)
 001c78   6b23     clrf    0x23, 0x1        	CLRF	(_max_amp + 1), B
-                                           ;	.line	403; stepperCon.c	max_amp    += i2c_regs[0x05] << 8 ;
+                                           ;	.line	407; stepperCon.c	max_amp    += i2c_regs[0x05] << 8 ;
 001c7a   c0e6     movff   0x0e6, 0x000     	MOVFF	(_i2c_regs + 5), r0x00
 001c7c   f000
 001c7e   6a01     clrf    0x01, 0x0        	CLRF	r0x01
@@ -1893,26 +1893,26 @@ Address  Value    Disassembly              Source
 001c98   2323     addwfc  0x23, 0x1, 0x1   	ADDWFC	(_max_amp + 1), F, B
                                            ; ;multiply lit val:0x02 by variable (_i2c_regs + 6) and store in _t_off
 001c9a   0100     movlb   0x0              	BANKSEL	(_i2c_regs + 6)
-                                           ;	.line	404; stepperCon.c	t_off       = i2c_regs[0x06] * 2 * TMR_500NS ;
+                                           ;	.line	408; stepperCon.c	t_off       = i2c_regs[0x06] * 2 * TMR_500NS ;
 001c9c   51e7     movf    0xe7, 0x0, 0x1   	MOVF	(_i2c_regs + 6), W, B
 001c9e   0d02     mullw   0x02             	MULLW	0x02
 001ca0   cff3     movff   0xff3, 0xf29     	MOVFF	PRODL, _t_off
 001ca2   ff29
                                            ; ;multiply lit val:0x02 by variable (_i2c_regs + 7) and store in _t_blank_low
 001ca4   0100     movlb   0x0              	BANKSEL	(_i2c_regs + 7)
-                                           ;	.line	405; stepperCon.c	t_blank_low = i2c_regs[0x07] * 2 * TMR_500NS ;
+                                           ;	.line	409; stepperCon.c	t_blank_low = i2c_regs[0x07] * 2 * TMR_500NS ;
 001ca6   51e8     movf    0xe8, 0x0, 0x1   	MOVF	(_i2c_regs + 7), W, B
 001ca8   0d02     mullw   0x02             	MULLW	0x02
 001caa   cff3     movff   0xff3, 0xf27     	MOVFF	PRODL, _t_blank_low
 001cac   ff27
                                            ; ;multiply lit val:0x02 by variable (_i2c_regs + 8) and store in _t_blank_high
 001cae   0100     movlb   0x0              	BANKSEL	(_i2c_regs + 8)
-                                           ;	.line	406; stepperCon.c	t_blank_high= i2c_regs[0x08] * 2 * TMR_500NS ;
+                                           ;	.line	410; stepperCon.c	t_blank_high= i2c_regs[0x08] * 2 * TMR_500NS ;
 001cb0   51e9     movf    0xe9, 0x0, 0x1   	MOVF	(_i2c_regs + 8), W, B
 001cb2   0d02     mullw   0x02             	MULLW	0x02
 001cb4   cff3     movff   0xff3, 0xf26     	MOVFF	PRODL, _t_blank_high
 001cb6   ff26
-                                           ;	.line	407; stepperCon.c	}
+                                           ;	.line	411; stepperCon.c	}
 001cb8   cfe4     movff   0xfe4, 0x003     	MOVFF	PREINC1, r0x03
 001cba   f003
 001cbc   cfe4     movff   0xfe4, 0x002     	MOVFF	PREINC1, r0x02
@@ -1928,7 +1928,7 @@ Address  Value    Disassembly              Source
                                            ; ; Starting pCode block
                                            S_stepperCon__prep_pwm_lu	code
                                            _prep_pwm_lu:
-                                           ;	.line	382; stepperCon.c	void prep_pwm_lu(void) {
+                                           ;	.line	385; stepperCon.c	void prep_pwm_lu(void) {
 00130a   cfd9     movff   0xfd9, 0xfe5     	MOVFF	FSR2L, POSTDEC1
 00130c   ffe5
 00130e   cfe1     movff   0xfe1, 0xfd9     	MOVFF	FSR1L, FSR2L
@@ -1956,7 +1956,7 @@ Address  Value    Disassembly              Source
 00133a   c00a     movff   0x00a, 0xfe5     	MOVFF	r0x0a, POSTDEC1
 00133c   ffe5
 00133e   010f     movlb   0xf              	BANKSEL	(_set_amp + 1)
-                                           ;	.line	386; stepperCon.c	ratio = (float)set_amp / (float)max_amp ;
+                                           ;	.line	389; stepperCon.c	ratio = (float)set_amp / (float)max_amp ;
 001340   5121     movf    0x21, 0x0, 0x1   	MOVF	(_set_amp + 1), W, B
 001342   6ee5     movwf   0xe5, 0x0        	MOVWF	POSTDEC1
 001344   010f     movlb   0xf              	BANKSEL	_set_amp
@@ -2017,7 +2017,7 @@ Address  Value    Disassembly              Source
 0013b2   f003
 0013b4   0e08     movlw   0x08             	MOVLW	0x08
 0013b6   26e1     addwf   0xe1, 0x1, 0x0   	ADDWF	FSR1L, F
-                                           ;	.line	389; stepperCon.c	zero_cross = __fs2uint(bias) ;
+                                           ;	.line	392; stepperCon.c	zero_cross = __fs2uint(bias) ;
 0013b8   0e43     movlw   0x43             	MOVLW	0x43
 0013ba   6ee5     movwf   0xe5, 0x0        	MOVWF	POSTDEC1
 0013bc   0eff     movlw   0xff             	MOVLW	0xff
@@ -2034,11 +2034,11 @@ Address  Value    Disassembly              Source
 0013d2   f0ff
 0013d4   0e04     movlw   0x04             	MOVLW	0x04
 0013d6   26e1     addwf   0xe1, 0x1, 0x0   	ADDWF	FSR1L, F
-                                           ;	.line	391; stepperCon.c	for(i = 0 ; i < (sizeof(pwm_base) / sizeof(int16_t)) ; i++) {
+                                           ;	.line	394; stepperCon.c	for(i = 0 ; i < (sizeof(pwm_base) / sizeof(int16_t)) ; i++) {
 0013d8   6a04     clrf    0x04, 0x0        	CLRF	r0x04
                                            ; ;multiply lit val:0x02 by variable r0x04 and store in r0x05
                                            _00269_DS_:
-                                           ;	.line	392; stepperCon.c	set = (float)pwm_base[i] * ratio + bias ;
+                                           ;	.line	395; stepperCon.c	set = (float)pwm_base[i] * ratio + bias ;
 0013da   5004     movf    0x04, 0x0, 0x0   	MOVF	r0x04, W
 0013dc   0d02     mullw   0x02             	MULLW	0x02
 0013de   50f4     movf    0xf4, 0x0, 0x0   	MOVF	PRODH, W
@@ -2128,7 +2128,7 @@ Address  Value    Disassembly              Source
 001486   f00a
 001488   0e08     movlw   0x08             	MOVLW	0x08
 00148a   26e1     addwf   0xe1, 0x1, 0x0   	ADDWF	FSR1L, F
-                                           ;	.line	393; stepperCon.c	pwm_lu[i] = __fs2uint(set) ;
+                                           ;	.line	396; stepperCon.c	pwm_lu[i] = __fs2uint(set) ;
 00148c   0e00     movlw   0x00             	MOVLW	LOW(_pwm_lu)
 00148e   2605     addwf   0x05, 0x1, 0x0   	ADDWF	r0x05, F
 001490   0e02     movlw   0x02             	MOVLW	HIGH(_pwm_lu)
@@ -2156,13 +2156,13 @@ Address  Value    Disassembly              Source
 0014bc   ffee
 0014be   c008     movff   0x008, 0xfef     	MOVFF	r0x08, INDF0
 0014c0   ffef
-                                           ;	.line	391; stepperCon.c	for(i = 0 ; i < (sizeof(pwm_base) / sizeof(int16_t)) ; i++) {
+                                           ;	.line	394; stepperCon.c	for(i = 0 ; i < (sizeof(pwm_base) / sizeof(int16_t)) ; i++) {
 0014c2   2a04     incf    0x04, 0x1, 0x0   	INCF	r0x04, F
 0014c4   0e40     movlw   0x40             	MOVLW	0x40
 0014c6   5c04     subwf   0x04, 0x0, 0x0   	SUBWF	r0x04, W
 0014c8   a0d8     btfss   0xd8, 0x0, 0x0   	BTFSS	STATUS, 0
 0014ca   d787     bra     0x0013da         	BRA	_00269_DS_
-                                           ;	.line	395; stepperCon.c	}
+                                           ;	.line	398; stepperCon.c	}
 0014cc   cfe4     movff   0xfe4, 0x00a     	MOVFF	PREINC1, r0x0a
 0014ce   f00a
 0014d0   cfe4     movff   0xfe4, 0x009     	MOVFF	PREINC1, r0x09
@@ -2192,36 +2192,36 @@ Address  Value    Disassembly              Source
                                            ; ; Starting pCode block
                                            S_stepperCon__idleInts	code
                                            _idleInts:
-                                           ;	.line	363; stepperCon.c	void idleInts(void) {
+                                           ;	.line	365; stepperCon.c	void idleInts(void) {
 00228c   cfd9     movff   0xfd9, 0xfe5     	MOVFF	FSR2L, POSTDEC1
 00228e   ffe5
 002290   cfe1     movff   0xfe1, 0xfd9     	MOVFF	FSR1L, FSR2L
 002292   ffd9
-                                           ;	.line	364; stepperCon.c	INTCONbits.INT0IE = 0 ;     // Disable 'step' interrupt
+                                           ;	.line	366; stepperCon.c	INTCONbits.INT0IE = 0 ;     // Disable 'step' interrupt
 002294   98f2     bcf     0xf2, 0x4, 0x0   	BCF	_INTCONbits, 4
-                                           ;	.line	365; stepperCon.c	INTCON3bits.INT2IE = 0 ;    // Disable 'dir' interrupt
+                                           ;	.line	367; stepperCon.c	INTCON3bits.INT2IE = 0 ;    // Disable 'dir' interrupt
 002296   98f0     bcf     0xf0, 0x4, 0x0   	BCF	_INTCON3bits, 4
-                                           ;	.line	367; stepperCon.c	PIE2bits.C1IE = 0 ;         // Disable Comparator C1 Interrupt
+                                           ;	.line	369; stepperCon.c	PIE2bits.C1IE = 0 ;         // Disable Comparator C1 Interrupt
 002298   9ca0     bcf     0xa0, 0x6, 0x0   	BCF	_PIE2bits, 6
-                                           ;	.line	368; stepperCon.c	PIE2bits.C2IE = 0 ;         // Disable Comparator C2 Interrupt
+                                           ;	.line	370; stepperCon.c	PIE2bits.C2IE = 0 ;         // Disable Comparator C2 Interrupt
 00229a   9aa0     bcf     0xa0, 0x5, 0x0   	BCF	_PIE2bits, 5
-                                           ;	.line	370; stepperCon.c	PIE1bits.CCP1IE = 0 ;       // Disable CCP1 interrupt
+                                           ;	.line	372; stepperCon.c	PIE1bits.CCP1IE = 0 ;       // Disable CCP1 interrupt
 00229c   949d     bcf     0x9d, 0x2, 0x0   	BCF	_PIE1bits, 2
-                                           ;	.line	371; stepperCon.c	PIE2bits.CCP2IE = 0 ;       // Disable CCP2 interrupt
+                                           ;	.line	373; stepperCon.c	PIE2bits.CCP2IE = 0 ;       // Disable CCP2 interrupt
 00229e   90a0     bcf     0xa0, 0x0, 0x0   	BCF	_PIE2bits, 0
-                                           ;	.line	373; stepperCon.c	PIE1bits.SSP1IE = 1 ;       // Enable I2C interrupt
+                                           ;	.line	375; stepperCon.c	PIE1bits.SSP1IE = 1 ;       // Enable I2C interrupt
 0022a0   869d     bsf     0x9d, 0x3, 0x0   	BSF	_PIE1bits, 3
-                                           ;	.line	374; stepperCon.c	PIE2bits.BCL1IE = 1 ;       // Enable I2C collision detection interrupt
+                                           ;	.line	376; stepperCon.c	PIE2bits.BCL1IE = 1 ;       // Enable I2C collision detection interrupt
 0022a2   86a0     bsf     0xa0, 0x3, 0x0   	BSF	_PIE2bits, 3
-                                           ;	.line	376; stepperCon.c	SSP1CON1bits.SSPOV = 0 ;
+                                           ;	.line	378; stepperCon.c	SSP1CON1bits.SSPOV = 0 ;
 0022a4   9cc6     bcf     0xc6, 0x6, 0x0   	BCF	_SSP1CON1bits, 6
-                                           ;	.line	377; stepperCon.c	PIR1bits.SSP1IF = 0 ;
+                                           ;	.line	379; stepperCon.c	PIR1bits.SSP1IF = 0 ;
 0022a6   969e     bcf     0x9e, 0x3, 0x0   	BCF	_PIR1bits, 3
-                                           ;	.line	378; stepperCon.c	SSP1CON1bits.CKP = 1 ;      // Release clock
+                                           ;	.line	380; stepperCon.c	SSP1CON1bits.CKP = 1 ;      // Release clock
 0022a8   88c6     bsf     0xc6, 0x4, 0x0   	BSF	_SSP1CON1bits, 4
-                                           ;	.line	379; stepperCon.c	SSP1CON1bits.SSPEN = 1 ;    // Enable I2C port
+                                           ;	.line	381; stepperCon.c	SSP1CON1bits.SSPEN = 1 ;    // Enable I2C port
 0022aa   8ac6     bsf     0xc6, 0x5, 0x0   	BSF	_SSP1CON1bits, 5
-                                           ;	.line	380; stepperCon.c	}
+                                           ;	.line	382; stepperCon.c	}
 0022ac   cfe4     movff   0xfe4, 0xfd9     	MOVFF	PREINC1, FSR2L
 0022ae   ffd9
 0022b0   0012     return  0x0              	RETURN	
@@ -2229,48 +2229,48 @@ Address  Value    Disassembly              Source
                                            ; ; Starting pCode block
                                            S_stepperCon__activeInts	code
                                            _activeInts:
-                                           ;	.line	338; stepperCon.c	void activeInts(void) {
+                                           ;	.line	340; stepperCon.c	void activeInts(void) {
 0021d4   cfd9     movff   0xfd9, 0xfe5     	MOVFF	FSR2L, POSTDEC1
 0021d6   ffe5
 0021d8   cfe1     movff   0xfe1, 0xfd9     	MOVFF	FSR1L, FSR2L
 0021da   ffd9
-                                           ;	.line	339; stepperCon.c	PIE1bits.SSP1IE = 0 ;       // Disable I2C interrupt
+                                           ;	.line	341; stepperCon.c	PIE1bits.SSP1IE = 0 ;       // Disable I2C interrupt
 0021dc   969d     bcf     0x9d, 0x3, 0x0   	BCF	_PIE1bits, 3
-                                           ;	.line	340; stepperCon.c	SSP1CON1bits.SSPEN = 0 ;    // Disable I2C port
+                                           ;	.line	342; stepperCon.c	SSP1CON1bits.SSPEN = 0 ;    // Disable I2C port
 0021de   9ac6     bcf     0xc6, 0x5, 0x0   	BCF	_SSP1CON1bits, 5
-                                           ;	.line	341; stepperCon.c	PIE2bits.BCL1IE = 0 ;       // Disable I2C collision detection interrupt
+                                           ;	.line	343; stepperCon.c	PIE2bits.BCL1IE = 0 ;       // Disable I2C collision detection interrupt
 0021e0   96a0     bcf     0xa0, 0x3, 0x0   	BCF	_PIE2bits, 3
-                                           ;	.line	344; stepperCon.c	if(PORTBbits.RB2) { 
+                                           ;	.line	346; stepperCon.c	if(PORTBbits.RB2) { 
 0021e2   a481     btfss   0x81, 0x2, 0x0   	BTFSS	_PORTBbits, 2
 0021e4   d005     bra     0x0021f0         	BRA	_00256_DS_
-                                           ;	.line	345; stepperCon.c	INTCON2bits.INTEDG2 = 0 ;
+                                           ;	.line	347; stepperCon.c	INTCON2bits.INTEDG2 = 0 ;
 0021e6   98f1     bcf     0xf1, 0x4, 0x0   	BCF	_INTCON2bits, 4
-                                           ;	.line	346; stepperCon.c	dir = 1 ;
+                                           ;	.line	348; stepperCon.c	dir = 1 ;
 0021e8   0e01     movlw   0x01             	MOVLW	0x01
 0021ea   010f     movlb   0xf              	BANKSEL	_dir
 0021ec   6f25     movwf   0x25, 0x1        	MOVWF	_dir, B
 0021ee   d004     bra     0x0021f8         	BRA	_00257_DS_
                                            _00256_DS_:
-                                           ;	.line	349; stepperCon.c	INTCON2bits.INTEDG2 = 1 ;
+                                           ;	.line	351; stepperCon.c	INTCON2bits.INTEDG2 = 1 ;
 0021f0   88f1     bsf     0xf1, 0x4, 0x0   	BSF	_INTCON2bits, 4
-                                           ;	.line	350; stepperCon.c	dir = -1 ;
+                                           ;	.line	352; stepperCon.c	dir = -1 ;
 0021f2   0eff     movlw   0xff             	MOVLW	0xff
 0021f4   010f     movlb   0xf              	BANKSEL	_dir
 0021f6   6f25     movwf   0x25, 0x1        	MOVWF	_dir, B
                                            _00257_DS_:
-                                           ;	.line	353; stepperCon.c	INTCONbits.INT0IE = 1 ;     // Enable 'step' interrupt
+                                           ;	.line	355; stepperCon.c	INTCONbits.INT0IE = 1 ;     // Enable 'step' interrupt
 0021f8   88f2     bsf     0xf2, 0x4, 0x0   	BSF	_INTCONbits, 4
-                                           ;	.line	354; stepperCon.c	INTCON3bits.INT2IE = 1 ;    // Enable 'dir' interrupt
+                                           ;	.line	356; stepperCon.c	INTCON3bits.INT2IE = 1 ;    // Enable 'dir' interrupt
 0021fa   88f0     bsf     0xf0, 0x4, 0x0   	BSF	_INTCON3bits, 4
-                                           ;	.line	356; stepperCon.c	PIE2bits.C1IE = 0 ;         // Disable Comparator C1 Interrupt
+                                           ;	.line	358; stepperCon.c	PIE2bits.C1IE = 0 ;         // Disable Comparator C1 Interrupt
 0021fc   9ca0     bcf     0xa0, 0x6, 0x0   	BCF	_PIE2bits, 6
-                                           ;	.line	357; stepperCon.c	PIE2bits.C2IE = 0 ;         // Disable Comparator C2 Interrupt
+                                           ;	.line	359; stepperCon.c	PIE2bits.C2IE = 0 ;         // Disable Comparator C2 Interrupt
 0021fe   9aa0     bcf     0xa0, 0x5, 0x0   	BCF	_PIE2bits, 5
-                                           ;	.line	359; stepperCon.c	PIE1bits.CCP1IE = 1 ;       // Enable CCP1 interrupt
+                                           ;	.line	361; stepperCon.c	PIE1bits.CCP1IE = 1 ;       // Enable CCP1 interrupt
 002200   849d     bsf     0x9d, 0x2, 0x0   	BSF	_PIE1bits, 2
-                                           ;	.line	360; stepperCon.c	PIE2bits.CCP2IE = 1 ;       // Enable CCP2 interrupt
+                                           ;	.line	362; stepperCon.c	PIE2bits.CCP2IE = 1 ;       // Enable CCP2 interrupt
 002202   80a0     bsf     0xa0, 0x0, 0x0   	BSF	_PIE2bits, 0
-                                           ;	.line	361; stepperCon.c	}
+                                           ;	.line	363; stepperCon.c	}
 002204   cfe4     movff   0xfe4, 0xfd9     	MOVFF	PREINC1, FSR2L
 002206   ffd9
 002208   0012     return  0x0              	RETURN	
@@ -2278,33 +2278,33 @@ Address  Value    Disassembly              Source
                                            ; ; Starting pCode block
                                            S_stepperCon__i2cSetup	code
                                            _i2cSetup:
-                                           ;	.line	324; stepperCon.c	void i2cSetup(void) {
+                                           ;	.line	325; stepperCon.c	void i2cSetup(void) {
 00223c   cfd9     movff   0xfd9, 0xfe5     	MOVFF	FSR2L, POSTDEC1
 00223e   ffe5
 002240   cfe1     movff   0xfe1, 0xfd9     	MOVFF	FSR1L, FSR2L
 002242   ffd9
-                                           ;	.line	325; stepperCon.c	TRISCbits.TRISC3 = 1 ;      // Set I2C pins as input
+                                           ;	.line	326; stepperCon.c	TRISCbits.TRISC3 = 1 ;      // Set I2C pins as input
 002244   8694     bsf     0x94, 0x3, 0x0   	BSF	_TRISCbits, 3
-                                           ;	.line	326; stepperCon.c	TRISCbits.TRISC4 = 1 ;
+                                           ;	.line	327; stepperCon.c	TRISCbits.TRISC4 = 1 ;
 002246   8894     bsf     0x94, 0x4, 0x0   	BSF	_TRISCbits, 4
-                                           ;	.line	328; stepperCon.c	SSP1CON1bits.SSPEN = 0 ;
+                                           ;	.line	329; stepperCon.c	SSP1CON1bits.SSPEN = 0 ;
 002248   9ac6     bcf     0xc6, 0x5, 0x0   	BCF	_SSP1CON1bits, 5
-                                           ;	.line	329; stepperCon.c	SSP1CON2bits.GCEN = 1 ;     // Enable general call on address 0x00
+                                           ;	.line	330; stepperCon.c	SSP1CON2bits.GCEN = 1 ;     // Enable general call on address 0x00
 00224a   8ec5     bsf     0xc5, 0x7, 0x0   	BSF	_SSP1CON2bits, 7
-                                           ;	.line	330; stepperCon.c	SSP1CON2bits.SEN = 1 ;      // Enable clock stretching
+                                           ;	.line	331; stepperCon.c	SSP1CON2bits.SEN = 1 ;      // Enable clock stretching
 00224c   80c5     bsf     0xc5, 0x0, 0x0   	BSF	_SSP1CON2bits, 0
-                                           ;	.line	331; stepperCon.c	SSP1ADD = i2c_address ;     // Set device I2C address
+                                           ;	.line	332; stepperCon.c	SSP1ADD = i2c_address ;     // Set device I2C address
 00224e   cf32     movff   0xf32, 0xfc8     	MOVFF	_i2c_address, _SSP1ADD
 002250   ffc8
 002252   010f     movlb   0xf              	BANKSEL	_i2c_reg_addr
-                                           ;	.line	333; stepperCon.c	i2c_reg_addr = 0 ;
+                                           ;	.line	334; stepperCon.c	i2c_reg_addr = 0 ;
 002254   6b30     clrf    0x30, 0x1        	CLRF	_i2c_reg_addr, B
-                                           ;	.line	335; stepperCon.c	SSP1CON1bits.SSPM = 0x6 ;   // I2C Slave mode, 7-bit address
+                                           ;	.line	336; stepperCon.c	SSP1CON1bits.SSPM = 0x6 ;   // I2C Slave mode, 7-bit address
 002256   50c6     movf    0xc6, 0x0, 0x0   	MOVF	_SSP1CON1bits, W
 002258   0bf0     andlw   0xf0             	ANDLW	0xf0
 00225a   0906     iorlw   0x06             	IORLW	0x06
 00225c   6ec6     movwf   0xc6, 0x0        	MOVWF	_SSP1CON1bits
-                                           ;	.line	336; stepperCon.c	}
+                                           ;	.line	337; stepperCon.c	}
 00225e   cfe4     movff   0xfe4, 0xfd9     	MOVFF	PREINC1, FSR2L
 002260   ffd9
 002262   0012     return  0x0              	RETURN	
