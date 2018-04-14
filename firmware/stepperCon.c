@@ -62,6 +62,8 @@
 
 #include "registers.h"
 
+
+// 64MHz clock 
 #pragma config  FOSC    = HSHP      // HS ocsillator, high power
 #pragma config  PLLCFG  = ON        // x4 PLL on
 #pragma config  WDTEN   = SWON      // WDT software controlled
@@ -113,6 +115,10 @@
 #define PH_OFF      1
 #define T_DRIVE     2
 
+// ADC Capture states
+#define CAPTURE_A   0
+#define CAPTURE_B   1
+
 #define TMR_1MS   63536     // @1:8 Prescaller, Fosc/4
 #define TMR_10MS  45536     // @1:8 Prescaller, Fosc/4
 #define TMR_500NS 1         // @1:8 Prescaller, Fosc/4
@@ -160,6 +166,9 @@ int8_t  dir ;               // Direction
 uint16_t pwm_lu[FULL_CYCLE] ;   // PWM lookup table
 uint16_t zero_cross ;
 
+uint16_t a_adc, b_adc ;
+uint8_t adc_cap ;
+
 uint8_t i2c_address ;       // Reg 0x00
 uint8_t i2c_counter ;       // I2C bytes counter
 uint8_t i2c_reg_addr ;      // Register address to read/write
@@ -169,10 +178,10 @@ uint8_t i2c_dirty ;         // I2C "dirty", does not match EEPROM
 uint8_t a_state, b_state ;
 
 
-extern void compsSetup(void) ;
 extern void ioSetup(void) ;
 extern void pwmSetup(void) ;
 extern void intSetup(void) ;
+extern void adc_setup(void) ;
 extern void phTimersSetup(void) ;
 extern void resetCheck(void) ;
 
@@ -202,79 +211,21 @@ static void highInt(void) __interrupt(1) {
         INTCON3bits.INT2IF = 0 ;    // clear 'dir' interrupt
     }
     
-    // Phase-A off counter done
-    if (PIR1bits.CCP1IF) {
-        T1CONbits.TMR1ON = 0 ;  // Toff timer off
-        TMR1L = 0 ;             // Clear off timer
-        TMR1H = 0 ;
-        
-        if (a_state == PH_OFF) {
-            if (a_decay == FAST_DECAY) {            
-                if (pol_a) {                    // Forward current, Phase-A
-                    LATCbits.LATC1 = 0 ;
-                    LATCbits.LATC0 = 1 ;
-                }
-                else {                          // Reverse current, Phase-A
-                    LATCbits.LATC0 = 0 ;
-                    LATCbits.LATC1 = 1 ;
-                }
-            }     
-            else LATAbits.LATA4 = 1 ;  // Toggle enable for slow decay
-            
-            CCPR1H = 0 ;
-            
-            if(pol_a) CCPR1L = t_blank_high ;
-            else CCPR1L = t_blank_low ;
-            
-            a_state = PH_BLANK ;
-            
-            T1CONbits.TMR1ON = 1 ;
+    // ADC Done
+    if (PIR1bits.ADIF) {
+        if (adc_cap) {
+            b_adc = (ADRESH << 8) + ADRESL ;
+            ADCON0bits.CHS = 0b0000 ;           // Set capture to RA0
+            adc_cap = CAPTURE_A ;
         }
-        else if(a_state == PH_BLANK) {
-            CCPR1H = 0 ;
-            CCPR1L = t_off ;
-            a_state = T_DRIVE ;
+        else {
+            a_adc = (ADRESH << 8) + ADRESL ;   
+            ADCON0bits.CHS = 0b0001 ;           // Set capture to RA1
+            adc_cap = CAPTURE_B ;
         }
-        
-        PIR1bits.CCP1IF = 0 ;
-    }
-    
-    // Phase-B off counter done
-    if (PIR2bits.CCP2IF) {
-        T3CONbits.TMR3ON = 0 ;  // Toff timer off
-        TMR3L = 0 ;             // Clear off timer 
-        TMR3H = 0 ;
-        
-        if (b_state == PH_OFF) {
-            // Reverse polarity for fast decay
-            if (b_decay == FAST_DECAY) {
-                if (pol_b) {                    // Forward current, Phase-B
-                    LATCbits.LATC2 = 0 ;
-                    LATDbits.LATD5 = 1 ;
-                }
-                else {                          // Reverse current, Phase-B
-                    LATDbits.LATD5 = 0 ;
-                    LATCbits.LATC2 = 1 ;
-                }
-            }
-            else LATAbits.LATA5 = 1 ;  // Toggle enable for slow decay
             
-            CCPR2H = 0 ;
-            
-            if(pol_b) CCPR2L = t_blank_high ;
-            else CCPR2L = t_blank_low ;
-            
-            b_state = PH_BLANK ;
-            
-            T3CONbits.TMR3ON = 1 ;
-        }
-        else if(b_state == PH_BLANK) {
-            CCPR2H = 0 ;
-            CCPR2L = t_off ;
-            b_state = T_DRIVE ;
-        }
-        
-        PIR2bits.CCP2IF = 0 ;
+        ADCON0bits.GO = 1 ;                     // Start next capture
+        PIR1bits.ADIF = 0 ;                     // Clear ADC interrupt
     }
 }
 
@@ -354,23 +305,11 @@ void activeInts(void) {
     
     INTCONbits.INT0IE = 1 ;     // Enable 'step' interrupt
     INTCON3bits.INT2IE = 1 ;    // Enable 'dir' interrupt
-    
-    PIE2bits.C1IE = 0 ;         // Disable Comparator C1 Interrupt
-    PIE2bits.C2IE = 0 ;         // Disable Comparator C2 Interrupt
-    
-    PIE1bits.CCP1IE = 1 ;       // Enable CCP1 interrupt
-    PIE2bits.CCP2IE = 1 ;       // Enable CCP2 interrupt
 }
 
 void idleInts(void) {
     INTCONbits.INT0IE = 0 ;     // Disable 'step' interrupt
     INTCON3bits.INT2IE = 0 ;    // Disable 'dir' interrupt
-    
-    PIE2bits.C1IE = 0 ;         // Disable Comparator C1 Interrupt
-    PIE2bits.C2IE = 0 ;         // Disable Comparator C2 Interrupt
-    
-    PIE1bits.CCP1IE = 0 ;       // Disable CCP1 interrupt
-    PIE2bits.CCP2IE = 0 ;       // Disable CCP2 interrupt
     
     PIE1bits.SSP1IE = 1 ;       // Enable I2C interrupt
     PIE2bits.BCL1IE = 1 ;       // Enable I2C collision detection interrupt
@@ -451,13 +390,11 @@ int main(void) {
     
     i2cSetup() ;                // Setup I2C I/F
     intSetup() ;                // Interrupts setup
-    compsSetup() ;              // Comparators setup
+    adc_setup() ;
     idleInts() ;                // Set interrupts to 'idle' state
     
     // Reset state
     state = IDLE ;              // Start in 'idle' state
-    
-    phTimersSetup() ;
     
     // Blink Blue LED once - indicate ready
     PORTDbits.RD2 = 1 ;     // Turn blue LED on
@@ -472,8 +409,7 @@ int main(void) {
         
         switch(state) {
             case START:
-                LATDbits.LATD2 = !LATDbits.LATD2 ;
-//                PORTDbits.RD2 = 1 ;     // Turn blue LED on
+                LATDbits.LATD2 = 1 ;
                 
                 // On full step phase A starts at 45 deg, 0 deg otherwise
                 if (skip == STEP_1) step_a = STEPS / 2 ;
@@ -481,13 +417,6 @@ int main(void) {
                 
                 // phase B is +90 deg from phase A
                 step_b = step_a + STEPS ;
-                
-                // Set compare modules to T_off
-                CCPR1H = 0 ;
-                CCPR1L = t_off ;
-                
-                CCPR2H = 0 ;
-                CCPR2L = t_off ;
                 
                 if (step_a > THREE_QUARTERS) a_decay = FAST_DECAY ;
                 else if (step_a >= HALF_CYCLE) a_decay = SLOW_DECAY ;
@@ -504,14 +433,6 @@ int main(void) {
                 pwmSetup() ;            // Activate PWM
                 activeInts() ;          // Set active state interrupts
                 
-                T1CONbits.TMR1ON = 0 ;  // Toff timer off
-                TMR1L = 0 ;             // Clear off timer
-                TMR1H = 0 ;
-                
-                T3CONbits.TMR3ON = 0 ;  // Toff timer off
-                TMR3L = 0 ;             // Clear off timer 
-                TMR3H = 0 ;
-                
                 a_state = T_DRIVE ;
                 b_state = T_DRIVE ;
                 
@@ -524,39 +445,7 @@ int main(void) {
                 else if (step_b > HALF_CYCLE) pol_b = 0 ;
                 else pol_b = 1 ;
                 
-                CM1CON0 = 0x09 ;
-                CM2CON0 = 0x08 ;
                 
-                if (pol_a == 2) {
-                    LATCbits.LATC1 = 0 ;
-                    LATCbits.LATC0 = 0 ;
-                }
-                else if (pol_a) {               // Forward current, Phase-A
-                    LATCbits.LATC1 = 0 ;
-                    LATCbits.LATC0 = 1 ;
-                    CM1CON0 = 0x99 ; 
-                }
-                else {                          // Reverse current, Phase-A
-                    LATCbits.LATC0 = 0 ;
-                    LATCbits.LATC1 = 1 ;
-                    CM1CON0 = 0x89 ; 
-                }
-                
-                if(pol_b == 2) {
-                    LATCbits.LATC2 = 0 ;
-                    LATDbits.LATD5 = 0 ;
-                }
-                else if (pol_b) {               // Forward current, Phase-B
-                    LATCbits.LATC2 = 0 ;
-                    LATDbits.LATD5 = 1 ;
-                    CM2CON0 = 0x98 ;
-                }
-                else {                          // Reverse current, Phase-B
-                    LATDbits.LATD5 = 0 ;
-                    LATCbits.LATC2 = 1 ;
-                    CM2CON0 = 0x88 ;
-                }
-                               
                 // Pre-calculate PWM duty-cycle registers values
                 CCP5CONbits.DC5B = 0x0c + (pwm_lu[step_a] & 0x3) << 4 ;
                 CCPR5L = pwm_lu[step_a] >> 2 ;
@@ -571,9 +460,6 @@ int main(void) {
                 break ;
                 
             case STEP:
-                CM1CON0 = 0x09 ;
-                CM2CON0 = 0x08 ;
-                
                 CCP5CONbits.DC5B = pwm_a_l ;             // Set PWM duty cycle, Phase-A
                 CCPR5L = pwm_a_h ;
                 
@@ -601,36 +487,6 @@ int main(void) {
                     PORTAbits.RA5 = 1 ;
                 }
                 else b_decay = SLOW_DECAY ;
-                
-                if (pol_a == 2) {
-                    LATCbits.LATC1 = 0 ;
-                    LATCbits.LATC0 = 0 ;
-                }
-                else if (pol_a) {               // Forward current, Phase-A
-                    LATCbits.LATC1 = 0 ;
-                    LATCbits.LATC0 = 1 ;
-                    CM1CON0 = 0x99 ; 
-                }
-                else {                          // Reverse current, Phase-A
-                    LATCbits.LATC0 = 0 ;
-                    LATCbits.LATC1 = 1 ;
-                    CM1CON0 = 0x89 ; 
-                }
-                
-                if(pol_b == 2) {
-                    LATCbits.LATC2 = 0 ;
-                    LATDbits.LATD5 = 0 ;
-                }
-                else if (pol_b) {               // Forward current, Phase-B
-                    LATCbits.LATC2 = 0 ;
-                    LATDbits.LATD5 = 1 ;
-                    CM2CON0 = 0x98 ;
-                }
-                else {                          // Reverse current, Phase-B
-                    LATDbits.LATD5 = 0 ;
-                    LATCbits.LATC2 = 1 ;
-                    CM2CON0 = 0x88 ;
-                }
                
                 state = NEXT_STEP ;
                 break ;
@@ -710,12 +566,6 @@ int main(void) {
                 if (!PORTBbits.RB3) {
                     INTCONbits.GIE = 0 ;
                     idleInts() ;
-                    
-                    CM1CON0bits.C1ON = 0 ;
-                    CM2CON0bits.C2ON = 0 ;
-                    
-                    CM1CON0bits.C1ON = 0 ; 
-                    CM2CON0bits.C2OE = 0 ;
                     
                     LATAbits.LATA4 = 0 ;    // Shut phases down
                     LATAbits.LATA5 = 0 ; 
