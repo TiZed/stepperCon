@@ -60,7 +60,9 @@
 #include <float.h>
 #include <math.h>
 
+#include "pi_controller.h"
 #include "registers.h"
+#include "sc_setup.h"
 
 
 // 64MHz clock 
@@ -68,7 +70,7 @@
 #pragma config  PLLCFG  = ON        // x4 PLL on
 #pragma config  WDTEN   = SWON      // WDT software controlled
 #pragma config  XINST   = OFF       // For SDCC
-#pragma config  CCP3MX  = PORTE0    // CCP3 on port E0   
+#pragma config  CCP3MX  = PORTB5    // CCP3 on port E0   
 #pragma config  P2BMX   = PORTC0    // P2B on port C0
 #pragma config  MCLRE   = EXTMCLR   // Enable MCLR pin (E3 disabled)
 // #pragma config  LVP     = ON        // Low voltage programming enabled
@@ -79,17 +81,18 @@
 #define THREE_QUARTERS (3 * STEPS)
 
 // Some default values
-#define CUR_GAIN 90         // Current sensor gain
+#define CUR_GAIN 90          // Current sensor gain
 
-#define I2C_ADDRESS 0x40    // X- 0x40, Y- 0x42, Z- 0x44 
-#define I2C_REGISTERS 9
+// PI Parameters
+#define KP      30           // Proportional coefficient
+#define KI      10           // Integral coefficient
 
+#define I2C_ADDRESS 0x44     // X- 0x40, Y- 0x42, Z- 0x44 
+#define I2C_REGISTERS 11
 
-#define MAX_AMP 3704        // [mA] Maximum driver amperage
-#define SET_AMP 1500        // [mA] Default driver limit
-#define T_OFF   20          // [usec.] fixed phase time off
-#define T_BLANK_HIGH 1      // [usec.] blank time for forward current
-#define T_BLANK_LOW  10     // [usec.] blank time for revers current
+#define MAX_AMP 1852         // [mA] Maximum driver amperage
+#define SET_AMP 1400         // [mA] Default driver limit
+#define T_BLANK 24           // [62.5nsec.] dead-band for transistors transition
 
 // Stepping modes
 #define STEP_16  1
@@ -98,26 +101,13 @@
 #define STEP_2   8
 #define STEP_1  16
 
-// Decay modes
-#define SLOW_DECAY 0
-#define FAST_DECAY 1
-
 // System states
 #define IDLE      0
 #define START     1
 #define RUNNING   2
-#define HALT      3
-#define STEP      4
-#define NEXT_STEP 6
-
-// Phase states
-#define PH_BLANK    0
-#define PH_OFF      1
-#define T_DRIVE     2
-
-// ADC Capture states
-#define CAPTURE_A   0
-#define CAPTURE_B   1
+#define CALC_PI_A 3
+#define CALC_PI_B 4
+#define STEP      6
 
 #define TMR_1MS   63536     // @1:8 Prescaller, Fosc/4
 #define TMR_10MS  45536     // @1:8 Prescaller, Fosc/4
@@ -127,12 +117,12 @@
 
 // Default EEPROM data
 typedef unsigned char eeprom ;
-__code eeprom __at 0xf00000 __EEPROM[] = { I2C_ADDRESS, STEP_8, SET_AMP, 
+__code eeprom __at 0xf00000 __EEPROM[] = { I2C_ADDRESS, STEP_16, SET_AMP, 
                                            SET_AMP >> 8, MAX_AMP, 
-                                           MAX_AMP >> 8, T_OFF,
-                                           T_BLANK_LOW, T_BLANK_HIGH};
+                                           MAX_AMP >> 8, T_BLANK,
+                                           KP, KP >> 8, KI, KI >> 8 };
 
-// PWM micro-stepping base table
+// PWM micro-stepping 10bit base table
 static const __data int16_t pwm_base[] = {  
         0,   50,  100,  149,  196,  241,  284,  325,    //  0-7 
       362,  396,  426,  452,  473,  490,  502,  510,    //  8-15
@@ -144,55 +134,78 @@ static const __data int16_t pwm_base[] = {
      -362, -325, -284, -241, -196, -149, -100,  -50     // 56-63
 } ;
 
-uint8_t state ;             // Current state of operation state machine
-uint8_t skip ;              // Reg 0x01 - Micro-stepping 
+volatile uint8_t state ;             // Current state of operation state machine
+volatile uint8_t micro_steps ;       // Reg 0x01 - Micro-stepping 
 
-uint16_t set_amp ;          // Reg 0x02 (LSB) & 0x03 (MSB) 
-uint16_t max_amp ;          // Reg 0x04 (LSB) & 0x05 (MSB)
+volatile uint16_t set_amp ;          // Reg 0x02 (LSB) & 0x03 (MSB) 
+volatile uint16_t max_amp ;          // Reg 0x04 (LSB) & 0x05 (MSB)
 
-uint8_t a_decay ;           // Phase A decay mode
-uint8_t b_decay ;           // Phase B decay mode
+volatile uint8_t t_blank ;           // Phase blanking in reverse current Reg 0x06
 
-uint8_t t_off ;             // Phase fixed off time, Reg 0x06
-uint8_t t_blank_low ;       // Phase blanking in reverse current Reg 0x7
-uint8_t t_blank_high ;      // Phase blanking in forward current Reg 0x8
+volatile int16_t pid_kp ;            // Reg 0x07 (LSB) & 0x08 (MSB) 
+volatile int16_t pid_ki ;            // Reg 0x09 (LSB) & 0x0a (MSB)
 
-int8_t step_a ;            // Current phase A step
-int8_t step_b ;            // Current phase B step
-uint8_t pol_a ;             // Phase A polarity
-uint8_t pol_b ;             // Phase B polarity
-int8_t  dir ;               // Direction
+volatile int8_t  dir ;               // Direction
+volatile int8_t  skip ;              // Current steps, based on micro-stepping mode 
 
-uint16_t pwm_lu[FULL_CYCLE] ;   // PWM lookup table
-uint16_t zero_cross ;
-
-uint16_t a_adc, b_adc ;
-uint8_t adc_cap ;
+volatile uint16_t pwm_lu[FULL_CYCLE] ;   // PWM lookup table
+volatile uint16_t zero_cross ;
 
 uint8_t i2c_address ;       // Reg 0x00
 uint8_t i2c_counter ;       // I2C bytes counter
 uint8_t i2c_reg_addr ;      // Register address to read/write
-uint8_t i2c_regs[I2C_REGISTERS] ;
+volatile uint8_t i2c_regs[I2C_REGISTERS] ;
 uint8_t i2c_dirty ;         // I2C "dirty", does not match EEPROM
+volatile uint8_t i2c_buf ;
 
-uint8_t a_state, b_state ;
-
-
-extern void ioSetup(void) ;
-extern void pwmSetup(void) ;
-extern void intSetup(void) ;
-extern void adc_setup(void) ;
-extern void phTimersSetup(void) ;
-extern void resetCheck(void) ;
+volatile uint16_t adc_wdt ;
 
 // High priority interrupt
 static void highInt(void) __interrupt(1) {
-    // 'step' Interrupt
+    // ADC Done
+    if (PIR1bits.ADIF) {
+        adc_wdt = 0 ;
+        
+        if (state != STEP) {
+            if (ADCON0bits.CHS == 0b0001) state = CALC_PI_A ;
+            else state = CALC_PI_B ;
+        }
+           
+        PIR1bits.ADIF = 0 ;                     // Clear ADC interrupt
+    }
+    
+     // 'step' Interrupt
     if (INTCONbits.INT0IF) {
         state = STEP ;
         INTCONbits.INT0IF = 0 ;     // clear 'step' interrupt
     }
     
+    // On Comparator 1 change
+    if (PIR2bits.C1IF && PIE2bits.C1IE) {
+        if (CM1CON0bits.C1OUT) {
+            ADCON0bits.CHS = 0b0001 ; 
+            ADCON0bits.GO = 1 ;
+            PIE2bits.C1IE = 0 ;
+        }
+        
+        PIR2bits.C1IF = 0 ;        
+    }
+    
+    // On Comparator 2 change
+    if (PIR2bits.C2IF && PIE2bits.C2IE) {
+        if (CM2CON0bits.C2OUT) {
+            ADCON0bits.CHS = 0b0000 ; 
+            ADCON0bits.GO = 1 ;
+            PIE2bits.C2IE = 0 ;
+        }
+        
+        PIR2bits.C2IF = 0 ;        
+    }
+}
+
+// Low priority interrupt
+static void lowInt(void) __interrupt(2) {
+   
     // 'dir' Interrupts
     if (INTCON3bits.INT2IF) {
         
@@ -200,38 +213,17 @@ static void highInt(void) __interrupt(1) {
             // 'dir' is high trigger on falling edge next
             INTCON2bits.INTEDG2 = 0 ;   
             dir = 1 ;
+            skip = micro_steps ;
         }
         else { 
             // 'dir' is low trigger on rising edge next
             INTCON2bits.INTEDG2 = 1 ;
             dir = -1 ;
+            skip = -micro_steps ;
         }
 
-        state = NEXT_STEP ;         // Force recalculate of next step
         INTCON3bits.INT2IF = 0 ;    // clear 'dir' interrupt
     }
-    
-    // ADC Done
-    if (PIR1bits.ADIF) {
-        if (adc_cap) {
-            b_adc = (ADRESH << 8) + ADRESL ;
-            ADCON0bits.CHS = 0b0000 ;           // Set capture to RA0
-            adc_cap = CAPTURE_A ;
-        }
-        else {
-            a_adc = (ADRESH << 8) + ADRESL ;   
-            ADCON0bits.CHS = 0b0001 ;           // Set capture to RA1
-            adc_cap = CAPTURE_B ;
-        }
-            
-        ADCON0bits.GO = 1 ;                     // Start next capture
-        PIR1bits.ADIF = 0 ;                     // Clear ADC interrupt
-    }
-}
-
-// Low priority interrupt
-static void lowInt(void) __interrupt(2) {
-    uint8_t i2c_buf = 0 ;
     
     // I2C Interrupt
     if (PIR1bits.SSP1IF) {
@@ -305,11 +297,17 @@ void activeInts(void) {
     
     INTCONbits.INT0IE = 1 ;     // Enable 'step' interrupt
     INTCON3bits.INT2IE = 1 ;    // Enable 'dir' interrupt
+    PIE1bits.ADIE = 1 ;         // Enable ADC interrupt
 }
 
 void idleInts(void) {
     INTCONbits.INT0IE = 0 ;     // Disable 'step' interrupt
     INTCON3bits.INT2IE = 0 ;    // Disable 'dir' interrupt
+    
+    PIE1bits.ADIE = 0 ;         // Disable ADC interrupt
+    
+    PIE2bits.C1IE = 0 ;         // Disable comparators int. 
+    PIE2bits.C2IE = 0 ;
     
     PIE1bits.SSP1IE = 1 ;       // Enable I2C interrupt
     PIE2bits.BCL1IE = 1 ;       // Enable I2C collision detection interrupt
@@ -323,30 +321,43 @@ void idleInts(void) {
 // Calculate PWM lookup table
 void prep_pwm_lu(void) {
     float ratio, set, bias ;
-    uint8_t i ;
+    uint16_t i ;
+    int16_t max = -32000 ;
+    int16_t min = 32000 ;
     
     ratio = (float)set_amp / (float)max_amp ;
-    bias = (float)PWM_MAX / 2.0 ;
+    bias = (float)PWM_MAX / 2.0 + 1 ;
     
-    zero_cross = __fs2uint(bias) ;
+    zero_cross = bias ;
     
     for(i = 0 ; i < (sizeof(pwm_base) / sizeof(int16_t)) ; i++) {
         set = (float)pwm_base[i] * ratio + bias ;
-        pwm_lu[i] = __fs2uint(set) ;
+        pwm_lu[i] = set ;
+        
+        if ((int16_t)pwm_lu[i] > max) max = pwm_lu[i] ;
+        if ((int16_t)pwm_lu[i] < min) min = pwm_lu[i] ;
     }
+    
+    max += 15 ;
+    min -= 15 ;
+    
+    set_max_out(max) ;
+    set_min_out(min) ;
 }
 
 // Get operation variables
 void set_op_vars(void) {
-    i2c_address = i2c_regs[0x00] ;
-    skip        = i2c_regs[0x01] ;
-    set_amp     = i2c_regs[0x02] ;
-    set_amp    += i2c_regs[0x03] << 8 ;
-    max_amp     = i2c_regs[0x04] ;
-    max_amp    += i2c_regs[0x05] << 8 ;
-    t_off       = i2c_regs[0x06] * 2 * TMR_500NS ;
-    t_blank_low = i2c_regs[0x07] * 2 * TMR_500NS ;
-    t_blank_high= i2c_regs[0x08] * 2 * TMR_500NS ;
+    i2c_address  = i2c_regs[0x00] ;
+    micro_steps  = i2c_regs[0x01] ;
+    set_amp      = i2c_regs[0x02] ;
+    set_amp     += i2c_regs[0x03] << 8 ;
+    max_amp      = i2c_regs[0x04] ;
+    max_amp     += i2c_regs[0x05] << 8 ;
+    t_blank      = i2c_regs[0x06] ;
+    pid_kp       = i2c_regs[0x07] ;
+    pid_kp      += i2c_regs[0x08] << 8 ;
+    pid_ki       = i2c_regs[0x09] ;
+    pid_ki      += i2c_regs[0x0a] << 8 ;
 }
 
 // Basic msec. delay loop
@@ -370,14 +381,19 @@ void delay_ms(uint16_t time) {
 }
 
 int main(void) {
-    uint8_t pwm_a_l = 0, pwm_a_h = 0, pwm_b_l = 0, pwm_b_h = 0 ;
+    int16_t pwm_a = 0, pwm_b = 0 ;
+    uint16_t adc_res ;
+    pi_result_t pi_result_a ;
+    pi_result_t pi_result_b ;   
+    uint8_t dummy ;
+  
+    int16_t step_a = 0 ;                         // Current phase A step
+    int16_t step_b = 0 ;                         // Current phase B step
     
     ioSetup() ;                 // Setup IO ports
     
     // We didn't have a proper power-on
-    if(RCONbits.POR) {
-        resetCheck() ;
-    }
+    if(RCONbits.POR) resetCheck() ;
     
     // Set POR bit to one. If there is a sudden reset,
     // this bit won't reset indicating a fault.
@@ -390,6 +406,7 @@ int main(void) {
     
     i2cSetup() ;                // Setup I2C I/F
     intSetup() ;                // Interrupts setup
+    compsSetup() ;
     adc_setup() ;
     idleInts() ;                // Set interrupts to 'idle' state
     
@@ -409,157 +426,115 @@ int main(void) {
         
         switch(state) {
             case START:
+                state = RUNNING ;
+                
+                // Turn blue LED on
                 LATDbits.LATD2 = 1 ;
                 
+                skip = dir * micro_steps ;
+                
                 // On full step phase A starts at 45 deg, 0 deg otherwise
-                if (skip == STEP_1) step_a = STEPS / 2 ;
+                if (micro_steps == STEP_1) step_a = STEPS / 2 ;
                 else step_a = 0 ;
                 
                 // phase B is +90 deg from phase A
                 step_b = step_a + STEPS ;
                 
-                if (step_a > THREE_QUARTERS) a_decay = FAST_DECAY ;
-                else if (step_a >= HALF_CYCLE) a_decay = SLOW_DECAY ;
-                else if (step_a > STEPS) a_decay = FAST_DECAY ;
-                else a_decay = SLOW_DECAY ;
+                init_result(&pi_result_a, pid_kp, pid_ki) ;
+                init_result(&pi_result_b, pid_kp, pid_ki) ;
                 
-                if (step_b > THREE_QUARTERS) b_decay = FAST_DECAY ;
-                else if (step_b >= HALF_CYCLE) b_decay = SLOW_DECAY ;
-                else if (step_b > STEPS) b_decay = FAST_DECAY ;
-                else b_decay = SLOW_DECAY ;
+                prep_pwm_lu() ;            // prepare PWM lookup table
                 
-                prep_pwm_lu() ;         // prepare PWM lookup table
+                pwm_a = pwm_lu[step_a] ;
+                pwm_b = pwm_lu[step_b] ;
                 
-                pwmSetup() ;            // Activate PWM
-                activeInts() ;          // Set active state interrupts
+                LATAbits.LATA4 = 1 ;
+                LATAbits.LATA5 = 1 ; 
+                LATCbits.LATC5 = 0 ;
+               
+                pwmSetup(t_blank) ;        // Activate PWM
+                pwmOut() ;
+                activeInts() ;             // Set active state interrupts
                 
-                a_state = T_DRIVE ;
-                b_state = T_DRIVE ;
+                ADCON0bits.CHS = 0b0001 ;  // Set capture to RA0
+                ADCON0bits.GO = 1 ;
                 
-                // Set current polarity
-                if (step_a == HALF_CYCLE || step_a == 0) pol_a = 2 ;
-                else if (step_a > HALF_CYCLE) pol_a = 0 ;
-                else pol_a = 1 ;
-                
-                if (step_b == HALF_CYCLE || step_b == 0) pol_b = 2 ;
-                else if (step_b > HALF_CYCLE) pol_b = 0 ;
-                else pol_b = 1 ;
-                
-                
-                // Pre-calculate PWM duty-cycle registers values
-                CCP5CONbits.DC5B = 0x0c + (pwm_lu[step_a] & 0x3) << 4 ;
-                CCPR5L = pwm_lu[step_a] >> 2 ;
-                
-                CCP4CONbits.DC4B = 0x0c + (pwm_lu[step_b] & 0x3) << 4 ;
-                CCPR4L = pwm_lu[step_b] >> 2 ;
-                
-                PORTAbits.RA4 = 1 ;
-                PORTAbits.RA5 = 1 ; 
-                
-                state = NEXT_STEP ;
                 break ;
                 
             case STEP:
-                CCP5CONbits.DC5B = pwm_a_l ;             // Set PWM duty cycle, Phase-A
-                CCPR5L = pwm_a_h ;
-                
-                CCP4CONbits.DC4B = pwm_b_l ;             // Set PWM duty cycle, Phase-B
-                CCPR4L = pwm_b_h ;
-                
-                if (step_a > THREE_QUARTERS && step_a < (FULL_CYCLE - 1)) {
-                    a_decay = FAST_DECAY ;
-                    PORTAbits.RA4 = 1 ;
-                }
-                else if (step_a >= HALF_CYCLE) a_decay = SLOW_DECAY ;
-                else if (step_a > STEPS) {
-                    a_decay = FAST_DECAY ;
-                    PORTAbits.RA4 = 1 ;
-                }
-                else a_decay = SLOW_DECAY ;
-                
-                if (step_b > THREE_QUARTERS && step_b < (FULL_CYCLE - 1)) {
-                    b_decay = FAST_DECAY ;
-                    PORTAbits.RA5 = 1 ;
-                }
-                else if (step_b >= HALF_CYCLE) b_decay = SLOW_DECAY ;
-                else if (step_b > STEPS) {
-                    b_decay = FAST_DECAY ;
-                    PORTAbits.RA5 = 1 ;
-                }
-                else b_decay = SLOW_DECAY ;
-               
-                state = NEXT_STEP ;
-                break ;
-                
-            case NEXT_STEP:
                 state = RUNNING ;
                 
-                // Forward motion
-                if (dir == 1) {
-                    step_a += skip ;
-                    step_b += skip ;
-                    if (step_a > FULL_CYCLE - 1) step_a -= FULL_CYCLE ;
-                    if (step_b > FULL_CYCLE - 1) step_b -= FULL_CYCLE ;
+                step_a += skip ;
+                step_b += skip ;
+
+                if (step_a > FULL_CYCLE - 1) step_a -= FULL_CYCLE ;
+                else if (step_a < 0) step_a += FULL_CYCLE ;
+
+                if (step_b > FULL_CYCLE - 1) step_b -= FULL_CYCLE ; 
+                else if (step_b < 0) step_b += FULL_CYCLE ;
+                
+                pwm_a = pwm_lu[step_a] ;
+                pwm_b = pwm_lu[step_b] ;
+                
+                if (!PIE2bits.C2IE && !PIE2bits.C1IE && !ADCON0bits.GO) {
+                    dummy = CM1CON0 ;
+                    PIR2bits.C1IF = 0 ; 
+                    PIE2bits.C1IE = 1 ;
                 }
-                // Reverse motion
-                else {
-                    step_a -= skip ;
-                    step_b -= skip ;
-                    if (step_a < 0) step_a += FULL_CYCLE ;
-                    if (step_b < 0) step_b += FULL_CYCLE ;
-                }
                 
-                // Set current polarity
-                if (step_a == HALF_CYCLE || step_a == 0) pol_a = 2 ;
-                else if (step_a > HALF_CYCLE) pol_a = 0 ;
-                else pol_a = 1 ;
+                break ;
                 
-                if (step_b == HALF_CYCLE || step_b == 0) pol_b = 2 ;
-                else if (step_b > HALF_CYCLE) pol_b = 0 ;
-                else pol_b = 1 ;
-                               
-                // Pre-calculate PWM duty-cycle registers values
-                pwm_a_l = 0x0c + (pwm_lu[step_a] & 0x3) << 4 ;
-                pwm_a_h = pwm_lu[step_a] >> 2 ;
+            case CALC_PI_A:
+                state = RUNNING ;
                 
-                pwm_b_l = 0x0c + (pwm_lu[step_b] & 0x3) << 4 ;
-                pwm_b_h = pwm_lu[step_b] >> 2 ;
+                adc_res = ADRESH ;
+                adc_res <<= 8 ;
+                adc_res += ADRESL ;
+                
+                dummy = CM2CON0 ;
+                PIR2bits.C2IF = 0 ; 
+                PIE2bits.C2IE = 1 ;
+                
+                LATCbits.LATC5 = 1 ;
+                calc_pi(&pi_result_a, adc_res, pwm_a) ;
+                
+                CCPR2L = pi_result_a.output >> 2 ;
+                CCP2CONbits.DC2B = pi_result_a.output ;
+                LATCbits.LATC5 = 0 ;
+                
+                CCPR5L = pi_result_a.output >> 3 ;
+                CCP5CONbits.DC5B = pi_result_a.output >> 1 ;
+                
+                break ;
+
+            case CALC_PI_B:
+                state = RUNNING ;
+                
+                adc_res = ADRESH  ;
+                adc_res <<= 8 ;
+                adc_res += ADRESL ;
+
+                dummy = CM1CON0 ;
+                PIR2bits.C1IF = 0 ; 
+                PIE2bits.C1IE = 1 ;
+                        
+                calc_pi(&pi_result_b, adc_res, pwm_b) ;
+                
+                CCPR1L = pi_result_b.output >> 2 ;
+                CCP1CONbits.DC1B = pi_result_b.output ;
+                
+                adc_res >>= 1 ;
+                
+                CCPR4L = pi_result_b.output >> 3 ;
+                CCP4CONbits.DC4B = pi_result_b.output >> 1 ;
                 
                 break ;
                 
             case RUNNING:
-                if(CM1CON0bits.C1OUT && a_state == T_DRIVE) {
-                    if (a_decay == FAST_DECAY) {            
-                        if (pol_a) {                    // Forward current, Phase-A
-                            LATCbits.LATC0 = 0 ;
-                            LATCbits.LATC1 = 1 ;  
-                        }
-                        else {                          // Reverse current, Phase-A
-                            LATCbits.LATC1 = 0 ;
-                            LATCbits.LATC0 = 1 ;
-                        }
-                    }     
-                    else PORTAbits.RA4 = 0 ;
-                    
-                    a_state = PH_OFF ;
-                    T1CONbits.TMR1ON = 1 ;
-                }
-                
-                if(CM2CON0bits.C2OUT && b_state == T_DRIVE) {
-                    if (b_decay == FAST_DECAY) {
-                        if (pol_b) {                    // Forward current, Phase-B
-                            LATDbits.LATD5 = 0 ;
-                            LATCbits.LATC2 = 1 ;
-                        }
-                        else {                          // Reverse current, Phase-B
-                            LATCbits.LATC2 = 0 ;
-                            LATDbits.LATD5 = 1 ;
-                        }
-                    }
-                    else PORTAbits.RA5 = 0 ;
-                    
-                    b_state = PH_OFF ;
-                    T3CONbits.TMR3ON = 1 ;
+                if(++adc_wdt > 600 && !ADCON0bits.GO) {
+                    adc_wdt = 0 ;
+                    ADCON0bits.CHS = 0b0001 ;  // Set capture to RA0
+                    ADCON0bits.GO = 1 ;
                 }
                 
                 // Enable signal dropped
@@ -567,10 +542,15 @@ int main(void) {
                     INTCONbits.GIE = 0 ;
                     idleInts() ;
                     
-                    LATAbits.LATA4 = 0 ;    // Shut phases down
+                    LATAbits.LATA4 = 0 ;            // Shut phases down
                     LATAbits.LATA5 = 0 ; 
                     
-                    PORTDbits.RD2 = 0 ;     // Turn blue LED off
+                    ECCP2ASbits.CCP2ASE = 1    ;    // Shutdown PWM 
+                    ECCP1ASbits.CCP1ASE = 1    ;    
+                    
+                    ADCON0bits.GO = 0 ;
+                    
+                    PORTDbits.RD2 = 0 ;             // Turn blue LED off
                     state = IDLE ;
                     INTCONbits.GIE = 1 ;
                 }

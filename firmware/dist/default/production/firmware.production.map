@@ -1,11 +1,11 @@
-gplink-1.5.2 #1312 (Apr 13 2018)
-Map File - Created 13/04/18  17:37:38
+gplink-1.5.2 #1313 (Aug 28 2018)
+Map File - Created 08/09/18  23:47:22
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
-                 .idata_i    romdata   0x001e1e    program   0x000082
-                   .cinit    romdata   0x0021f2    program   0x00000e
+                 .idata_i    romdata   0x0026d6    program   0x000082
+                   .cinit    romdata   0x002d74    program   0x00000e
 .config_300001_BUILD/DEFAULT/PRODUCTION/STEPPERCON.O    romdata   0x300001    program   0x000001
 .config_300003_BUILD/DEFAULT/PRODUCTION/STEPPERCON.O    romdata   0x300003    program   0x000001
 .config_300005_BUILD/DEFAULT/PRODUCTION/STEPPERCON.O    romdata   0x300005    program   0x000001
@@ -13,84 +13,102 @@ Map File - Created 13/04/18  17:37:38
          S_crt0iz___entry       code   0x000000    program   0x000004
  S___eeprom_gptrget1_stub       code   0x000004    program   0x000004
 S_stepperCon_ivec_0x1_highInt       code   0x000008    program   0x000004
- S___eeprom_gptrput1_stub       code   0x00000c    program   0x000004
+ S___eeprom_gptrget2_stub       code   0x00000c    program   0x000004
+ S___eeprom_gptrput1_stub       code   0x000010    program   0x000004
+ S___eeprom_gptrput2_stub       code   0x000014    program   0x000004
 S_stepperCon_ivec_0x2_lowInt       code   0x000018    program   0x000004
-       S_stepperCon__main       code   0x00001c    program   0x0005b4
-         S_fsmul____fsmul       code   0x0005d0    program   0x000378
-         S_fsadd____fsadd       code   0x000948    program   0x000364
-         S_fsdiv____fsdiv       code   0x000cac    program   0x000358
-      S_mullong___mullong       code   0x001004    program   0x000214
-S_stepperCon__prep_pwm_lu       code   0x001218    program   0x0001f4
-   S_ulong2fs____ulong2fs       code   0x00140c    program   0x000176
-     S_stepperCon__lowInt       code   0x001582    program   0x00011e
-    S_stepperCon__highInt       code   0x0016a0    program   0x00010c
-   S_slong2fs____slong2fs       code   0x0017ac    program   0x0000f6
-   S_fs2ulong____fs2ulong       code   0x0018a2    program   0x0000f2
-  S_registers__store_regs       code   0x001994    program   0x0000cc
-       S_crt0iz___startup       code   0x001a60    program   0x0000ac
-S_stepperCon__set_op_vars       code   0x001b0c    program   0x0000a4
-   S_sc_setup__resetCheck       code   0x001bb0    program   0x0000a2
-   S_registers__read_regs       code   0x001c52    program   0x0000a2
-     S_sc_setup__pwmSetup       code   0x001cf4    program   0x00009a
-     S_fs2uint____fs2uint       code   0x001d8e    program   0x000090
-     S_sint2fs____sint2fs       code   0x001ea0    program   0x000074
-    S_moduchar___moduchar       code   0x001f14    program   0x000074
-   S_stepperCon__delay_ms       code   0x001f88    program   0x000070
-     S_uint2fs____uint2fs       code   0x001ff8    program   0x00006a
-    S_sc_setup__adc_setup       code   0x002062    program   0x000038
-      S_sc_setup__ioSetup       code   0x00209a    program   0x000038
- S_stepperCon__activeInts       code   0x0020d2    program   0x00002e
-   S_stepperCon__i2cSetup       code   0x002100    program   0x000028
-S_eeprom16_gptrput1____eeprom16_gptrput1       code   0x002128    program   0x000024
-     S_sc_setup__intSetup       code   0x00214c    program   0x000022
-    S_gptrget1___gptrget1       code   0x00216e    program   0x000022
-   S_stepperCon__idleInts       code   0x002190    program   0x00001e
-S_eeprom16_gptrget1____eeprom16_gptrget1       code   0x0021ae    program   0x00001c
-    S_gptrput1___gptrput1       code   0x0021ca    program   0x000016
-S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
-   S_stepperCon____EEPROM       code   0xf00000    program   0x000009
+       S_stepperCon__main       code   0x00001c    program   0x00052c
+ S_pi_controller__calc_pi       code   0x000548    program   0x000416
+         S_fsmul____fsmul       code   0x00095e    program   0x000392
+         S_fsdiv____fsdiv       code   0x000cf0    program   0x000370
+         S_fsadd____fsadd       code   0x001060    program   0x00036c
+S_stepperCon__prep_pwm_lu       code   0x0013cc    program   0x000314
+      S_mullong___mullong       code   0x0016e0    program   0x000214
+   S_ulong2fs____ulong2fs       code   0x0018f4    program   0x000176
+     S_sc_setup__pwmSetup       code   0x001a6a    program   0x00014a
+     S_stepperCon__lowInt       code   0x001bb4    program   0x000140
+   S_fs2ulong____fs2ulong       code   0x001cf4    program   0x000116
+S_pi_controller__init_result       code   0x001e0a    program   0x00010e
+   S_slong2fs____slong2fs       code   0x001f18    program   0x0000f6
+    S_stepperCon__highInt       code   0x00200e    program   0x0000cc
+  S_registers__store_regs       code   0x0020da    program   0x0000cc
+S_stepperCon__set_op_vars       code   0x0021a6    program   0x0000ca
+S_pi_controller__set_max_out       code   0x002270    program   0x0000c0
+       S_crt0iz___startup       code   0x002330    program   0x0000ac
+   S_sc_setup__resetCheck       code   0x0023dc    program   0x0000a2
+   S_registers__read_regs       code   0x00247e    program   0x0000a2
+        S_mulint___mulint       code   0x002520    program   0x0000a0
+     S_fs2uint____fs2uint       code   0x0025c0    program   0x000090
+S_pi_controller__mult_int16       code   0x002650    program   0x000086
+    S_moduchar___moduchar       code   0x002758    program   0x000080
+     S_sint2fs____sint2fs       code   0x0027d8    program   0x000074
+   S_sc_setup__compsSetup       code   0x00284c    program   0x000072
+   S_stepperCon__delay_ms       code   0x0028be    program   0x000070
+S_pi_controller__mult_uint16       code   0x00292e    program   0x00006e
+     S_uint2fs____uint2fs       code   0x00299c    program   0x00006a
+S_pi_controller__mult_int8       code   0x002a06    program   0x000066
+S_pi_controller__mult_uint8       code   0x002a6c    program   0x00005c
+       S_sc_setup__pwmOut       code   0x002ac8    program   0x000050
+    S_sc_setup__adc_setup       code   0x002b18    program   0x000042
+      S_sc_setup__ioSetup       code   0x002b5a    program   0x00003c
+ S_stepperCon__activeInts       code   0x002b96    program   0x000030
+    S_gptrget2___gptrget2       code   0x002bc6    program   0x00002c
+S_eeprom16_gptrput2____eeprom16_gptrput2       code   0x002bf2    program   0x00002c
+   S_stepperCon__i2cSetup       code   0x002c1e    program   0x000028
+     S_sc_setup__intSetup       code   0x002c46    program   0x000026
+S_eeprom16_gptrget2____eeprom16_gptrget2       code   0x002c6c    program   0x000026
+   S_stepperCon__idleInts       code   0x002c92    program   0x000024
+S_eeprom16_gptrput1____eeprom16_gptrput1       code   0x002cb6    program   0x000024
+    S_gptrget1___gptrget1       code   0x002cda    program   0x000022
+S_eeprom16_gptrget1____eeprom16_gptrget1       code   0x002cfc    program   0x00001c
+S_pi_controller__set_min_out       code   0x002d18    program   0x00001a
+    S_gptrput2___gptrput2       code   0x002d32    program   0x00001a
+    S_gptrput1___gptrput1       code   0x002d4c    program   0x000016
+S_eeprom16_write____eeprom16_write       code   0x002d62    program   0x000012
+   S_stepperCon____EEPROM       code   0xf00000    program   0x00000b
                    .idata      idata   0x000060       data   0x000081
                .registers      udata   0x000000       data   0x000017
-      udata_stepperCon_12      udata   0x0000e1       data   0x000009
-            udata_fsadd_0      udata   0x0000ea       data   0x000004
-            udata_fsadd_1      udata   0x0000ee       data   0x000004
-            udata_fsmul_0      udata   0x0000f2       data   0x000004
-            udata_fsmul_1      udata   0x0000f6       data   0x000004
-          udata_mullong_0      udata   0x0000fa       data   0x000004
-       udata_stepperCon_3      udata   0x0000fe       data   0x000002
+                    bank0      udata   0x000017       data   0x00000a
+       udata_stepperCon_9      udata   0x0000e1       data   0x00000b
+      udata_stepperCon_18      udata   0x0000ec       data   0x000008
+      udata_stepperCon_19      udata   0x0000f4       data   0x000008
+            udata_fsadd_0      udata   0x0000fc       data   0x000004
             stack_section      udata   0x000100       data   0x000100
-      udata_stepperCon_16      udata   0x000200       data   0x000080
-      udata_stepperCon_22      udata   0x000280       data   0x000001
-      udata_stepperCon_23      udata   0x000281       data   0x000001
-      udata_stepperCon_24      udata   0x000282       data   0x000001
-      udata_stepperCon_25      udata   0x000283       data   0x000001
-          udata_mullong_1      udata   0x000f00       data   0x000004
-          udata_mullong_2      udata   0x000f04       data   0x000004
-          udata_mullong_3      udata   0x000f08       data   0x000004
-          udata_mullong_4      udata   0x000f0c       data   0x000004
-         udata_fs2ulong_0      udata   0x000f10       data   0x000004
-            udata_fsdiv_0      udata   0x000f14       data   0x000004
-            udata_fsdiv_1      udata   0x000f18       data   0x000004
-         udata_ulong2fs_0      udata   0x000f1c       data   0x000004
-       udata_stepperCon_4      udata   0x000f20       data   0x000002
-       udata_stepperCon_5      udata   0x000f22       data   0x000002
-      udata_stepperCon_14      udata   0x000f24       data   0x000002
-      udata_stepperCon_15      udata   0x000f26       data   0x000002
-       udata_stepperCon_0      udata   0x000f28       data   0x000001
-       udata_stepperCon_1      udata   0x000f29       data   0x000001
-       udata_stepperCon_2      udata   0x000f2a       data   0x000001
-       udata_stepperCon_6      udata   0x000f2b       data   0x000001
-       udata_stepperCon_7      udata   0x000f2c       data   0x000001
-       udata_stepperCon_8      udata   0x000f2d       data   0x000001
-       udata_stepperCon_9      udata   0x000f2e       data   0x000001
-      udata_stepperCon_10      udata   0x000f2f       data   0x000001
-      udata_stepperCon_11      udata   0x000f30       data   0x000001
-      udata_stepperCon_13      udata   0x000f31       data   0x000001
-      udata_stepperCon_17      udata   0x000f32       data   0x000001
-      udata_stepperCon_18      udata   0x000f33       data   0x000001
-      udata_stepperCon_19      udata   0x000f34       data   0x000001
-      udata_stepperCon_20      udata   0x000f35       data   0x000001
-      udata_stepperCon_21      udata   0x000f36       data   0x000001
+      udata_stepperCon_14      udata   0x000200       data   0x000080
+      udata_stepperCon_16      udata   0x000280       data   0x000002
+      udata_stepperCon_17      udata   0x000282       data   0x000002
+    udata_pi_controller_0      udata   0x000284       data   0x000002
+    udata_pi_controller_1      udata   0x000286       data   0x000002
+    udata_pi_controller_2      udata   0x000288       data   0x000002
+           udata_mulint_0      udata   0x00028a       data   0x000002
+           udata_mulint_1      udata   0x00028c       data   0x000002
+           udata_mulint_2      udata   0x00028e       data   0x000002
+       udata_stepperCon_2      udata   0x000290       data   0x000001
+       udata_stepperCon_3      udata   0x000291       data   0x000001
+       udata_stepperCon_4      udata   0x000292       data   0x000001
+       udata_stepperCon_5      udata   0x000293       data   0x000001
+       udata_stepperCon_6      udata   0x000294       data   0x000001
+       udata_stepperCon_7      udata   0x000295       data   0x000001
+       udata_stepperCon_8      udata   0x000296       data   0x000001
+      udata_stepperCon_10      udata   0x000297       data   0x000001
+      udata_stepperCon_11      udata   0x000298       data   0x000001
+      udata_stepperCon_15      udata   0x000299       data   0x000001
+            udata_fsadd_1      udata   0x000f00       data   0x000004
+            udata_fsmul_0      udata   0x000f04       data   0x000004
+            udata_fsmul_1      udata   0x000f08       data   0x000004
+          udata_mullong_0      udata   0x000f0c       data   0x000004
+          udata_mullong_1      udata   0x000f10       data   0x000004
+          udata_mullong_2      udata   0x000f14       data   0x000004
+          udata_mullong_3      udata   0x000f18       data   0x000004
+          udata_mullong_4      udata   0x000f1c       data   0x000004
+         udata_fs2ulong_0      udata   0x000f20       data   0x000004
+            udata_fsdiv_0      udata   0x000f24       data   0x000004
+            udata_fsdiv_1      udata   0x000f28       data   0x000004
+         udata_ulong2fs_0      udata   0x000f2c       data   0x000004
+       udata_stepperCon_0      udata   0x000f30       data   0x000002
+       udata_stepperCon_1      udata   0x000f32       data   0x000002
+      udata_stepperCon_12      udata   0x000f34       data   0x000002
+      udata_stepperCon_13      udata   0x000f36       data   0x000002
      ustat_pic18f46k22_00      udata   0x000f38       data   0x00004d
      ustat_pic18f46k22_01      udata   0x000f89       data   0x000005
      ustat_pic18f46k22_02      udata   0x000f92       data   0x000005
@@ -103,240 +121,230 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                               Program Memory Usage
                                Start         End
                            ---------   ---------
-                            0x001e1e    0x001e9f
+                            0x0026d6    0x002757
                             0x000008    0x00000b
                             0x000018    0x00001b
-                            0xf00000    0xf00008
-                            0x00001c    0x0005cf
-                            0x001f88    0x001ff7
-                            0x001b0c    0x001baf
-                            0x001218    0x00140b
-                            0x002190    0x0021ad
-                            0x0020d2    0x0020ff
-                            0x002100    0x002127
-                            0x001582    0x00169f
-                            0x0016a0    0x0017ab
+                            0xf00000    0xf0000a
+                            0x00001c    0x000547
+                            0x0028be    0x00292d
+                            0x0021a6    0x00226f
+                            0x0013cc    0x0016df
+                            0x002c92    0x002cb5
+                            0x002b96    0x002bc5
+                            0x002c1e    0x002c45
+                            0x001bb4    0x001cf3
+                            0x00200e    0x0020d9
                             0x300001    0x300001
                             0x300003    0x300003
                             0x300006    0x300006
                             0x300005    0x300005
-                            0x001bb0    0x001c51
-                            0x002062    0x002099
-                            0x00214c    0x00216d
-                            0x001cf4    0x001d8d
-                            0x00209a    0x0020d1
-                            0x001994    0x001a5f
-                            0x001c52    0x001cf3
+                            0x0023dc    0x00247d
+                            0x002b18    0x002b59
+                            0x002c46    0x002c6b
+                            0x00284c    0x0028bd
+                            0x002ac8    0x002b17
+                            0x001a6a    0x001bb3
+                            0x002b5a    0x002b95
+                            0x0020da    0x0021a5
+                            0x00247e    0x00251f
+                            0x000548    0x00095d
+                            0x001e0a    0x001f17
+                            0x002d18    0x002d31
+                            0x002270    0x00232f
+                            0x002650    0x0026d5
+                            0x00292e    0x00299b
+                            0x002a06    0x002a6b
+                            0x002a6c    0x002ac7
                             0x000000    0x000003
-                            0x001a60    0x001b0b
-                            0x000948    0x000cab
-                            0x0021ca    0x0021df
-                            0x0005d0    0x000947
-                            0x001004    0x001217
-                            0x00216e    0x00218f
-                            0x001ff8    0x002061
-                            0x001d8e    0x001e1d
-                            0x0018a2    0x001993
-                            0x000cac    0x001003
-                            0x00140c    0x001581
-                            0x001ea0    0x001f13
-                            0x0017ac    0x0018a1
-                            0x001f14    0x001f87
+                            0x002330    0x0023db
+                            0x001060    0x0013cb
+                            0x002d32    0x002d4b
+                            0x002d4c    0x002d61
+                            0x00095e    0x000cef
+                            0x0016e0    0x0018f3
+                            0x002520    0x0025bf
+                            0x002bc6    0x002bf1
+                            0x002cda    0x002cfb
+                            0x00299c    0x002a05
+                            0x0025c0    0x00264f
+                            0x001cf4    0x001e09
+                            0x000cf0    0x00105f
+                            0x0018f4    0x001a69
+                            0x0027d8    0x00284b
+                            0x001f18    0x00200d
+                            0x002758    0x0027d7
                             0x000004    0x000007
                             0x00000c    0x00000f
-                            0x002128    0x00214b
-                            0x0021ae    0x0021c9
-                            0x0021e0    0x0021f1
-                            0x0021f2    0x0021ff
-                            8709 program addresses used
+                            0x000010    0x000013
+                            0x000014    0x000017
+                            0x002bf2    0x002c1d
+                            0x002cb6    0x002cd9
+                            0x002c6c    0x002c91
+                            0x002cfc    0x002d17
+                            0x002d62    0x002d73
+                            0x002d74    0x002d81
+                            11665 program addresses used
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File
                 ---------  ---------  ---------  --------- ---------
-               _00105_DS_   0x000680    program     static fsmul.asm
-               _00105_DS_   0x001902    program     static fs2ulong.asm
-               _00106_DS_   0x0016e6    program     static build/default/production/stepperCon.asm
-               _00106_DS_   0x000a0e    program     static fsadd.asm
-               _00106_DS_   0x00068a    program     static fsmul.asm
-               _00106_DS_   0x001e02    program     static fs2uint.asm
-               _00106_DS_   0x00190c    program     static fs2ulong.asm
-               _00106_DS_   0x000dd4    program     static fsdiv.asm
-               _00106_DS_   0x001848    program     static slong2fs.asm
-               _00106_DS_   0x001f50    program     static moduchar.asm
-               _00107_DS_   0x001c96    program     static build/default/production/_ext/899019879/registers.asm
-               _00107_DS_   0x001e08    program     static fs2uint.asm
-               _00107_DS_   0x001476    program     static ulong2fs.asm
-               _00107_DS_   0x001f3c    program     static moduchar.asm
-               _00108_DS_   0x0016f8    program     static build/default/production/stepperCon.asm
-               _00108_DS_   0x000a2c    program     static fsadd.asm
-               _00108_DS_   0x001976    program     static fs2ulong.asm
-               _00108_DS_   0x000dea    program     static fsdiv.asm
-               _00108_DS_   0x00187c    program     static slong2fs.asm
-               _00109_DS_   0x001700    program     static build/default/production/stepperCon.asm
-               _00109_DS_   0x001cce    program     static build/default/production/_ext/899019879/registers.asm
-               _00109_DS_   0x000828    program     static fsmul.asm
-               _00110_DS_   0x000a72    program     static fsadd.asm
-               _00110_DS_   0x00084a    program     static fsmul.asm
-               _00110_DS_   0x000e42    program     static fsdiv.asm
-               _00110_DS_   0x0014aa    program     static ulong2fs.asm
-               _00111_DS_   0x001708    program     static build/default/production/stepperCon.asm
-               _00111_DS_   0x001f62    program     static moduchar.asm
-               _00112_DS_   0x000aa0    program     static fsadd.asm
-               _00112_DS_   0x0008a0    program     static fsmul.asm
-               _00112_DS_   0x001dfa    program     static fs2uint.asm
-               _00112_DS_   0x000eb6    program     static fsdiv.asm
-               _00112_DS_   0x001f58    program     static moduchar.asm
-               _00113_DS_   0x001740    program     static build/default/production/stepperCon.asm
-               _00113_DS_   0x000e54    program     static fsdiv.asm
-               _00113_DS_   0x001810    program     static slong2fs.asm
-               _00114_DS_   0x001770    program     static build/default/production/stepperCon.asm
-               _00114_DS_   0x000aea    program     static fsadd.asm
-               _00114_DS_   0x0014da    program     static ulong2fs.asm
-               _00115_DS_   0x00088c    program     static fsmul.asm
-               _00115_DS_   0x000ecc    program     static fsdiv.asm
-               _00116_DS_   0x000b0c    program     static fsadd.asm
-               _00116_DS_   0x0008f6    program     static fsmul.asm
-               _00116_DS_   0x00150e    program     static ulong2fs.asm
-               _00117_DS_   0x001774    program     static build/default/production/stepperCon.asm
-               _00117_DS_   0x000906    program     static fsmul.asm
-               _00117_DS_   0x001968    program     static fs2ulong.asm
-               _00117_DS_   0x000f3c    program     static fsdiv.asm
-               _00117_DS_   0x00154c    program     static ulong2fs.asm
-               _00118_DS_   0x000b42    program     static fsadd.asm
-               _00118_DS_   0x00194c    program     static fs2ulong.asm
-               _00119_DS_   0x000b6a    program     static fsadd.asm
-               _00119_DS_   0x00086a    program     static fsmul.asm
-               _00119_DS_   0x00195c    program     static fs2ulong.asm
-               _00120_DS_   0x000872    program     static fsmul.asm
-               _00120_DS_   0x00195a    program     static fs2ulong.asm
-               _00120_DS_   0x000f28    program     static fsdiv.asm
-               _00121_DS_   0x0008b0    program     static fsmul.asm
-               _00121_DS_   0x000f92    program     static fsdiv.asm
-               _00121_DS_   0x001470    program     static ulong2fs.asm
-               _00122_DS_   0x0008b8    program     static fsmul.asm
-               _00122_DS_   0x000fa2    program     static fsdiv.asm
-               _00123_DS_   0x0015c6    program     static build/default/production/stepperCon.asm
-               _00123_DS_   0x000ba2    program     static fsadd.asm
-               _00124_DS_   0x000f06    program     static fsdiv.asm
-               _00124_DS_   0x00148a    program     static ulong2fs.asm
-               _00125_DS_   0x000bb6    program     static fsadd.asm
-               _00125_DS_   0x000f0e    program     static fsdiv.asm
-               _00126_DS_   0x001bd8    program     static build/default/production/_ext/899019879/sc_setup.asm
-               _00126_DS_   0x000f4c    program     static fsdiv.asm
-               _00127_DS_   0x001628    program     static build/default/production/stepperCon.asm
-               _00127_DS_   0x000f54    program     static fsdiv.asm
-               _00128_DS_   0x001bcc    program     static build/default/production/_ext/899019879/sc_setup.asm
-               _00129_DS_   0x001bda    program     static build/default/production/_ext/899019879/sc_setup.asm
-               _00129_DS_   0x0019dc    program     static build/default/production/_ext/899019879/registers.asm
-               _00129_DS_   0x000c04    program     static fsadd.asm
-               _00130_DS_   0x00161a    program     static build/default/production/stepperCon.asm
-               _00130_DS_   0x001a32    program     static build/default/production/_ext/899019879/registers.asm
-               _00130_DS_   0x000bf0    program     static fsadd.asm
-               _00131_DS_   0x001a36    program     static build/default/production/_ext/899019879/registers.asm
-               _00132_DS_   0x001c0a    program     static build/default/production/_ext/899019879/sc_setup.asm
-               _00132_DS_   0x000c14    program     static fsadd.asm
-               _00133_DS_   0x0015f2    program     static build/default/production/stepperCon.asm
-               _00133_DS_   0x000c62    program     static fsadd.asm
-               _00134_DS_   0x00164c    program     static build/default/production/stepperCon.asm
-               _00138_DS_   0x001666    program     static build/default/production/stepperCon.asm
-               _00138_DS_   0x001bf4    program     static build/default/production/_ext/899019879/sc_setup.asm
-               _00140_DS_   0x00166c    program     static build/default/production/stepperCon.asm
-               _00140_DS_   0x001be2    program     static build/default/production/_ext/899019879/sc_setup.asm
-               _00141_DS_   0x0014a8    program     static ulong2fs.asm
-               _00142_DS_   0x0014d0    program     static ulong2fs.asm
-               _00143_DS_   0x001c44    program     static build/default/production/_ext/899019879/sc_setup.asm
-               _00144_DS_   0x001500    program     static ulong2fs.asm
-               _00145_DS_   0x001502    program     static ulong2fs.asm
-               _00152_DS_   0x000858    program     static fsmul.asm
-               _00165_DS_   0x000e30    program     static fsdiv.asm
-               _00166_DS_   0x000e7c    program     static fsdiv.asm
-               _00168_DS_   0x000ed8    program     static fsdiv.asm
-               _00170_DS_   0x000ef4    program     static fsdiv.asm
-               _00181_DS_   0x000a5e    program     static fsadd.asm
-               _00182_DS_   0x0020ee    program     static build/default/production/stepperCon.asm
-               _00182_DS_   0x000a8c    program     static fsadd.asm
-               _00183_DS_   0x0020f6    program     static build/default/production/stepperCon.asm
-               _00189_DS_   0x000b1e    program     static fsadd.asm
-               _00190_DS_   0x000b40    program     static fsadd.asm
-               _00191_DS_   0x000b30    program     static fsadd.asm
-               _00192_DS_   0x000b62    program     static fsadd.asm
-               _00193_DS_   0x000b52    program     static fsadd.asm
-               _00194_DS_   0x000b96    program     static fsadd.asm
-               _00195_DS_   0x0012e8    program     static build/default/production/stepperCon.asm
-               _00195_DS_   0x000bdc    program     static fsadd.asm
-               _00214_DS_   0x001fd8    program     static build/default/production/stepperCon.asm
-               _00217_DS_   0x001fb0    program     static build/default/production/stepperCon.asm
-               _00219_DS_   0x001fde    program     static build/default/production/stepperCon.asm
-               _00226_DS_   0x000030    program     static build/default/production/stepperCon.asm
-               _00227_DS_   0x0000c2    program     static build/default/production/stepperCon.asm
-               _00229_DS_   0x0000d4    program     static build/default/production/stepperCon.asm
-               _00230_DS_   0x0000d8    program     static build/default/production/stepperCon.asm
-               _00232_DS_   0x000116    program     static build/default/production/stepperCon.asm
-               _00235_DS_   0x000104    program     static build/default/production/stepperCon.asm
-               _00238_DS_   0x0000f4    program     static build/default/production/stepperCon.asm
-               _00239_DS_   0x00011a    program     static build/default/production/stepperCon.asm
-               _00241_DS_   0x00014e    program     static build/default/production/stepperCon.asm
-               _00244_DS_   0x00013c    program     static build/default/production/stepperCon.asm
-               _00247_DS_   0x00012c    program     static build/default/production/stepperCon.asm
-               _00248_DS_   0x000152    program     static build/default/production/stepperCon.asm
-               _00250_DS_   0x000190    program     static build/default/production/stepperCon.asm
-               _00252_DS_   0x000178    program     static build/default/production/stepperCon.asm
-               _00253_DS_   0x000180    program     static build/default/production/stepperCon.asm
-               _00254_DS_   0x000196    program     static build/default/production/stepperCon.asm
-               _00257_DS_   0x0001bc    program     static build/default/production/stepperCon.asm
-               _00259_DS_   0x0001a4    program     static build/default/production/stepperCon.asm
-               _00260_DS_   0x0001ac    program     static build/default/production/stepperCon.asm
-               _00261_DS_   0x0001c2    program     static build/default/production/stepperCon.asm
-               _00263_DS_   0x0002de    program     static build/default/production/stepperCon.asm
-               _00265_DS_   0x000350    program     static build/default/production/stepperCon.asm
-               _00268_DS_   0x00033c    program     static build/default/production/stepperCon.asm
-               _00271_DS_   0x00032c    program     static build/default/production/stepperCon.asm
-               _00272_DS_   0x000354    program     static build/default/production/stepperCon.asm
-               _00275_DS_   0x000396    program     static build/default/production/stepperCon.asm
-               _00278_DS_   0x000382    program     static build/default/production/stepperCon.asm
-               _00281_DS_   0x000372    program     static build/default/production/stepperCon.asm
-               _00282_DS_   0x00039a    program     static build/default/production/stepperCon.asm
-               _00284_DS_   0x0003a2    program     static build/default/production/stepperCon.asm
-               _00286_DS_   0x0003d2    program     static build/default/production/stepperCon.asm
-               _00290_DS_   0x000406    program     static build/default/production/stepperCon.asm
-               _00294_DS_   0x0003e4    program     static build/default/production/stepperCon.asm
-               _00295_DS_   0x000416    program     static build/default/production/stepperCon.asm
-               _00297_DS_   0x00043c    program     static build/default/production/stepperCon.asm
-               _00299_DS_   0x000424    program     static build/default/production/stepperCon.asm
-               _00300_DS_   0x00042c    program     static build/default/production/stepperCon.asm
-               _00301_DS_   0x000442    program     static build/default/production/stepperCon.asm
-               _00304_DS_   0x000468    program     static build/default/production/stepperCon.asm
-               _00306_DS_   0x000450    program     static build/default/production/stepperCon.asm
-               _00307_DS_   0x000458    program     static build/default/production/stepperCon.asm
-               _00308_DS_   0x00046e    program     static build/default/production/stepperCon.asm
-               _00310_DS_   0x00050e    program     static build/default/production/stepperCon.asm
-               _00312_DS_   0x00052e    program     static build/default/production/stepperCon.asm
-               _00315_DS_   0x000534    program     static build/default/production/stepperCon.asm
-               _00316_DS_   0x000536    program     static build/default/production/stepperCon.asm
-               _00318_DS_   0x00053e    program     static build/default/production/stepperCon.asm
-               _00321_DS_   0x00055e    program     static build/default/production/stepperCon.asm
-               _00324_DS_   0x000564    program     static build/default/production/stepperCon.asm
-               _00325_DS_   0x000566    program     static build/default/production/stepperCon.asm
-               _00327_DS_   0x00056e    program     static build/default/production/stepperCon.asm
-               _00331_DS_   0x00058a    program     static build/default/production/stepperCon.asm
-               _00333_DS_   0x000594    program     static build/default/production/stepperCon.asm
-               _00338_DS_   0x00008c    program     static build/default/production/stepperCon.asm
-               _00527_DS_   0x000098    program     static build/default/production/stepperCon.asm
-               _00529_DS_   0x0000a0    program     static build/default/production/stepperCon.asm
-               _00531_DS_   0x0000ac    program     static build/default/production/stepperCon.asm
-               _00533_DS_   0x0000b6    program     static build/default/production/stepperCon.asm
-               _00535_DS_   0x0000c0    program     static build/default/production/stepperCon.asm
-               _00545_DS_   0x000172    program     static build/default/production/stepperCon.asm
-               _00548_DS_   0x00019e    program     static build/default/production/stepperCon.asm
-               _00561_DS_   0x0003b0    program     static build/default/production/stepperCon.asm
-               _00565_DS_   0x00041e    program     static build/default/production/stepperCon.asm
-               _00568_DS_   0x00044a    program     static build/default/production/stepperCon.asm
-               _00573_DS_   0x00051a    program     static build/default/production/stepperCon.asm
-               _00575_DS_   0x000522    program     static build/default/production/stepperCon.asm
-               _00577_DS_   0x00054a    program     static build/default/production/stepperCon.asm
-               _00579_DS_   0x000552    program     static build/default/production/stepperCon.asm
+               _00105_DS_   0x000a0e    program     static fsmul.asm
+               _00105_DS_   0x001d5c    program     static fs2ulong.asm
+               _00106_DS_   0x002068    program     static build/default/production/stepperCon.asm
+               _00106_DS_   0x001126    program     static fsadd.asm
+               _00106_DS_   0x000a18    program     static fsmul.asm
+               _00106_DS_   0x002634    program     static fs2uint.asm
+               _00106_DS_   0x001d66    program     static fs2ulong.asm
+               _00106_DS_   0x000e20    program     static fsdiv.asm
+               _00106_DS_   0x001fb4    program     static slong2fs.asm
+               _00106_DS_   0x00279c    program     static moduchar.asm
+               _00107_DS_   0x0024c2    program     static build/default/production/_ext/899019879/registers.asm
+               _00107_DS_   0x00263a    program     static fs2uint.asm
+               _00107_DS_   0x00195e    program     static ulong2fs.asm
+               _00107_DS_   0x002784    program     static moduchar.asm
+               _00108_DS_   0x001144    program     static fsadd.asm
+               _00108_DS_   0x001de4    program     static fs2ulong.asm
+               _00108_DS_   0x000e36    program     static fsdiv.asm
+               _00108_DS_   0x001fe8    program     static slong2fs.asm
+               _00109_DS_   0x00206e    program     static build/default/production/stepperCon.asm
+               _00109_DS_   0x0024fa    program     static build/default/production/_ext/899019879/registers.asm
+               _00109_DS_   0x000bc0    program     static fsmul.asm
+               _00110_DS_   0x00118a    program     static fsadd.asm
+               _00110_DS_   0x000be2    program     static fsmul.asm
+               _00110_DS_   0x000e8e    program     static fsdiv.asm
+               _00110_DS_   0x001992    program     static ulong2fs.asm
+               _00111_DS_   0x002070    program     static build/default/production/stepperCon.asm
+               _00111_DS_   0x0027ae    program     static moduchar.asm
+               _00112_DS_   0x0011b8    program     static fsadd.asm
+               _00112_DS_   0x000c48    program     static fsmul.asm
+               _00112_DS_   0x000f02    program     static fsdiv.asm
+               _00112_DS_   0x0027a4    program     static moduchar.asm
+               _00113_DS_   0x00207c    program     static build/default/production/stepperCon.asm
+               _00113_DS_   0x00262c    program     static fs2uint.asm
+               _00113_DS_   0x000ea0    program     static fsdiv.asm
+               _00114_DS_   0x001202    program     static fsadd.asm
+               _00114_DS_   0x0019c2    program     static ulong2fs.asm
+               _00114_DS_   0x001f7c    program     static slong2fs.asm
+               _00115_DS_   0x002094    program     static build/default/production/stepperCon.asm
+               _00115_DS_   0x000c34    program     static fsmul.asm
+               _00115_DS_   0x000f18    program     static fsdiv.asm
+               _00116_DS_   0x001224    program     static fsadd.asm
+               _00116_DS_   0x000c9e    program     static fsmul.asm
+               _00116_DS_   0x0019f6    program     static ulong2fs.asm
+               _00117_DS_   0x002096    program     static build/default/production/stepperCon.asm
+               _00117_DS_   0x000cae    program     static fsmul.asm
+               _00117_DS_   0x000f98    program     static fsdiv.asm
+               _00117_DS_   0x001a34    program     static ulong2fs.asm
+               _00118_DS_   0x00125a    program     static fsadd.asm
+               _00119_DS_   0x001282    program     static fsadd.asm
+               _00119_DS_   0x000c12    program     static fsmul.asm
+               _00119_DS_   0x001dd6    program     static fs2ulong.asm
+               _00120_DS_   0x0020ac    program     static build/default/production/stepperCon.asm
+               _00120_DS_   0x002858    program     static build/default/production/_ext/899019879/sc_setup.asm
+               _00120_DS_   0x000c1a    program     static fsmul.asm
+               _00120_DS_   0x001dba    program     static fs2ulong.asm
+               _00120_DS_   0x000f84    program     static fsdiv.asm
+               _00121_DS_   0x000c58    program     static fsmul.asm
+               _00121_DS_   0x001dca    program     static fs2ulong.asm
+               _00121_DS_   0x000fee    program     static fsdiv.asm
+               _00121_DS_   0x001958    program     static ulong2fs.asm
+               _00122_DS_   0x000c60    program     static fsmul.asm
+               _00122_DS_   0x001dc8    program     static fs2ulong.asm
+               _00122_DS_   0x000ffe    program     static fsdiv.asm
+               _00123_DS_   0x0012c2    program     static fsadd.asm
+               _00124_DS_   0x0020ae    program     static build/default/production/stepperCon.asm
+               _00124_DS_   0x000f62    program     static fsdiv.asm
+               _00124_DS_   0x001972    program     static ulong2fs.asm
+               _00125_DS_   0x0012d6    program     static fsadd.asm
+               _00125_DS_   0x000f6a    program     static fsdiv.asm
+               _00126_DS_   0x000fa8    program     static fsdiv.asm
+               _00127_DS_   0x000fb0    program     static fsdiv.asm
+               _00129_DS_   0x002122    program     static build/default/production/_ext/899019879/registers.asm
+               _00129_DS_   0x001324    program     static fsadd.asm
+               _00130_DS_   0x002178    program     static build/default/production/_ext/899019879/registers.asm
+               _00130_DS_   0x001310    program     static fsadd.asm
+               _00131_DS_   0x00217c    program     static build/default/production/_ext/899019879/registers.asm
+               _00132_DS_   0x001334    program     static fsadd.asm
+               _00133_DS_   0x001382    program     static fsadd.asm
+               _00139_DS_   0x002404    program     static build/default/production/_ext/899019879/sc_setup.asm
+               _00141_DS_   0x0023f8    program     static build/default/production/_ext/899019879/sc_setup.asm
+               _00142_DS_   0x002406    program     static build/default/production/_ext/899019879/sc_setup.asm
+               _00142_DS_   0x0007e0    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00144_DS_   0x00083e    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00145_DS_   0x002436    program     static build/default/production/_ext/899019879/sc_setup.asm
+               _00148_DS_   0x0005fe    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00149_DS_   0x00086c    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00151_DS_   0x002420    program     static build/default/production/_ext/899019879/sc_setup.asm
+               _00153_DS_   0x00240e    program     static build/default/production/_ext/899019879/sc_setup.asm
+               _00153_DS_   0x0008b6    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00154_DS_   0x0008fe    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00155_DS_   0x001990    program     static ulong2fs.asm
+               _00156_DS_   0x002470    program     static build/default/production/_ext/899019879/sc_setup.asm
+               _00156_DS_   0x0019b8    program     static ulong2fs.asm
+               _00158_DS_   0x0019e8    program     static ulong2fs.asm
+               _00159_DS_   0x0019ea    program     static ulong2fs.asm
+               _00170_DS_   0x000c00    program     static fsmul.asm
+               _00175_DS_   0x001bfc    program     static build/default/production/stepperCon.asm
+               _00176_DS_   0x001c10    program     static build/default/production/stepperCon.asm
+               _00178_DS_   0x001c12    program     static build/default/production/stepperCon.asm
+               _00180_DS_   0x001c1e    program     static build/default/production/stepperCon.asm
+               _00183_DS_   0x0007c8    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00184_DS_   0x001c80    program     static build/default/production/stepperCon.asm
+               _00185_DS_   0x000816    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00185_DS_   0x000e7c    program     static fsdiv.asm
+               _00186_DS_   0x000ec8    program     static fsdiv.asm
+               _00187_DS_   0x001c72    program     static build/default/production/stepperCon.asm
+               _00187_DS_   0x00089e    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00188_DS_   0x0008e8    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00188_DS_   0x000f24    program     static fsdiv.asm
+               _00190_DS_   0x001c4a    program     static build/default/production/stepperCon.asm
+               _00190_DS_   0x000f50    program     static fsdiv.asm
+               _00191_DS_   0x001ca4    program     static build/default/production/stepperCon.asm
+               _00195_DS_   0x001cbe    program     static build/default/production/stepperCon.asm
+               _00197_DS_   0x001cc4    program     static build/default/production/stepperCon.asm
+               _00209_DS_   0x001176    program     static fsadd.asm
+               _00210_DS_   0x0011a4    program     static fsadd.asm
+               _00217_DS_   0x001236    program     static fsadd.asm
+               _00218_DS_   0x001258    program     static fsadd.asm
+               _00219_DS_   0x001248    program     static fsadd.asm
+               _00220_DS_   0x00127a    program     static fsadd.asm
+               _00221_DS_   0x00126a    program     static fsadd.asm
+               _00222_DS_   0x0012b6    program     static fsadd.asm
+               _00223_DS_   0x0012fc    program     static fsadd.asm
+               _00248_DS_   0x002bb2    program     static build/default/production/stepperCon.asm
+               _00249_DS_   0x002bba    program     static build/default/production/stepperCon.asm
+               _00261_DS_   0x0015ec    program     static build/default/production/stepperCon.asm
+               _00265_DS_   0x0014c0    program     static build/default/production/stepperCon.asm
+               _00266_DS_   0x001638    program     static build/default/production/stepperCon.asm
+               _00290_DS_   0x0015ce    program     static build/default/production/stepperCon.asm
+               _00291_DS_   0x00161a    program     static build/default/production/stepperCon.asm
+               _00292_DS_   0x001656    program     static build/default/production/stepperCon.asm
+               _00302_DS_   0x00290e    program     static build/default/production/stepperCon.asm
+               _00305_DS_   0x0028e6    program     static build/default/production/stepperCon.asm
+               _00307_DS_   0x002914    program     static build/default/production/stepperCon.asm
+               _00314_DS_   0x000038    program     static build/default/production/stepperCon.asm
+               _00315_DS_   0x0000de    program     static build/default/production/stepperCon.asm
+               _00317_DS_   0x000102    program     static build/default/production/stepperCon.asm
+               _00318_DS_   0x000106    program     static build/default/production/stepperCon.asm
+               _00319_DS_   0x000218    program     static build/default/production/stepperCon.asm
+               _00323_DS_   0x00025e    program     static build/default/production/stepperCon.asm
+               _00324_DS_   0x00026e    program     static build/default/production/stepperCon.asm
+               _00328_DS_   0x000286    program     static build/default/production/stepperCon.asm
+               _00329_DS_   0x000296    program     static build/default/production/stepperCon.asm
+               _00334_DS_   0x000316    program     static build/default/production/stepperCon.asm
+               _00335_DS_   0x0003e4    program     static build/default/production/stepperCon.asm
+               _00336_DS_   0x0004b0    program     static build/default/production/stepperCon.asm
+               _00338_DS_   0x0004e0    program     static build/default/production/stepperCon.asm
+               _00342_DS_   0x000502    program     static build/default/production/stepperCon.asm
+               _00344_DS_   0x00050c    program     static build/default/production/stepperCon.asm
+               _00349_DS_   0x000098    program     static build/default/production/stepperCon.asm
+               _00434_DS_   0x0000c2    program     static build/default/production/stepperCon.asm
+               _00437_DS_   0x000252    program     static build/default/production/stepperCon.asm
+               _00438_DS_   0x00027a    program     static build/default/production/stepperCon.asm
+               _00439_DS_   0x0004c8    program     static build/default/production/stepperCon.asm
+               _10313_DS_   0x0004ba    program     static build/default/production/stepperCon.asm
                   _ADCON0   0x000fc2       data     extern libdev18f46k22_a-pic18f46k22.asm
               _ADCON0bits   0x000fc2       data     extern libdev18f46k22_a-pic18f46k22.asm
                   _ADCON1   0x000fc1       data     extern libdev18f46k22_a-pic18f46k22.asm
@@ -652,6 +660,14 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
               _STATUSbits   0x000fd8       data     extern libdev18f46k22_a-pic18f46k22.asm
                   _STKPTR   0x000ffc       data     extern libdev18f46k22_a-pic18f46k22.asm
               _STKPTRbits   0x000ffc       data     extern libdev18f46k22_a-pic18f46k22.asm
+_S_pi_controller__calc_pi_00010C   0x000654    program     static build/default/production/_ext/899019879/pi_controller.asm
+_S_pi_controller__calc_pi_000118   0x000660    program     static build/default/production/_ext/899019879/pi_controller.asm
+_S_pi_controller__calc_pi_00020C   0x000754    program     static build/default/production/_ext/899019879/pi_controller.asm
+_S_pi_controller__calc_pi_000218   0x000760    program     static build/default/production/_ext/899019879/pi_controller.asm
+_S_pi_controller__mult_int16_00005A   0x0026aa    program     static build/default/production/_ext/899019879/pi_controller.asm
+_S_pi_controller__mult_int16_000066   0x0026b6    program     static build/default/production/_ext/899019879/pi_controller.asm
+_S_pi_controller__set_max_out_000078   0x0022e8    program     static build/default/production/_ext/899019879/pi_controller.asm
+_S_pi_controller__set_max_out_000084   0x0022f4    program     static build/default/production/_ext/899019879/pi_controller.asm
                    _T0CON   0x000fd5       data     extern libdev18f46k22_a-pic18f46k22.asm
                _T0CONbits   0x000fd5       data     extern libdev18f46k22_a-pic18f46k22.asm
                    _T1CON   0x000fcd       data     extern libdev18f46k22_a-pic18f46k22.asm
@@ -733,102 +749,128 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                 _WPUBbits   0x000f61       data     extern libdev18f46k22_a-pic18f46k22.asm
                     _WREG   0x000fe8       data     extern libdev18f46k22_a-pic18f46k22.asm
                 ___EEPROM   0xf00000    program     extern build/default/production/stepperCon.asm
-     ___eeprom16_gptrget1   0x0021ae    program     extern eeprom16_gptrget1.asm
-     ___eeprom16_gptrput1   0x002128    program     extern eeprom16_gptrput1.asm
-        ___eeprom16_write   0x0021e0    program     extern eeprom16_write.asm
+     ___eeprom16_gptrget1   0x002cfc    program     extern eeprom16_gptrget1.asm
+     ___eeprom16_gptrget2   0x002c6c    program     extern eeprom16_gptrget2.asm
+     ___eeprom16_gptrput1   0x002cb6    program     extern eeprom16_gptrput1.asm
+     ___eeprom16_gptrput2   0x002bf2    program     extern eeprom16_gptrput2.asm
+        ___eeprom16_write   0x002d62    program     extern eeprom16_write.asm
        ___eeprom_gptrget1   0x000004    program     extern gptr/eeprom16_gptrget1_dispatch.S
-       ___eeprom_gptrput1   0x00000c    program     extern gptr/eeprom16_gptrput1_dispatch.S
-               ___fs2uint   0x001d8e    program     extern fs2uint.asm
-              ___fs2ulong   0x0018a2    program     extern fs2ulong.asm
-     ___fs2ulong_fl1_1_22   0x000f10       data     static fs2ulong.asm
-                 ___fsadd   0x000948    program     extern fsadd.asm
-        ___fsadd_fl1_1_22   0x0000ea       data     static fsadd.asm
-        ___fsadd_fl2_1_22   0x0000ee       data     static fsadd.asm
-                 ___fsdiv   0x000cac    program     extern fsdiv.asm
-        ___fsdiv_fl1_1_22   0x000f14       data     static fsdiv.asm
-        ___fsdiv_fl2_1_22   0x000f18       data     static fsdiv.asm
-                 ___fsmul   0x0005d0    program     extern fsmul.asm
-        ___fsmul_fl1_1_22   0x0000f2       data     static fsmul.asm
-        ___fsmul_fl2_1_22   0x0000f6       data     static fsmul.asm
-               ___sint2fs   0x001ea0    program     extern sint2fs.asm
-              ___slong2fs   0x0017ac    program     extern slong2fs.asm
+       ___eeprom_gptrget2   0x00000c    program     extern gptr/eeprom16_gptrget2_dispatch.S
+       ___eeprom_gptrput1   0x000010    program     extern gptr/eeprom16_gptrput1_dispatch.S
+       ___eeprom_gptrput2   0x000014    program     extern gptr/eeprom16_gptrput2_dispatch.S
+               ___fs2uint   0x0025c0    program     extern fs2uint.asm
+              ___fs2ulong   0x001cf4    program     extern fs2ulong.asm
+ ___fs2ulong_fl1_65536_22   0x000f20       data     static fs2ulong.asm
+                 ___fsadd   0x001060    program     extern fsadd.asm
+    ___fsadd_fl1_65536_22   0x0000fc       data     static fsadd.asm
+    ___fsadd_fl2_65536_22   0x000f00       data     static fsadd.asm
+                 ___fsdiv   0x000cf0    program     extern fsdiv.asm
+    ___fsdiv_fl1_65536_22   0x000f24       data     static fsdiv.asm
+    ___fsdiv_fl2_65536_22   0x000f28       data     static fsdiv.asm
+                 ___fsmul   0x00095e    program     extern fsmul.asm
+    ___fsmul_fl1_65536_22   0x000f04       data     static fsmul.asm
+    ___fsmul_fl2_65536_22   0x000f08       data     static fsmul.asm
+               ___sint2fs   0x0027d8    program     extern sint2fs.asm
+              ___slong2fs   0x001f18    program     extern slong2fs.asm
                 ___uflags   0x0000e0       data     extern crt0iz.asm
-               ___uint2fs   0x001ff8    program     extern uint2fs.asm
-              ___ulong2fs   0x00140c    program     extern ulong2fs.asm
-      ___ulong2fs_fl_1_22   0x000f1c       data     static ulong2fs.asm
+               ___uint2fs   0x00299c    program     extern uint2fs.asm
+              ___ulong2fs   0x0018f4    program     extern ulong2fs.asm
+  ___ulong2fs_fl_65536_22   0x000f2c       data     static ulong2fs.asm
                   __entry   0x000000    program     extern crt0iz.asm
-               __gptrget1   0x00216e    program     extern gptrget1.asm
-               __gptrput1   0x0021ca    program     extern gptrput1.asm
-               __moduchar   0x001f14    program     extern moduchar.asm
-                __mullong   0x001004    program     extern mullong.asm
-         __mullong_t1_1_2   0x000f08       data     static mullong.asm
-         __mullong_t2_1_2   0x000f0c       data     static mullong.asm
-          __mullong_t_1_2   0x000f04       data     static mullong.asm
-          __mullong_x_1_2   0x0000fa       data     static mullong.asm
-          __mullong_y_1_2   0x000f00       data     static mullong.asm
-                __startup   0x001a60    program     extern crt0iz.asm
-                   _a_adc   0x000f20       data     extern build/default/production/stepperCon.asm
-                 _a_decay   0x000f35       data     extern build/default/production/stepperCon.asm
-                 _a_state   0x000280       data     extern build/default/production/stepperCon.asm
-              _activeInts   0x0020d2    program     extern build/default/production/stepperCon.asm
-                 _adc_cap   0x000f2d       data     extern build/default/production/stepperCon.asm
-               _adc_setup   0x002062    program     extern build/default/production/_ext/899019879/sc_setup.asm
-                   _b_adc   0x000f22       data     extern build/default/production/stepperCon.asm
-                 _b_decay   0x000f36       data     extern build/default/production/stepperCon.asm
-                 _b_state   0x000281       data     extern build/default/production/stepperCon.asm
-                   _cinit   0x0021f2    program     extern 
-                _delay_ms   0x001f88    program     extern build/default/production/stepperCon.asm
-                     _dir   0x000f2c       data     extern build/default/production/stepperCon.asm
-                 _highInt   0x0016a0    program     static build/default/production/stepperCon.asm
-                _i2cSetup   0x002100    program     extern build/default/production/stepperCon.asm
-             _i2c_address   0x000f31       data     extern build/default/production/stepperCon.asm
-             _i2c_counter   0x000f2e       data     extern build/default/production/stepperCon.asm
-               _i2c_dirty   0x000f30       data     extern build/default/production/stepperCon.asm
-            _i2c_reg_addr   0x000f2f       data     extern build/default/production/stepperCon.asm
+               __gptrget1   0x002cda    program     extern gptrget1.asm
+               __gptrget2   0x002bc6    program     extern gptrget2.asm
+               __gptrput1   0x002d4c    program     extern gptrput1.asm
+               __gptrput2   0x002d32    program     extern gptrput2.asm
+              __integ_sat   0x000286       data     extern build/default/production/_ext/899019879/pi_controller.asm
+                __max_out   0x000284       data     extern build/default/production/_ext/899019879/pi_controller.asm
+                __min_out   0x000288       data     extern build/default/production/_ext/899019879/pi_controller.asm
+               __moduchar   0x002758    program     extern moduchar.asm
+                 __mulint   0x002520    program     extern mulint.asm
+       __mulint_t_65536_2   0x00028e       data     static mulint.asm
+       __mulint_x_65536_2   0x00028a       data     static mulint.asm
+       __mulint_y_65536_2   0x00028c       data     static mulint.asm
+                __mullong   0x0016e0    program     extern mullong.asm
+     __mullong_t1_65536_2   0x000f18       data     static mullong.asm
+     __mullong_t2_65536_2   0x000f1c       data     static mullong.asm
+      __mullong_t_65536_2   0x000f14       data     static mullong.asm
+      __mullong_x_65536_2   0x000f0c       data     static mullong.asm
+      __mullong_y_65536_2   0x000f10       data     static mullong.asm
+                __startup   0x002330    program     extern crt0iz.asm
+                    _a16_   0x000019       data     extern build/default/production/_ext/899019879/pi_controller.asm
+                      _a_   0x000017       data     static build/default/production/_ext/899019879/pi_controller.asm
+              _activeInts   0x002b96    program     extern build/default/production/stepperCon.asm
+               _adc_setup   0x002b18    program     extern build/default/production/_ext/899019879/sc_setup.asm
+                 _adc_wdt   0x000f32       data     extern build/default/production/stepperCon.asm
+                    _b16_   0x00001b       data     static build/default/production/_ext/899019879/pi_controller.asm
+                      _b_   0x000018       data     static build/default/production/_ext/899019879/pi_controller.asm
+                 _calc_pi   0x000548    program     extern build/default/production/_ext/899019879/pi_controller.asm
+                   _cinit   0x002d74    program     extern 
+              _compsSetup   0x00284c    program     extern build/default/production/_ext/899019879/sc_setup.asm
+                _delay_ms   0x0028be    program     extern build/default/production/stepperCon.asm
+                     _dir   0x000291       data     extern build/default/production/stepperCon.asm
+                 _highInt   0x00200e    program     static build/default/production/stepperCon.asm
+                _i2cSetup   0x002c1e    program     extern build/default/production/stepperCon.asm
+             _i2c_address   0x000298       data     extern build/default/production/stepperCon.asm
+                 _i2c_buf   0x000294       data     extern build/default/production/stepperCon.asm
+             _i2c_counter   0x000295       data     extern build/default/production/stepperCon.asm
+               _i2c_dirty   0x000297       data     extern build/default/production/stepperCon.asm
+            _i2c_reg_addr   0x000296       data     extern build/default/production/stepperCon.asm
                 _i2c_regs   0x0000e1       data     extern build/default/production/stepperCon.asm
-                _idleInts   0x002190    program     extern build/default/production/stepperCon.asm
-                _intSetup   0x00214c    program     extern build/default/production/_ext/899019879/sc_setup.asm
-                 _ioSetup   0x00209a    program     extern build/default/production/_ext/899019879/sc_setup.asm
-                 _lab_01_   0x0021d8    program     static gptrput1.asm
-                 _lab_01_   0x00217a    program     static gptrget1.asm
-                  _lowInt   0x001582    program     static build/default/production/stepperCon.asm
+                _idleInts   0x002c92    program     extern build/default/production/stepperCon.asm
+             _init_result   0x001e0a    program     extern build/default/production/_ext/899019879/pi_controller.asm
+                _intSetup   0x002c46    program     extern build/default/production/_ext/899019879/sc_setup.asm
+                 _ioSetup   0x002b5a    program     extern build/default/production/_ext/899019879/sc_setup.asm
+                 _lab_01_   0x002d44    program     static gptrput2.asm
+                 _lab_01_   0x002d5a    program     static gptrput1.asm
+                 _lab_01_   0x002bd6    program     static gptrget2.asm
+                 _lab_01_   0x002ce6    program     static gptrget1.asm
+                  _lowInt   0x001bb4    program     static build/default/production/stepperCon.asm
                     _main   0x00001c    program     extern build/default/production/stepperCon.asm
-                 _max_amp   0x000f26       data     extern build/default/production/stepperCon.asm
-                   _pol_a   0x000282       data     extern build/default/production/stepperCon.asm
-                   _pol_b   0x000283       data     extern build/default/production/stepperCon.asm
-             _prep_pwm_lu   0x001218    program     extern build/default/production/stepperCon.asm
-                _pwmSetup   0x001cf4    program     extern build/default/production/_ext/899019879/sc_setup.asm
+_main_pi_result_a_65536_99   0x0000ec       data     static build/default/production/stepperCon.asm
+_main_pi_result_b_65536_99   0x0000f4       data     static build/default/production/stepperCon.asm
+                 _max_amp   0x000f36       data     extern build/default/production/stepperCon.asm
+             _micro_steps   0x000293       data     extern build/default/production/stepperCon.asm
+              _mult_int16   0x002650    program     extern build/default/production/_ext/899019879/pi_controller.asm
+               _mult_int8   0x002a06    program     extern build/default/production/_ext/899019879/pi_controller.asm
+             _mult_uint16   0x00292e    program     extern build/default/production/_ext/899019879/pi_controller.asm
+              _mult_uint8   0x002a6c    program     extern build/default/production/_ext/899019879/pi_controller.asm
+                  _pid_ki   0x000282       data     extern build/default/production/stepperCon.asm
+                  _pid_kp   0x000280       data     extern build/default/production/stepperCon.asm
+             _prep_pwm_lu   0x0013cc    program     extern build/default/production/stepperCon.asm
+                  _pwmOut   0x002ac8    program     extern build/default/production/_ext/899019879/sc_setup.asm
+                _pwmSetup   0x001a6a    program     extern build/default/production/_ext/899019879/sc_setup.asm
                 _pwm_base   0x000060       data     static build/default/production/stepperCon.asm
                   _pwm_lu   0x000200       data     extern build/default/production/stepperCon.asm
-               _read_regs   0x001c52    program     extern build/default/production/_ext/899019879/registers.asm
-              _resetCheck   0x001bb0    program     extern build/default/production/_ext/899019879/sc_setup.asm
-                 _set_amp   0x000f24       data     extern build/default/production/stepperCon.asm
-             _set_op_vars   0x001b0c    program     extern build/default/production/stepperCon.asm
-                    _skip   0x000f32       data     extern build/default/production/stepperCon.asm
+               _read_regs   0x00247e    program     extern build/default/production/_ext/899019879/registers.asm
+                    _res_   0x00001d       data     extern build/default/production/_ext/899019879/pi_controller.asm
+              _resetCheck   0x0023dc    program     extern build/default/production/_ext/899019879/sc_setup.asm
+                 _set_amp   0x000f34       data     extern build/default/production/stepperCon.asm
+             _set_max_out   0x002270    program     extern build/default/production/_ext/899019879/pi_controller.asm
+             _set_min_out   0x002d18    program     extern build/default/production/_ext/899019879/pi_controller.asm
+             _set_op_vars   0x0021a6    program     extern build/default/production/stepperCon.asm
+                    _skip   0x000292       data     extern build/default/production/stepperCon.asm
                    _stack   0x000100       data     extern stack/stack.S
                _stack_end   0x0001ff       data     extern stack/stack.S
-                   _state   0x000f2b       data     extern build/default/production/stepperCon.asm
-                  _step_a   0x000f33       data     extern build/default/production/stepperCon.asm
-                  _step_b   0x000f34       data     extern build/default/production/stepperCon.asm
-              _store_regs   0x001994    program     extern build/default/production/_ext/899019879/registers.asm
-            _t_blank_high   0x000f2a       data     extern build/default/production/stepperCon.asm
-             _t_blank_low   0x000f29       data     extern build/default/production/stepperCon.asm
-                   _t_off   0x000f28       data     extern build/default/production/stepperCon.asm
-              _zero_cross   0x0000fe       data     extern build/default/production/stepperCon.asm
-               clear_loop   0x001a76    program     static crt0iz.asm
-                copy_loop   0x001ae4    program     static crt0iz.asm
-            copy_loop_dec   0x001aea    program     static crt0iz.asm
-               entry_loop   0x001a96    program     static crt0iz.asm
-           entry_loop_dec   0x001afe    program     static crt0iz.asm
+                   _state   0x000290       data     extern build/default/production/stepperCon.asm
+              _store_regs   0x0020da    program     extern build/default/production/_ext/899019879/registers.asm
+                 _t_blank   0x000299       data     extern build/default/production/stepperCon.asm
+              _zero_cross   0x000f30       data     extern build/default/production/stepperCon.asm
+               clear_loop   0x002346    program     static crt0iz.asm
+                copy_loop   0x0023b4    program     static crt0iz.asm
+            copy_loop_dec   0x0023ba    program     static crt0iz.asm
+               entry_loop   0x002366    program     static crt0iz.asm
+           entry_loop_dec   0x0023ce    program     static crt0iz.asm
          ivec_0x1_highInt   0x000008    program     static build/default/production/stepperCon.asm
           ivec_0x2_lowInt   0x000018    program     static build/default/production/stepperCon.asm
-                   lockup   0x001b0a    program     static crt0iz.asm
+                   lockup   0x0023da    program     static crt0iz.asm
                     r0x00   0x000000       data     static build/default/production/stepperCon.asm
                     r0x00   0x000000       data     static build/default/production/_ext/899019879/sc_setup.asm
                     r0x00   0x000000       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x00   0x000000       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x00   0x000000       data     static fsadd.asm
                     r0x00   0x000000       data     static fsmul.asm
                     r0x00   0x000000       data     static mullong.asm
+                    r0x00   0x000000       data     static mulint.asm
                     r0x00   0x000000       data     static uint2fs.asm
                     r0x00   0x000000       data     static fs2uint.asm
                     r0x00   0x000000       data     static fs2ulong.asm
@@ -840,9 +882,11 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                     r0x01   0x000001       data     static build/default/production/stepperCon.asm
                     r0x01   0x000001       data     static build/default/production/_ext/899019879/sc_setup.asm
                     r0x01   0x000001       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x01   0x000001       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x01   0x000001       data     static fsadd.asm
                     r0x01   0x000001       data     static fsmul.asm
                     r0x01   0x000001       data     static mullong.asm
+                    r0x01   0x000001       data     static mulint.asm
                     r0x01   0x000001       data     static uint2fs.asm
                     r0x01   0x000001       data     static fs2uint.asm
                     r0x01   0x000001       data     static fs2ulong.asm
@@ -853,9 +897,11 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                     r0x01   0x000001       data     static moduchar.asm
                     r0x02   0x000002       data     static build/default/production/stepperCon.asm
                     r0x02   0x000002       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x02   0x000002       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x02   0x000002       data     static fsadd.asm
                     r0x02   0x000002       data     static fsmul.asm
                     r0x02   0x000002       data     static mullong.asm
+                    r0x02   0x000002       data     static mulint.asm
                     r0x02   0x000002       data     static uint2fs.asm
                     r0x02   0x000002       data     static fs2uint.asm
                     r0x02   0x000002       data     static fs2ulong.asm
@@ -866,9 +912,11 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                     r0x02   0x000002       data     static moduchar.asm
                     r0x03   0x000003       data     static build/default/production/stepperCon.asm
                     r0x03   0x000003       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x03   0x000003       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x03   0x000003       data     static fsadd.asm
                     r0x03   0x000003       data     static fsmul.asm
                     r0x03   0x000003       data     static mullong.asm
+                    r0x03   0x000003       data     static mulint.asm
                     r0x03   0x000003       data     static uint2fs.asm
                     r0x03   0x000003       data     static fs2uint.asm
                     r0x03   0x000003       data     static fs2ulong.asm
@@ -879,6 +927,7 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                     r0x03   0x000003       data     static moduchar.asm
                     r0x04   0x000004       data     static build/default/production/stepperCon.asm
                     r0x04   0x000004       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x04   0x000004       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x04   0x000004       data     static fsadd.asm
                     r0x04   0x000004       data     static fsmul.asm
                     r0x04   0x000004       data     static mullong.asm
@@ -886,8 +935,10 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                     r0x04   0x000004       data     static fsdiv.asm
                     r0x04   0x000004       data     static ulong2fs.asm
                     r0x04   0x000004       data     static slong2fs.asm
+                    r0x04   0x000004       data     static moduchar.asm
                     r0x05   0x000005       data     static build/default/production/stepperCon.asm
                     r0x05   0x000005       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x05   0x000005       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x05   0x000005       data     static fsadd.asm
                     r0x05   0x000005       data     static fsmul.asm
                     r0x05   0x000005       data     static mullong.asm
@@ -897,61 +948,83 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                     r0x05   0x000005       data     static slong2fs.asm
                     r0x06   0x000006       data     static build/default/production/stepperCon.asm
                     r0x06   0x000006       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x06   0x000006       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x06   0x000006       data     static fsadd.asm
                     r0x06   0x000006       data     static fsmul.asm
                     r0x06   0x000006       data     static mullong.asm
+                    r0x06   0x000006       data     static fs2ulong.asm
                     r0x06   0x000006       data     static fsdiv.asm
                     r0x06   0x000006       data     static ulong2fs.asm
                     r0x06   0x000006       data     static slong2fs.asm
                     r0x07   0x000007       data     static build/default/production/stepperCon.asm
                     r0x07   0x000007       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x07   0x000007       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x07   0x000007       data     static fsadd.asm
                     r0x07   0x000007       data     static fsmul.asm
                     r0x07   0x000007       data     static mullong.asm
+                    r0x07   0x000007       data     static fs2ulong.asm
                     r0x07   0x000007       data     static fsdiv.asm
                     r0x07   0x000007       data     static ulong2fs.asm
                     r0x07   0x000007       data     static slong2fs.asm
                     r0x08   0x000008       data     static build/default/production/stepperCon.asm
                     r0x08   0x000008       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x08   0x000008       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x08   0x000008       data     static fsadd.asm
                     r0x08   0x000008       data     static fsmul.asm
                     r0x08   0x000008       data     static fsdiv.asm
                     r0x08   0x000008       data     static ulong2fs.asm
                     r0x09   0x000009       data     static build/default/production/stepperCon.asm
+                    r0x09   0x000009       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x09   0x000009       data     static fsadd.asm
                     r0x09   0x000009       data     static fsmul.asm
                     r0x09   0x000009       data     static fsdiv.asm
                     r0x09   0x000009       data     static ulong2fs.asm
                     r0x0a   0x00000a       data     static build/default/production/stepperCon.asm
+                    r0x0a   0x00000a       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x0a   0x00000a       data     static fsadd.asm
                     r0x0a   0x00000a       data     static fsmul.asm
                     r0x0a   0x00000a       data     static fsdiv.asm
                     r0x0a   0x00000a       data     static ulong2fs.asm
+                    r0x0b   0x00000b       data     static build/default/production/stepperCon.asm
+                    r0x0b   0x00000b       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x0b   0x00000b       data     static fsadd.asm
                     r0x0b   0x00000b       data     static fsmul.asm
                     r0x0b   0x00000b       data     static fsdiv.asm
                     r0x0b   0x00000b       data     static ulong2fs.asm
+                    r0x0c   0x00000c       data     static build/default/production/stepperCon.asm
+                    r0x0c   0x00000c       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x0c   0x00000c       data     static fsadd.asm
                     r0x0c   0x00000c       data     static fsmul.asm
                     r0x0c   0x00000c       data     static fsdiv.asm
+                    r0x0d   0x00000d       data     static build/default/production/stepperCon.asm
+                    r0x0d   0x00000d       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x0d   0x00000d       data     static fsadd.asm
                     r0x0d   0x00000d       data     static fsmul.asm
                     r0x0d   0x00000d       data     static fsdiv.asm
+                    r0x0e   0x00000e       data     static build/default/production/stepperCon.asm
+                    r0x0e   0x00000e       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x0e   0x00000e       data     static fsadd.asm
                     r0x0e   0x00000e       data     static fsmul.asm
                     r0x0e   0x00000e       data     static fsdiv.asm
+                    r0x0f   0x00000f       data     static build/default/production/stepperCon.asm
+                    r0x0f   0x00000f       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x0f   0x00000f       data     static fsadd.asm
                     r0x0f   0x00000f       data     static fsmul.asm
                     r0x0f   0x00000f       data     static fsdiv.asm
+                    r0x10   0x000010       data     static build/default/production/stepperCon.asm
+                    r0x10   0x000010       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x10   0x000010       data     static fsadd.asm
                     r0x10   0x000010       data     static fsdiv.asm
+                    r0x11   0x000011       data     static build/default/production/stepperCon.asm
                     r0x11   0x000011       data     static fsdiv.asm
+                    r0x12   0x000012       data     static build/default/production/stepperCon.asm
                     r0x12   0x000012       data     static fsdiv.asm
+                    r0x13   0x000013       data     static build/default/production/stepperCon.asm
                     r0x13   0x000013       data     static fsdiv.asm
                     r0x14   0x000014       data     static fsdiv.asm
                     r0x15   0x000015       data     static fsdiv.asm
                     r0x16   0x000016       data     static fsdiv.asm
-           wait_till_done   0x0021ea    program     static eeprom16_write.asm
+           wait_till_done   0x002d6c    program     static eeprom16_write.asm
 
 
 
@@ -962,9 +1035,11 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                     r0x00   0x000000       data     static build/default/production/stepperCon.asm
                     r0x00   0x000000       data     static build/default/production/_ext/899019879/sc_setup.asm
                     r0x00   0x000000       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x00   0x000000       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x00   0x000000       data     static fsadd.asm
                     r0x00   0x000000       data     static fsmul.asm
                     r0x00   0x000000       data     static mullong.asm
+                    r0x00   0x000000       data     static mulint.asm
                     r0x00   0x000000       data     static uint2fs.asm
                     r0x00   0x000000       data     static fs2uint.asm
                     r0x00   0x000000       data     static fs2ulong.asm
@@ -976,9 +1051,11 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                     r0x01   0x000001       data     static build/default/production/stepperCon.asm
                     r0x01   0x000001       data     static build/default/production/_ext/899019879/sc_setup.asm
                     r0x01   0x000001       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x01   0x000001       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x01   0x000001       data     static fsadd.asm
                     r0x01   0x000001       data     static fsmul.asm
                     r0x01   0x000001       data     static mullong.asm
+                    r0x01   0x000001       data     static mulint.asm
                     r0x01   0x000001       data     static uint2fs.asm
                     r0x01   0x000001       data     static fs2uint.asm
                     r0x01   0x000001       data     static fs2ulong.asm
@@ -989,9 +1066,11 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                     r0x01   0x000001       data     static moduchar.asm
                     r0x02   0x000002       data     static build/default/production/stepperCon.asm
                     r0x02   0x000002       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x02   0x000002       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x02   0x000002       data     static fsadd.asm
                     r0x02   0x000002       data     static fsmul.asm
                     r0x02   0x000002       data     static mullong.asm
+                    r0x02   0x000002       data     static mulint.asm
                     r0x02   0x000002       data     static uint2fs.asm
                     r0x02   0x000002       data     static fs2uint.asm
                     r0x02   0x000002       data     static fs2ulong.asm
@@ -1002,9 +1081,11 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                     r0x02   0x000002       data     static moduchar.asm
                     r0x03   0x000003       data     static build/default/production/stepperCon.asm
                     r0x03   0x000003       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x03   0x000003       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x03   0x000003       data     static fsadd.asm
                     r0x03   0x000003       data     static fsmul.asm
                     r0x03   0x000003       data     static mullong.asm
+                    r0x03   0x000003       data     static mulint.asm
                     r0x03   0x000003       data     static uint2fs.asm
                     r0x03   0x000003       data     static fs2uint.asm
                     r0x03   0x000003       data     static fs2ulong.asm
@@ -1016,6 +1097,7 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
        ___eeprom_gptrget1   0x000004    program     extern gptr/eeprom16_gptrget1_dispatch.S
                     r0x04   0x000004       data     static build/default/production/stepperCon.asm
                     r0x04   0x000004       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x04   0x000004       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x04   0x000004       data     static fsadd.asm
                     r0x04   0x000004       data     static fsmul.asm
                     r0x04   0x000004       data     static mullong.asm
@@ -1023,8 +1105,10 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                     r0x04   0x000004       data     static fsdiv.asm
                     r0x04   0x000004       data     static ulong2fs.asm
                     r0x04   0x000004       data     static slong2fs.asm
+                    r0x04   0x000004       data     static moduchar.asm
                     r0x05   0x000005       data     static build/default/production/stepperCon.asm
                     r0x05   0x000005       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x05   0x000005       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x05   0x000005       data     static fsadd.asm
                     r0x05   0x000005       data     static fsmul.asm
                     r0x05   0x000005       data     static mullong.asm
@@ -1034,227 +1118,196 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                     r0x05   0x000005       data     static slong2fs.asm
                     r0x06   0x000006       data     static build/default/production/stepperCon.asm
                     r0x06   0x000006       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x06   0x000006       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x06   0x000006       data     static fsadd.asm
                     r0x06   0x000006       data     static fsmul.asm
                     r0x06   0x000006       data     static mullong.asm
+                    r0x06   0x000006       data     static fs2ulong.asm
                     r0x06   0x000006       data     static fsdiv.asm
                     r0x06   0x000006       data     static ulong2fs.asm
                     r0x06   0x000006       data     static slong2fs.asm
                     r0x07   0x000007       data     static build/default/production/stepperCon.asm
                     r0x07   0x000007       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x07   0x000007       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x07   0x000007       data     static fsadd.asm
                     r0x07   0x000007       data     static fsmul.asm
                     r0x07   0x000007       data     static mullong.asm
+                    r0x07   0x000007       data     static fs2ulong.asm
                     r0x07   0x000007       data     static fsdiv.asm
                     r0x07   0x000007       data     static ulong2fs.asm
                     r0x07   0x000007       data     static slong2fs.asm
          ivec_0x1_highInt   0x000008    program     static build/default/production/stepperCon.asm
                     r0x08   0x000008       data     static build/default/production/stepperCon.asm
                     r0x08   0x000008       data     static build/default/production/_ext/899019879/registers.asm
+                    r0x08   0x000008       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x08   0x000008       data     static fsadd.asm
                     r0x08   0x000008       data     static fsmul.asm
                     r0x08   0x000008       data     static fsdiv.asm
                     r0x08   0x000008       data     static ulong2fs.asm
                     r0x09   0x000009       data     static build/default/production/stepperCon.asm
+                    r0x09   0x000009       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x09   0x000009       data     static fsadd.asm
                     r0x09   0x000009       data     static fsmul.asm
                     r0x09   0x000009       data     static fsdiv.asm
                     r0x09   0x000009       data     static ulong2fs.asm
                     r0x0a   0x00000a       data     static build/default/production/stepperCon.asm
+                    r0x0a   0x00000a       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x0a   0x00000a       data     static fsadd.asm
                     r0x0a   0x00000a       data     static fsmul.asm
                     r0x0a   0x00000a       data     static fsdiv.asm
                     r0x0a   0x00000a       data     static ulong2fs.asm
+                    r0x0b   0x00000b       data     static build/default/production/stepperCon.asm
+                    r0x0b   0x00000b       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x0b   0x00000b       data     static fsadd.asm
                     r0x0b   0x00000b       data     static fsmul.asm
                     r0x0b   0x00000b       data     static fsdiv.asm
                     r0x0b   0x00000b       data     static ulong2fs.asm
-       ___eeprom_gptrput1   0x00000c    program     extern gptr/eeprom16_gptrput1_dispatch.S
+       ___eeprom_gptrget2   0x00000c    program     extern gptr/eeprom16_gptrget2_dispatch.S
+                    r0x0c   0x00000c       data     static build/default/production/stepperCon.asm
+                    r0x0c   0x00000c       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x0c   0x00000c       data     static fsadd.asm
                     r0x0c   0x00000c       data     static fsmul.asm
                     r0x0c   0x00000c       data     static fsdiv.asm
+                    r0x0d   0x00000d       data     static build/default/production/stepperCon.asm
+                    r0x0d   0x00000d       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x0d   0x00000d       data     static fsadd.asm
                     r0x0d   0x00000d       data     static fsmul.asm
                     r0x0d   0x00000d       data     static fsdiv.asm
+                    r0x0e   0x00000e       data     static build/default/production/stepperCon.asm
+                    r0x0e   0x00000e       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x0e   0x00000e       data     static fsadd.asm
                     r0x0e   0x00000e       data     static fsmul.asm
                     r0x0e   0x00000e       data     static fsdiv.asm
+                    r0x0f   0x00000f       data     static build/default/production/stepperCon.asm
+                    r0x0f   0x00000f       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x0f   0x00000f       data     static fsadd.asm
                     r0x0f   0x00000f       data     static fsmul.asm
                     r0x0f   0x00000f       data     static fsdiv.asm
+       ___eeprom_gptrput1   0x000010    program     extern gptr/eeprom16_gptrput1_dispatch.S
+                    r0x10   0x000010       data     static build/default/production/stepperCon.asm
+                    r0x10   0x000010       data     static build/default/production/_ext/899019879/pi_controller.asm
                     r0x10   0x000010       data     static fsadd.asm
                     r0x10   0x000010       data     static fsdiv.asm
+                    r0x11   0x000011       data     static build/default/production/stepperCon.asm
                     r0x11   0x000011       data     static fsdiv.asm
+                    r0x12   0x000012       data     static build/default/production/stepperCon.asm
                     r0x12   0x000012       data     static fsdiv.asm
+                    r0x13   0x000013       data     static build/default/production/stepperCon.asm
                     r0x13   0x000013       data     static fsdiv.asm
+       ___eeprom_gptrput2   0x000014    program     extern gptr/eeprom16_gptrput2_dispatch.S
                     r0x14   0x000014       data     static fsdiv.asm
                     r0x15   0x000015       data     static fsdiv.asm
                     r0x16   0x000016       data     static fsdiv.asm
+                      _a_   0x000017       data     static build/default/production/_ext/899019879/pi_controller.asm
+                      _b_   0x000018       data     static build/default/production/_ext/899019879/pi_controller.asm
           ivec_0x2_lowInt   0x000018    program     static build/default/production/stepperCon.asm
+                    _a16_   0x000019       data     extern build/default/production/_ext/899019879/pi_controller.asm
+                    _b16_   0x00001b       data     static build/default/production/_ext/899019879/pi_controller.asm
                     _main   0x00001c    program     extern build/default/production/stepperCon.asm
-               _00226_DS_   0x000030    program     static build/default/production/stepperCon.asm
+                    _res_   0x00001d       data     extern build/default/production/_ext/899019879/pi_controller.asm
+               _00314_DS_   0x000038    program     static build/default/production/stepperCon.asm
                 _pwm_base   0x000060       data     static build/default/production/stepperCon.asm
-               _00338_DS_   0x00008c    program     static build/default/production/stepperCon.asm
-               _00527_DS_   0x000098    program     static build/default/production/stepperCon.asm
-               _00529_DS_   0x0000a0    program     static build/default/production/stepperCon.asm
-               _00531_DS_   0x0000ac    program     static build/default/production/stepperCon.asm
-               _00533_DS_   0x0000b6    program     static build/default/production/stepperCon.asm
-               _00535_DS_   0x0000c0    program     static build/default/production/stepperCon.asm
-               _00227_DS_   0x0000c2    program     static build/default/production/stepperCon.asm
-               _00229_DS_   0x0000d4    program     static build/default/production/stepperCon.asm
-               _00230_DS_   0x0000d8    program     static build/default/production/stepperCon.asm
+               _00349_DS_   0x000098    program     static build/default/production/stepperCon.asm
+               _00434_DS_   0x0000c2    program     static build/default/production/stepperCon.asm
+               _00315_DS_   0x0000de    program     static build/default/production/stepperCon.asm
                 ___uflags   0x0000e0       data     extern crt0iz.asm
                 _i2c_regs   0x0000e1       data     extern build/default/production/stepperCon.asm
-        ___fsadd_fl1_1_22   0x0000ea       data     static fsadd.asm
-        ___fsadd_fl2_1_22   0x0000ee       data     static fsadd.asm
-        ___fsmul_fl1_1_22   0x0000f2       data     static fsmul.asm
-               _00238_DS_   0x0000f4    program     static build/default/production/stepperCon.asm
-        ___fsmul_fl2_1_22   0x0000f6       data     static fsmul.asm
-          __mullong_x_1_2   0x0000fa       data     static mullong.asm
-              _zero_cross   0x0000fe       data     extern build/default/production/stepperCon.asm
+_main_pi_result_a_65536_99   0x0000ec       data     static build/default/production/stepperCon.asm
+_main_pi_result_b_65536_99   0x0000f4       data     static build/default/production/stepperCon.asm
+    ___fsadd_fl1_65536_22   0x0000fc       data     static fsadd.asm
                    _stack   0x000100       data     extern stack/stack.S
-               _00235_DS_   0x000104    program     static build/default/production/stepperCon.asm
-               _00232_DS_   0x000116    program     static build/default/production/stepperCon.asm
-               _00239_DS_   0x00011a    program     static build/default/production/stepperCon.asm
-               _00247_DS_   0x00012c    program     static build/default/production/stepperCon.asm
-               _00244_DS_   0x00013c    program     static build/default/production/stepperCon.asm
-               _00241_DS_   0x00014e    program     static build/default/production/stepperCon.asm
-               _00248_DS_   0x000152    program     static build/default/production/stepperCon.asm
-               _00545_DS_   0x000172    program     static build/default/production/stepperCon.asm
-               _00252_DS_   0x000178    program     static build/default/production/stepperCon.asm
-               _00253_DS_   0x000180    program     static build/default/production/stepperCon.asm
-               _00250_DS_   0x000190    program     static build/default/production/stepperCon.asm
-               _00254_DS_   0x000196    program     static build/default/production/stepperCon.asm
-               _00548_DS_   0x00019e    program     static build/default/production/stepperCon.asm
-               _00259_DS_   0x0001a4    program     static build/default/production/stepperCon.asm
-               _00260_DS_   0x0001ac    program     static build/default/production/stepperCon.asm
-               _00257_DS_   0x0001bc    program     static build/default/production/stepperCon.asm
-               _00261_DS_   0x0001c2    program     static build/default/production/stepperCon.asm
+               _00317_DS_   0x000102    program     static build/default/production/stepperCon.asm
+               _00318_DS_   0x000106    program     static build/default/production/stepperCon.asm
                _stack_end   0x0001ff       data     extern stack/stack.S
                   _pwm_lu   0x000200       data     extern build/default/production/stepperCon.asm
-                 _a_state   0x000280       data     extern build/default/production/stepperCon.asm
-                 _b_state   0x000281       data     extern build/default/production/stepperCon.asm
-                   _pol_a   0x000282       data     extern build/default/production/stepperCon.asm
-                   _pol_b   0x000283       data     extern build/default/production/stepperCon.asm
-               _00263_DS_   0x0002de    program     static build/default/production/stepperCon.asm
-               _00271_DS_   0x00032c    program     static build/default/production/stepperCon.asm
-               _00268_DS_   0x00033c    program     static build/default/production/stepperCon.asm
-               _00265_DS_   0x000350    program     static build/default/production/stepperCon.asm
-               _00272_DS_   0x000354    program     static build/default/production/stepperCon.asm
-               _00281_DS_   0x000372    program     static build/default/production/stepperCon.asm
-               _00278_DS_   0x000382    program     static build/default/production/stepperCon.asm
-               _00275_DS_   0x000396    program     static build/default/production/stepperCon.asm
-               _00282_DS_   0x00039a    program     static build/default/production/stepperCon.asm
-               _00284_DS_   0x0003a2    program     static build/default/production/stepperCon.asm
-               _00561_DS_   0x0003b0    program     static build/default/production/stepperCon.asm
-               _00286_DS_   0x0003d2    program     static build/default/production/stepperCon.asm
-               _00294_DS_   0x0003e4    program     static build/default/production/stepperCon.asm
-               _00290_DS_   0x000406    program     static build/default/production/stepperCon.asm
-               _00295_DS_   0x000416    program     static build/default/production/stepperCon.asm
-               _00565_DS_   0x00041e    program     static build/default/production/stepperCon.asm
-               _00299_DS_   0x000424    program     static build/default/production/stepperCon.asm
-               _00300_DS_   0x00042c    program     static build/default/production/stepperCon.asm
-               _00297_DS_   0x00043c    program     static build/default/production/stepperCon.asm
-               _00301_DS_   0x000442    program     static build/default/production/stepperCon.asm
-               _00568_DS_   0x00044a    program     static build/default/production/stepperCon.asm
-               _00306_DS_   0x000450    program     static build/default/production/stepperCon.asm
-               _00307_DS_   0x000458    program     static build/default/production/stepperCon.asm
-               _00304_DS_   0x000468    program     static build/default/production/stepperCon.asm
-               _00308_DS_   0x00046e    program     static build/default/production/stepperCon.asm
-               _00310_DS_   0x00050e    program     static build/default/production/stepperCon.asm
-               _00573_DS_   0x00051a    program     static build/default/production/stepperCon.asm
-               _00575_DS_   0x000522    program     static build/default/production/stepperCon.asm
-               _00312_DS_   0x00052e    program     static build/default/production/stepperCon.asm
-               _00315_DS_   0x000534    program     static build/default/production/stepperCon.asm
-               _00316_DS_   0x000536    program     static build/default/production/stepperCon.asm
-               _00318_DS_   0x00053e    program     static build/default/production/stepperCon.asm
-               _00577_DS_   0x00054a    program     static build/default/production/stepperCon.asm
-               _00579_DS_   0x000552    program     static build/default/production/stepperCon.asm
-               _00321_DS_   0x00055e    program     static build/default/production/stepperCon.asm
-               _00324_DS_   0x000564    program     static build/default/production/stepperCon.asm
-               _00325_DS_   0x000566    program     static build/default/production/stepperCon.asm
-               _00327_DS_   0x00056e    program     static build/default/production/stepperCon.asm
-               _00331_DS_   0x00058a    program     static build/default/production/stepperCon.asm
-               _00333_DS_   0x000594    program     static build/default/production/stepperCon.asm
-                 ___fsmul   0x0005d0    program     extern fsmul.asm
-               _00105_DS_   0x000680    program     static fsmul.asm
-               _00106_DS_   0x00068a    program     static fsmul.asm
-               _00109_DS_   0x000828    program     static fsmul.asm
-               _00110_DS_   0x00084a    program     static fsmul.asm
-               _00152_DS_   0x000858    program     static fsmul.asm
-               _00119_DS_   0x00086a    program     static fsmul.asm
-               _00120_DS_   0x000872    program     static fsmul.asm
-               _00115_DS_   0x00088c    program     static fsmul.asm
-               _00112_DS_   0x0008a0    program     static fsmul.asm
-               _00121_DS_   0x0008b0    program     static fsmul.asm
-               _00122_DS_   0x0008b8    program     static fsmul.asm
-               _00116_DS_   0x0008f6    program     static fsmul.asm
-               _00117_DS_   0x000906    program     static fsmul.asm
-                 ___fsadd   0x000948    program     extern fsadd.asm
-               _00106_DS_   0x000a0e    program     static fsadd.asm
-               _00108_DS_   0x000a2c    program     static fsadd.asm
-               _00181_DS_   0x000a5e    program     static fsadd.asm
-               _00110_DS_   0x000a72    program     static fsadd.asm
-               _00182_DS_   0x000a8c    program     static fsadd.asm
-               _00112_DS_   0x000aa0    program     static fsadd.asm
-               _00114_DS_   0x000aea    program     static fsadd.asm
-               _00116_DS_   0x000b0c    program     static fsadd.asm
-               _00189_DS_   0x000b1e    program     static fsadd.asm
-               _00191_DS_   0x000b30    program     static fsadd.asm
-               _00190_DS_   0x000b40    program     static fsadd.asm
-               _00118_DS_   0x000b42    program     static fsadd.asm
-               _00193_DS_   0x000b52    program     static fsadd.asm
-               _00192_DS_   0x000b62    program     static fsadd.asm
-               _00119_DS_   0x000b6a    program     static fsadd.asm
-               _00194_DS_   0x000b96    program     static fsadd.asm
-               _00123_DS_   0x000ba2    program     static fsadd.asm
-               _00125_DS_   0x000bb6    program     static fsadd.asm
-               _00195_DS_   0x000bdc    program     static fsadd.asm
-               _00130_DS_   0x000bf0    program     static fsadd.asm
-               _00129_DS_   0x000c04    program     static fsadd.asm
-               _00132_DS_   0x000c14    program     static fsadd.asm
-               _00133_DS_   0x000c62    program     static fsadd.asm
-                 ___fsdiv   0x000cac    program     extern fsdiv.asm
-               _00106_DS_   0x000dd4    program     static fsdiv.asm
-               _00108_DS_   0x000dea    program     static fsdiv.asm
-               _00165_DS_   0x000e30    program     static fsdiv.asm
-               _00110_DS_   0x000e42    program     static fsdiv.asm
-               _00113_DS_   0x000e54    program     static fsdiv.asm
-               _00166_DS_   0x000e7c    program     static fsdiv.asm
-               _00112_DS_   0x000eb6    program     static fsdiv.asm
-               _00115_DS_   0x000ecc    program     static fsdiv.asm
-               _00168_DS_   0x000ed8    program     static fsdiv.asm
-               _00170_DS_   0x000ef4    program     static fsdiv.asm
-          __mullong_y_1_2   0x000f00       data     static mullong.asm
-          __mullong_t_1_2   0x000f04       data     static mullong.asm
-               _00124_DS_   0x000f06    program     static fsdiv.asm
-         __mullong_t1_1_2   0x000f08       data     static mullong.asm
-         __mullong_t2_1_2   0x000f0c       data     static mullong.asm
-               _00125_DS_   0x000f0e    program     static fsdiv.asm
-     ___fs2ulong_fl1_1_22   0x000f10       data     static fs2ulong.asm
-        ___fsdiv_fl1_1_22   0x000f14       data     static fsdiv.asm
-        ___fsdiv_fl2_1_22   0x000f18       data     static fsdiv.asm
-      ___ulong2fs_fl_1_22   0x000f1c       data     static ulong2fs.asm
-                   _a_adc   0x000f20       data     extern build/default/production/stepperCon.asm
-                   _b_adc   0x000f22       data     extern build/default/production/stepperCon.asm
-                 _set_amp   0x000f24       data     extern build/default/production/stepperCon.asm
-                 _max_amp   0x000f26       data     extern build/default/production/stepperCon.asm
-               _00120_DS_   0x000f28    program     static fsdiv.asm
-                   _t_off   0x000f28       data     extern build/default/production/stepperCon.asm
-             _t_blank_low   0x000f29       data     extern build/default/production/stepperCon.asm
-            _t_blank_high   0x000f2a       data     extern build/default/production/stepperCon.asm
-                   _state   0x000f2b       data     extern build/default/production/stepperCon.asm
-                     _dir   0x000f2c       data     extern build/default/production/stepperCon.asm
-                 _adc_cap   0x000f2d       data     extern build/default/production/stepperCon.asm
-             _i2c_counter   0x000f2e       data     extern build/default/production/stepperCon.asm
-            _i2c_reg_addr   0x000f2f       data     extern build/default/production/stepperCon.asm
-               _i2c_dirty   0x000f30       data     extern build/default/production/stepperCon.asm
-             _i2c_address   0x000f31       data     extern build/default/production/stepperCon.asm
-                    _skip   0x000f32       data     extern build/default/production/stepperCon.asm
-                  _step_a   0x000f33       data     extern build/default/production/stepperCon.asm
-                  _step_b   0x000f34       data     extern build/default/production/stepperCon.asm
-                 _a_decay   0x000f35       data     extern build/default/production/stepperCon.asm
-                 _b_decay   0x000f36       data     extern build/default/production/stepperCon.asm
+               _00319_DS_   0x000218    program     static build/default/production/stepperCon.asm
+               _00437_DS_   0x000252    program     static build/default/production/stepperCon.asm
+               _00323_DS_   0x00025e    program     static build/default/production/stepperCon.asm
+               _00324_DS_   0x00026e    program     static build/default/production/stepperCon.asm
+               _00438_DS_   0x00027a    program     static build/default/production/stepperCon.asm
+                  _pid_kp   0x000280       data     extern build/default/production/stepperCon.asm
+                  _pid_ki   0x000282       data     extern build/default/production/stepperCon.asm
+                __max_out   0x000284       data     extern build/default/production/_ext/899019879/pi_controller.asm
+               _00328_DS_   0x000286    program     static build/default/production/stepperCon.asm
+              __integ_sat   0x000286       data     extern build/default/production/_ext/899019879/pi_controller.asm
+                __min_out   0x000288       data     extern build/default/production/_ext/899019879/pi_controller.asm
+       __mulint_x_65536_2   0x00028a       data     static mulint.asm
+       __mulint_y_65536_2   0x00028c       data     static mulint.asm
+       __mulint_t_65536_2   0x00028e       data     static mulint.asm
+                   _state   0x000290       data     extern build/default/production/stepperCon.asm
+                     _dir   0x000291       data     extern build/default/production/stepperCon.asm
+                    _skip   0x000292       data     extern build/default/production/stepperCon.asm
+             _micro_steps   0x000293       data     extern build/default/production/stepperCon.asm
+                 _i2c_buf   0x000294       data     extern build/default/production/stepperCon.asm
+             _i2c_counter   0x000295       data     extern build/default/production/stepperCon.asm
+               _00329_DS_   0x000296    program     static build/default/production/stepperCon.asm
+            _i2c_reg_addr   0x000296       data     extern build/default/production/stepperCon.asm
+               _i2c_dirty   0x000297       data     extern build/default/production/stepperCon.asm
+             _i2c_address   0x000298       data     extern build/default/production/stepperCon.asm
+                 _t_blank   0x000299       data     extern build/default/production/stepperCon.asm
+               _00334_DS_   0x000316    program     static build/default/production/stepperCon.asm
+               _00335_DS_   0x0003e4    program     static build/default/production/stepperCon.asm
+               _00336_DS_   0x0004b0    program     static build/default/production/stepperCon.asm
+               _10313_DS_   0x0004ba    program     static build/default/production/stepperCon.asm
+               _00439_DS_   0x0004c8    program     static build/default/production/stepperCon.asm
+               _00338_DS_   0x0004e0    program     static build/default/production/stepperCon.asm
+               _00342_DS_   0x000502    program     static build/default/production/stepperCon.asm
+               _00344_DS_   0x00050c    program     static build/default/production/stepperCon.asm
+                 _calc_pi   0x000548    program     extern build/default/production/_ext/899019879/pi_controller.asm
+               _00148_DS_   0x0005fe    program     static build/default/production/_ext/899019879/pi_controller.asm
+_S_pi_controller__calc_pi_00010C   0x000654    program     static build/default/production/_ext/899019879/pi_controller.asm
+_S_pi_controller__calc_pi_000118   0x000660    program     static build/default/production/_ext/899019879/pi_controller.asm
+_S_pi_controller__calc_pi_00020C   0x000754    program     static build/default/production/_ext/899019879/pi_controller.asm
+_S_pi_controller__calc_pi_000218   0x000760    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00183_DS_   0x0007c8    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00142_DS_   0x0007e0    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00185_DS_   0x000816    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00144_DS_   0x00083e    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00149_DS_   0x00086c    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00187_DS_   0x00089e    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00153_DS_   0x0008b6    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00188_DS_   0x0008e8    program     static build/default/production/_ext/899019879/pi_controller.asm
+               _00154_DS_   0x0008fe    program     static build/default/production/_ext/899019879/pi_controller.asm
+                 ___fsmul   0x00095e    program     extern fsmul.asm
+               _00105_DS_   0x000a0e    program     static fsmul.asm
+               _00106_DS_   0x000a18    program     static fsmul.asm
+               _00109_DS_   0x000bc0    program     static fsmul.asm
+               _00110_DS_   0x000be2    program     static fsmul.asm
+               _00170_DS_   0x000c00    program     static fsmul.asm
+               _00119_DS_   0x000c12    program     static fsmul.asm
+               _00120_DS_   0x000c1a    program     static fsmul.asm
+               _00115_DS_   0x000c34    program     static fsmul.asm
+               _00112_DS_   0x000c48    program     static fsmul.asm
+               _00121_DS_   0x000c58    program     static fsmul.asm
+               _00122_DS_   0x000c60    program     static fsmul.asm
+               _00116_DS_   0x000c9e    program     static fsmul.asm
+               _00117_DS_   0x000cae    program     static fsmul.asm
+                 ___fsdiv   0x000cf0    program     extern fsdiv.asm
+               _00106_DS_   0x000e20    program     static fsdiv.asm
+               _00108_DS_   0x000e36    program     static fsdiv.asm
+               _00185_DS_   0x000e7c    program     static fsdiv.asm
+               _00110_DS_   0x000e8e    program     static fsdiv.asm
+               _00113_DS_   0x000ea0    program     static fsdiv.asm
+               _00186_DS_   0x000ec8    program     static fsdiv.asm
+    ___fsadd_fl2_65536_22   0x000f00       data     static fsadd.asm
+               _00112_DS_   0x000f02    program     static fsdiv.asm
+    ___fsmul_fl1_65536_22   0x000f04       data     static fsmul.asm
+    ___fsmul_fl2_65536_22   0x000f08       data     static fsmul.asm
+      __mullong_x_65536_2   0x000f0c       data     static mullong.asm
+      __mullong_y_65536_2   0x000f10       data     static mullong.asm
+      __mullong_t_65536_2   0x000f14       data     static mullong.asm
+               _00115_DS_   0x000f18    program     static fsdiv.asm
+     __mullong_t1_65536_2   0x000f18       data     static mullong.asm
+     __mullong_t2_65536_2   0x000f1c       data     static mullong.asm
+ ___fs2ulong_fl1_65536_22   0x000f20       data     static fs2ulong.asm
+               _00188_DS_   0x000f24    program     static fsdiv.asm
+    ___fsdiv_fl1_65536_22   0x000f24       data     static fsdiv.asm
+    ___fsdiv_fl2_65536_22   0x000f28       data     static fsdiv.asm
+  ___ulong2fs_fl_65536_22   0x000f2c       data     static ulong2fs.asm
+              _zero_cross   0x000f30       data     extern build/default/production/stepperCon.asm
+                 _adc_wdt   0x000f32       data     extern build/default/production/stepperCon.asm
+                 _set_amp   0x000f34       data     extern build/default/production/stepperCon.asm
+                 _max_amp   0x000f36       data     extern build/default/production/stepperCon.asm
                   _ANSELA   0x000f38       data     extern libdev18f46k22_a-pic18f46k22.asm
               _ANSELAbits   0x000f38       data     extern libdev18f46k22_a-pic18f46k22.asm
                   _ANSELB   0x000f39       data     extern libdev18f46k22_a-pic18f46k22.asm
@@ -1263,7 +1316,6 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
               _ANSELCbits   0x000f3a       data     extern libdev18f46k22_a-pic18f46k22.asm
                   _ANSELD   0x000f3b       data     extern libdev18f46k22_a-pic18f46k22.asm
               _ANSELDbits   0x000f3b       data     extern libdev18f46k22_a-pic18f46k22.asm
-               _00117_DS_   0x000f3c    program     static fsdiv.asm
                   _ANSELE   0x000f3c       data     extern libdev18f46k22_a-pic18f46k22.asm
               _ANSELEbits   0x000f3c       data     extern libdev18f46k22_a-pic18f46k22.asm
                     _PMD2   0x000f3d       data     extern libdev18f46k22_a-pic18f46k22.asm
@@ -1307,7 +1359,6 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                    _T6CON   0x000f4a       data     extern libdev18f46k22_a-pic18f46k22.asm
                _T6CONbits   0x000f4a       data     extern libdev18f46k22_a-pic18f46k22.asm
                      _PR6   0x000f4b       data     extern libdev18f46k22_a-pic18f46k22.asm
-               _00126_DS_   0x000f4c    program     static fsdiv.asm
                     _TMR6   0x000f4c       data     extern libdev18f46k22_a-pic18f46k22.asm
                   _T5GCON   0x000f4d       data     extern libdev18f46k22_a-pic18f46k22.asm
               _T5GCONbits   0x000f4d       data     extern libdev18f46k22_a-pic18f46k22.asm
@@ -1315,12 +1366,12 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                _T5CONbits   0x000f4e       data     extern libdev18f46k22_a-pic18f46k22.asm
                     _TMR5   0x000f4f       data     extern libdev18f46k22_a-pic18f46k22.asm
                    _TMR5L   0x000f4f       data     extern libdev18f46k22_a-pic18f46k22.asm
+               _00190_DS_   0x000f50    program     static fsdiv.asm
                    _TMR5H   0x000f50       data     extern libdev18f46k22_a-pic18f46k22.asm
                    _T4CON   0x000f51       data     extern libdev18f46k22_a-pic18f46k22.asm
                _T4CONbits   0x000f51       data     extern libdev18f46k22_a-pic18f46k22.asm
                      _PR4   0x000f52       data     extern libdev18f46k22_a-pic18f46k22.asm
                     _TMR4   0x000f53       data     extern libdev18f46k22_a-pic18f46k22.asm
-               _00127_DS_   0x000f54    program     static fsdiv.asm
                  _CCP5CON   0x000f54       data     extern libdev18f46k22_a-pic18f46k22.asm
              _CCP5CONbits   0x000f54       data     extern libdev18f46k22_a-pic18f46k22.asm
                    _CCPR5   0x000f55       data     extern libdev18f46k22_a-pic18f46k22.asm
@@ -1348,6 +1399,7 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
               _SLRCONbits   0x000f60       data     extern libdev18f46k22_a-pic18f46k22.asm
                     _WPUB   0x000f61       data     extern libdev18f46k22_a-pic18f46k22.asm
                 _WPUBbits   0x000f61       data     extern libdev18f46k22_a-pic18f46k22.asm
+               _00124_DS_   0x000f62    program     static fsdiv.asm
                     _IOCB   0x000f62       data     extern libdev18f46k22_a-pic18f46k22.asm
                 _IOCBbits   0x000f62       data     extern libdev18f46k22_a-pic18f46k22.asm
                 _PSTR2CON   0x000f63       data     extern libdev18f46k22_a-pic18f46k22.asm
@@ -1365,6 +1417,7 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                   _CCPR2H   0x000f68       data     extern libdev18f46k22_a-pic18f46k22.asm
                 _SSP2CON3   0x000f69       data     extern libdev18f46k22_a-pic18f46k22.asm
             _SSP2CON3bits   0x000f69       data     extern libdev18f46k22_a-pic18f46k22.asm
+               _00125_DS_   0x000f6a    program     static fsdiv.asm
                  _SSP2MSK   0x000f6a       data     extern libdev18f46k22_a-pic18f46k22.asm
              _SSP2MSKbits   0x000f6a       data     extern libdev18f46k22_a-pic18f46k22.asm
                 _SSP2CON2   0x000f6b       data     extern libdev18f46k22_a-pic18f46k22.asm
@@ -1427,6 +1480,7 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                _PORTCbits   0x000f82       data     extern libdev18f46k22_a-pic18f46k22.asm
                    _PORTD   0x000f83       data     extern libdev18f46k22_a-pic18f46k22.asm
                _PORTDbits   0x000f83       data     extern libdev18f46k22_a-pic18f46k22.asm
+               _00120_DS_   0x000f84    program     static fsdiv.asm
                    _PORTE   0x000f84       data     extern libdev18f46k22_a-pic18f46k22.asm
                _PORTEbits   0x000f84       data     extern libdev18f46k22_a-pic18f46k22.asm
                     _LATA   0x000f89       data     extern libdev18f46k22_a-pic18f46k22.asm
@@ -1439,7 +1493,6 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                 _LATDbits   0x000f8c       data     extern libdev18f46k22_a-pic18f46k22.asm
                     _LATE   0x000f8d       data     extern libdev18f46k22_a-pic18f46k22.asm
                 _LATEbits   0x000f8d       data     extern libdev18f46k22_a-pic18f46k22.asm
-               _00121_DS_   0x000f92    program     static fsdiv.asm
                     _DDRA   0x000f92       data     extern libdev18f46k22_a-pic18f46k22.asm
                 _DDRAbits   0x000f92       data     extern libdev18f46k22_a-pic18f46k22.asm
                    _TRISA   0x000f92       data     extern libdev18f46k22_a-pic18f46k22.asm
@@ -1460,6 +1513,7 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                 _DDREbits   0x000f96       data     extern libdev18f46k22_a-pic18f46k22.asm
                    _TRISE   0x000f96       data     extern libdev18f46k22_a-pic18f46k22.asm
                _TRISEbits   0x000f96       data     extern libdev18f46k22_a-pic18f46k22.asm
+               _00117_DS_   0x000f98    program     static fsdiv.asm
                  _OSCTUNE   0x000f9b       data     extern libdev18f46k22_a-pic18f46k22.asm
              _OSCTUNEbits   0x000f9b       data     extern libdev18f46k22_a-pic18f46k22.asm
                  _HLVDCON   0x000f9c       data     extern libdev18f46k22_a-pic18f46k22.asm
@@ -1476,7 +1530,6 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                 _PIE2bits   0x000fa0       data     extern libdev18f46k22_a-pic18f46k22.asm
                     _PIR2   0x000fa1       data     extern libdev18f46k22_a-pic18f46k22.asm
                 _PIR2bits   0x000fa1       data     extern libdev18f46k22_a-pic18f46k22.asm
-               _00122_DS_   0x000fa2    program     static fsdiv.asm
                     _IPR2   0x000fa2       data     extern libdev18f46k22_a-pic18f46k22.asm
                 _IPR2bits   0x000fa2       data     extern libdev18f46k22_a-pic18f46k22.asm
                     _PIE3   0x000fa3       data     extern libdev18f46k22_a-pic18f46k22.asm
@@ -1488,6 +1541,7 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                   _EECON1   0x000fa6       data     extern libdev18f46k22_a-pic18f46k22.asm
               _EECON1bits   0x000fa6       data     extern libdev18f46k22_a-pic18f46k22.asm
                   _EECON2   0x000fa7       data     extern libdev18f46k22_a-pic18f46k22.asm
+               _00126_DS_   0x000fa8    program     static fsdiv.asm
                   _EEDATA   0x000fa8       data     extern libdev18f46k22_a-pic18f46k22.asm
                    _EEADR   0x000fa9       data     extern libdev18f46k22_a-pic18f46k22.asm
                _EEADRbits   0x000fa9       data     extern libdev18f46k22_a-pic18f46k22.asm
@@ -1514,6 +1568,7 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                   _SP1BRG   0x000faf       data     extern libdev18f46k22_a-pic18f46k22.asm
                    _SPBRG   0x000faf       data     extern libdev18f46k22_a-pic18f46k22.asm
                   _SPBRG1   0x000faf       data     extern libdev18f46k22_a-pic18f46k22.asm
+               _00127_DS_   0x000fb0    program     static fsdiv.asm
                  _SP1BRGH   0x000fb0       data     extern libdev18f46k22_a-pic18f46k22.asm
                   _SPBRGH   0x000fb0       data     extern libdev18f46k22_a-pic18f46k22.asm
                  _SPBRGH1   0x000fb0       data     extern libdev18f46k22_a-pic18f46k22.asm
@@ -1629,6 +1684,7 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
                   _PLUSW0   0x000feb       data     extern libdev18f46k22_a-pic18f46k22.asm
                  _PREINC0   0x000fec       data     extern libdev18f46k22_a-pic18f46k22.asm
                 _POSTDEC0   0x000fed       data     extern libdev18f46k22_a-pic18f46k22.asm
+               _00121_DS_   0x000fee    program     static fsdiv.asm
                 _POSTINC0   0x000fee       data     extern libdev18f46k22_a-pic18f46k22.asm
                    _INDF0   0x000fef       data     extern libdev18f46k22_a-pic18f46k22.asm
                  _INTCON3   0x000ff0       data     extern libdev18f46k22_a-pic18f46k22.asm
@@ -1653,107 +1709,162 @@ S_eeprom16_write____eeprom16_write       code   0x0021e0    program   0x000012
               _STKPTRbits   0x000ffc       data     extern libdev18f46k22_a-pic18f46k22.asm
                      _TOS   0x000ffd       data     extern libdev18f46k22_a-pic18f46k22.asm
                     _TOSL   0x000ffd       data     extern libdev18f46k22_a-pic18f46k22.asm
+               _00122_DS_   0x000ffe    program     static fsdiv.asm
                     _TOSH   0x000ffe       data     extern libdev18f46k22_a-pic18f46k22.asm
                     _TOSU   0x000fff       data     extern libdev18f46k22_a-pic18f46k22.asm
-                __mullong   0x001004    program     extern mullong.asm
-             _prep_pwm_lu   0x001218    program     extern build/default/production/stepperCon.asm
-               _00195_DS_   0x0012e8    program     static build/default/production/stepperCon.asm
-              ___ulong2fs   0x00140c    program     extern ulong2fs.asm
-               _00121_DS_   0x001470    program     static ulong2fs.asm
-               _00107_DS_   0x001476    program     static ulong2fs.asm
-               _00124_DS_   0x00148a    program     static ulong2fs.asm
-               _00141_DS_   0x0014a8    program     static ulong2fs.asm
-               _00110_DS_   0x0014aa    program     static ulong2fs.asm
-               _00142_DS_   0x0014d0    program     static ulong2fs.asm
-               _00114_DS_   0x0014da    program     static ulong2fs.asm
-               _00144_DS_   0x001500    program     static ulong2fs.asm
-               _00145_DS_   0x001502    program     static ulong2fs.asm
-               _00116_DS_   0x00150e    program     static ulong2fs.asm
-               _00117_DS_   0x00154c    program     static ulong2fs.asm
-                  _lowInt   0x001582    program     static build/default/production/stepperCon.asm
-               _00123_DS_   0x0015c6    program     static build/default/production/stepperCon.asm
-               _00133_DS_   0x0015f2    program     static build/default/production/stepperCon.asm
-               _00130_DS_   0x00161a    program     static build/default/production/stepperCon.asm
-               _00127_DS_   0x001628    program     static build/default/production/stepperCon.asm
-               _00134_DS_   0x00164c    program     static build/default/production/stepperCon.asm
-               _00138_DS_   0x001666    program     static build/default/production/stepperCon.asm
-               _00140_DS_   0x00166c    program     static build/default/production/stepperCon.asm
-                 _highInt   0x0016a0    program     static build/default/production/stepperCon.asm
-               _00106_DS_   0x0016e6    program     static build/default/production/stepperCon.asm
-               _00108_DS_   0x0016f8    program     static build/default/production/stepperCon.asm
-               _00109_DS_   0x001700    program     static build/default/production/stepperCon.asm
-               _00111_DS_   0x001708    program     static build/default/production/stepperCon.asm
-               _00113_DS_   0x001740    program     static build/default/production/stepperCon.asm
-               _00114_DS_   0x001770    program     static build/default/production/stepperCon.asm
-               _00117_DS_   0x001774    program     static build/default/production/stepperCon.asm
-              ___slong2fs   0x0017ac    program     extern slong2fs.asm
-               _00113_DS_   0x001810    program     static slong2fs.asm
-               _00106_DS_   0x001848    program     static slong2fs.asm
-               _00108_DS_   0x00187c    program     static slong2fs.asm
-              ___fs2ulong   0x0018a2    program     extern fs2ulong.asm
-               _00105_DS_   0x001902    program     static fs2ulong.asm
-               _00106_DS_   0x00190c    program     static fs2ulong.asm
-               _00118_DS_   0x00194c    program     static fs2ulong.asm
-               _00120_DS_   0x00195a    program     static fs2ulong.asm
-               _00119_DS_   0x00195c    program     static fs2ulong.asm
-               _00117_DS_   0x001968    program     static fs2ulong.asm
-               _00108_DS_   0x001976    program     static fs2ulong.asm
-              _store_regs   0x001994    program     extern build/default/production/_ext/899019879/registers.asm
-               _00129_DS_   0x0019dc    program     static build/default/production/_ext/899019879/registers.asm
-               _00130_DS_   0x001a32    program     static build/default/production/_ext/899019879/registers.asm
-               _00131_DS_   0x001a36    program     static build/default/production/_ext/899019879/registers.asm
-                __startup   0x001a60    program     extern crt0iz.asm
-               clear_loop   0x001a76    program     static crt0iz.asm
-               entry_loop   0x001a96    program     static crt0iz.asm
-                copy_loop   0x001ae4    program     static crt0iz.asm
-            copy_loop_dec   0x001aea    program     static crt0iz.asm
-           entry_loop_dec   0x001afe    program     static crt0iz.asm
-                   lockup   0x001b0a    program     static crt0iz.asm
-             _set_op_vars   0x001b0c    program     extern build/default/production/stepperCon.asm
-              _resetCheck   0x001bb0    program     extern build/default/production/_ext/899019879/sc_setup.asm
-               _00128_DS_   0x001bcc    program     static build/default/production/_ext/899019879/sc_setup.asm
-               _00126_DS_   0x001bd8    program     static build/default/production/_ext/899019879/sc_setup.asm
-               _00129_DS_   0x001bda    program     static build/default/production/_ext/899019879/sc_setup.asm
-               _00140_DS_   0x001be2    program     static build/default/production/_ext/899019879/sc_setup.asm
-               _00138_DS_   0x001bf4    program     static build/default/production/_ext/899019879/sc_setup.asm
-               _00132_DS_   0x001c0a    program     static build/default/production/_ext/899019879/sc_setup.asm
-               _00143_DS_   0x001c44    program     static build/default/production/_ext/899019879/sc_setup.asm
-               _read_regs   0x001c52    program     extern build/default/production/_ext/899019879/registers.asm
-               _00107_DS_   0x001c96    program     static build/default/production/_ext/899019879/registers.asm
-               _00109_DS_   0x001cce    program     static build/default/production/_ext/899019879/registers.asm
-                _pwmSetup   0x001cf4    program     extern build/default/production/_ext/899019879/sc_setup.asm
-               ___fs2uint   0x001d8e    program     extern fs2uint.asm
-               _00112_DS_   0x001dfa    program     static fs2uint.asm
-               _00106_DS_   0x001e02    program     static fs2uint.asm
-               _00107_DS_   0x001e08    program     static fs2uint.asm
-               ___sint2fs   0x001ea0    program     extern sint2fs.asm
-               __moduchar   0x001f14    program     extern moduchar.asm
-               _00107_DS_   0x001f3c    program     static moduchar.asm
-               _00106_DS_   0x001f50    program     static moduchar.asm
-               _00112_DS_   0x001f58    program     static moduchar.asm
-               _00111_DS_   0x001f62    program     static moduchar.asm
-                _delay_ms   0x001f88    program     extern build/default/production/stepperCon.asm
-               _00217_DS_   0x001fb0    program     static build/default/production/stepperCon.asm
-               _00214_DS_   0x001fd8    program     static build/default/production/stepperCon.asm
-               _00219_DS_   0x001fde    program     static build/default/production/stepperCon.asm
-               ___uint2fs   0x001ff8    program     extern uint2fs.asm
-               _adc_setup   0x002062    program     extern build/default/production/_ext/899019879/sc_setup.asm
-                 _ioSetup   0x00209a    program     extern build/default/production/_ext/899019879/sc_setup.asm
-              _activeInts   0x0020d2    program     extern build/default/production/stepperCon.asm
-               _00182_DS_   0x0020ee    program     static build/default/production/stepperCon.asm
-               _00183_DS_   0x0020f6    program     static build/default/production/stepperCon.asm
-                _i2cSetup   0x002100    program     extern build/default/production/stepperCon.asm
-     ___eeprom16_gptrput1   0x002128    program     extern eeprom16_gptrput1.asm
-                _intSetup   0x00214c    program     extern build/default/production/_ext/899019879/sc_setup.asm
-               __gptrget1   0x00216e    program     extern gptrget1.asm
-                 _lab_01_   0x00217a    program     static gptrget1.asm
-                _idleInts   0x002190    program     extern build/default/production/stepperCon.asm
-     ___eeprom16_gptrget1   0x0021ae    program     extern eeprom16_gptrget1.asm
-               __gptrput1   0x0021ca    program     extern gptrput1.asm
-                 _lab_01_   0x0021d8    program     static gptrput1.asm
-        ___eeprom16_write   0x0021e0    program     extern eeprom16_write.asm
-           wait_till_done   0x0021ea    program     static eeprom16_write.asm
-                   _cinit   0x0021f2    program     extern 
+                 ___fsadd   0x001060    program     extern fsadd.asm
+               _00106_DS_   0x001126    program     static fsadd.asm
+               _00108_DS_   0x001144    program     static fsadd.asm
+               _00209_DS_   0x001176    program     static fsadd.asm
+               _00110_DS_   0x00118a    program     static fsadd.asm
+               _00210_DS_   0x0011a4    program     static fsadd.asm
+               _00112_DS_   0x0011b8    program     static fsadd.asm
+               _00114_DS_   0x001202    program     static fsadd.asm
+               _00116_DS_   0x001224    program     static fsadd.asm
+               _00217_DS_   0x001236    program     static fsadd.asm
+               _00219_DS_   0x001248    program     static fsadd.asm
+               _00218_DS_   0x001258    program     static fsadd.asm
+               _00118_DS_   0x00125a    program     static fsadd.asm
+               _00221_DS_   0x00126a    program     static fsadd.asm
+               _00220_DS_   0x00127a    program     static fsadd.asm
+               _00119_DS_   0x001282    program     static fsadd.asm
+               _00222_DS_   0x0012b6    program     static fsadd.asm
+               _00123_DS_   0x0012c2    program     static fsadd.asm
+               _00125_DS_   0x0012d6    program     static fsadd.asm
+               _00223_DS_   0x0012fc    program     static fsadd.asm
+               _00130_DS_   0x001310    program     static fsadd.asm
+               _00129_DS_   0x001324    program     static fsadd.asm
+               _00132_DS_   0x001334    program     static fsadd.asm
+               _00133_DS_   0x001382    program     static fsadd.asm
+             _prep_pwm_lu   0x0013cc    program     extern build/default/production/stepperCon.asm
+               _00265_DS_   0x0014c0    program     static build/default/production/stepperCon.asm
+               _00290_DS_   0x0015ce    program     static build/default/production/stepperCon.asm
+               _00261_DS_   0x0015ec    program     static build/default/production/stepperCon.asm
+               _00291_DS_   0x00161a    program     static build/default/production/stepperCon.asm
+               _00266_DS_   0x001638    program     static build/default/production/stepperCon.asm
+               _00292_DS_   0x001656    program     static build/default/production/stepperCon.asm
+                __mullong   0x0016e0    program     extern mullong.asm
+              ___ulong2fs   0x0018f4    program     extern ulong2fs.asm
+               _00121_DS_   0x001958    program     static ulong2fs.asm
+               _00107_DS_   0x00195e    program     static ulong2fs.asm
+               _00124_DS_   0x001972    program     static ulong2fs.asm
+               _00155_DS_   0x001990    program     static ulong2fs.asm
+               _00110_DS_   0x001992    program     static ulong2fs.asm
+               _00156_DS_   0x0019b8    program     static ulong2fs.asm
+               _00114_DS_   0x0019c2    program     static ulong2fs.asm
+               _00158_DS_   0x0019e8    program     static ulong2fs.asm
+               _00159_DS_   0x0019ea    program     static ulong2fs.asm
+               _00116_DS_   0x0019f6    program     static ulong2fs.asm
+               _00117_DS_   0x001a34    program     static ulong2fs.asm
+                _pwmSetup   0x001a6a    program     extern build/default/production/_ext/899019879/sc_setup.asm
+                  _lowInt   0x001bb4    program     static build/default/production/stepperCon.asm
+               _00175_DS_   0x001bfc    program     static build/default/production/stepperCon.asm
+               _00176_DS_   0x001c10    program     static build/default/production/stepperCon.asm
+               _00178_DS_   0x001c12    program     static build/default/production/stepperCon.asm
+               _00180_DS_   0x001c1e    program     static build/default/production/stepperCon.asm
+               _00190_DS_   0x001c4a    program     static build/default/production/stepperCon.asm
+               _00187_DS_   0x001c72    program     static build/default/production/stepperCon.asm
+               _00184_DS_   0x001c80    program     static build/default/production/stepperCon.asm
+               _00191_DS_   0x001ca4    program     static build/default/production/stepperCon.asm
+               _00195_DS_   0x001cbe    program     static build/default/production/stepperCon.asm
+               _00197_DS_   0x001cc4    program     static build/default/production/stepperCon.asm
+              ___fs2ulong   0x001cf4    program     extern fs2ulong.asm
+               _00105_DS_   0x001d5c    program     static fs2ulong.asm
+               _00106_DS_   0x001d66    program     static fs2ulong.asm
+               _00120_DS_   0x001dba    program     static fs2ulong.asm
+               _00122_DS_   0x001dc8    program     static fs2ulong.asm
+               _00121_DS_   0x001dca    program     static fs2ulong.asm
+               _00119_DS_   0x001dd6    program     static fs2ulong.asm
+               _00108_DS_   0x001de4    program     static fs2ulong.asm
+             _init_result   0x001e0a    program     extern build/default/production/_ext/899019879/pi_controller.asm
+              ___slong2fs   0x001f18    program     extern slong2fs.asm
+               _00114_DS_   0x001f7c    program     static slong2fs.asm
+               _00106_DS_   0x001fb4    program     static slong2fs.asm
+               _00108_DS_   0x001fe8    program     static slong2fs.asm
+                 _highInt   0x00200e    program     static build/default/production/stepperCon.asm
+               _00106_DS_   0x002068    program     static build/default/production/stepperCon.asm
+               _00109_DS_   0x00206e    program     static build/default/production/stepperCon.asm
+               _00111_DS_   0x002070    program     static build/default/production/stepperCon.asm
+               _00113_DS_   0x00207c    program     static build/default/production/stepperCon.asm
+               _00115_DS_   0x002094    program     static build/default/production/stepperCon.asm
+               _00117_DS_   0x002096    program     static build/default/production/stepperCon.asm
+               _00120_DS_   0x0020ac    program     static build/default/production/stepperCon.asm
+               _00124_DS_   0x0020ae    program     static build/default/production/stepperCon.asm
+              _store_regs   0x0020da    program     extern build/default/production/_ext/899019879/registers.asm
+               _00129_DS_   0x002122    program     static build/default/production/_ext/899019879/registers.asm
+               _00130_DS_   0x002178    program     static build/default/production/_ext/899019879/registers.asm
+               _00131_DS_   0x00217c    program     static build/default/production/_ext/899019879/registers.asm
+             _set_op_vars   0x0021a6    program     extern build/default/production/stepperCon.asm
+             _set_max_out   0x002270    program     extern build/default/production/_ext/899019879/pi_controller.asm
+_S_pi_controller__set_max_out_000078   0x0022e8    program     static build/default/production/_ext/899019879/pi_controller.asm
+_S_pi_controller__set_max_out_000084   0x0022f4    program     static build/default/production/_ext/899019879/pi_controller.asm
+                __startup   0x002330    program     extern crt0iz.asm
+               clear_loop   0x002346    program     static crt0iz.asm
+               entry_loop   0x002366    program     static crt0iz.asm
+                copy_loop   0x0023b4    program     static crt0iz.asm
+            copy_loop_dec   0x0023ba    program     static crt0iz.asm
+           entry_loop_dec   0x0023ce    program     static crt0iz.asm
+                   lockup   0x0023da    program     static crt0iz.asm
+              _resetCheck   0x0023dc    program     extern build/default/production/_ext/899019879/sc_setup.asm
+               _00141_DS_   0x0023f8    program     static build/default/production/_ext/899019879/sc_setup.asm
+               _00139_DS_   0x002404    program     static build/default/production/_ext/899019879/sc_setup.asm
+               _00142_DS_   0x002406    program     static build/default/production/_ext/899019879/sc_setup.asm
+               _00153_DS_   0x00240e    program     static build/default/production/_ext/899019879/sc_setup.asm
+               _00151_DS_   0x002420    program     static build/default/production/_ext/899019879/sc_setup.asm
+               _00145_DS_   0x002436    program     static build/default/production/_ext/899019879/sc_setup.asm
+               _00156_DS_   0x002470    program     static build/default/production/_ext/899019879/sc_setup.asm
+               _read_regs   0x00247e    program     extern build/default/production/_ext/899019879/registers.asm
+               _00107_DS_   0x0024c2    program     static build/default/production/_ext/899019879/registers.asm
+               _00109_DS_   0x0024fa    program     static build/default/production/_ext/899019879/registers.asm
+                 __mulint   0x002520    program     extern mulint.asm
+               ___fs2uint   0x0025c0    program     extern fs2uint.asm
+               _00113_DS_   0x00262c    program     static fs2uint.asm
+               _00106_DS_   0x002634    program     static fs2uint.asm
+               _00107_DS_   0x00263a    program     static fs2uint.asm
+              _mult_int16   0x002650    program     extern build/default/production/_ext/899019879/pi_controller.asm
+_S_pi_controller__mult_int16_00005A   0x0026aa    program     static build/default/production/_ext/899019879/pi_controller.asm
+_S_pi_controller__mult_int16_000066   0x0026b6    program     static build/default/production/_ext/899019879/pi_controller.asm
+               __moduchar   0x002758    program     extern moduchar.asm
+               _00107_DS_   0x002784    program     static moduchar.asm
+               _00106_DS_   0x00279c    program     static moduchar.asm
+               _00112_DS_   0x0027a4    program     static moduchar.asm
+               _00111_DS_   0x0027ae    program     static moduchar.asm
+               ___sint2fs   0x0027d8    program     extern sint2fs.asm
+              _compsSetup   0x00284c    program     extern build/default/production/_ext/899019879/sc_setup.asm
+               _00120_DS_   0x002858    program     static build/default/production/_ext/899019879/sc_setup.asm
+                _delay_ms   0x0028be    program     extern build/default/production/stepperCon.asm
+               _00305_DS_   0x0028e6    program     static build/default/production/stepperCon.asm
+               _00302_DS_   0x00290e    program     static build/default/production/stepperCon.asm
+               _00307_DS_   0x002914    program     static build/default/production/stepperCon.asm
+             _mult_uint16   0x00292e    program     extern build/default/production/_ext/899019879/pi_controller.asm
+               ___uint2fs   0x00299c    program     extern uint2fs.asm
+               _mult_int8   0x002a06    program     extern build/default/production/_ext/899019879/pi_controller.asm
+              _mult_uint8   0x002a6c    program     extern build/default/production/_ext/899019879/pi_controller.asm
+                  _pwmOut   0x002ac8    program     extern build/default/production/_ext/899019879/sc_setup.asm
+               _adc_setup   0x002b18    program     extern build/default/production/_ext/899019879/sc_setup.asm
+                 _ioSetup   0x002b5a    program     extern build/default/production/_ext/899019879/sc_setup.asm
+              _activeInts   0x002b96    program     extern build/default/production/stepperCon.asm
+               _00248_DS_   0x002bb2    program     static build/default/production/stepperCon.asm
+               _00249_DS_   0x002bba    program     static build/default/production/stepperCon.asm
+               __gptrget2   0x002bc6    program     extern gptrget2.asm
+                 _lab_01_   0x002bd6    program     static gptrget2.asm
+     ___eeprom16_gptrput2   0x002bf2    program     extern eeprom16_gptrput2.asm
+                _i2cSetup   0x002c1e    program     extern build/default/production/stepperCon.asm
+                _intSetup   0x002c46    program     extern build/default/production/_ext/899019879/sc_setup.asm
+     ___eeprom16_gptrget2   0x002c6c    program     extern eeprom16_gptrget2.asm
+                _idleInts   0x002c92    program     extern build/default/production/stepperCon.asm
+     ___eeprom16_gptrput1   0x002cb6    program     extern eeprom16_gptrput1.asm
+               __gptrget1   0x002cda    program     extern gptrget1.asm
+                 _lab_01_   0x002ce6    program     static gptrget1.asm
+     ___eeprom16_gptrget1   0x002cfc    program     extern eeprom16_gptrget1.asm
+             _set_min_out   0x002d18    program     extern build/default/production/_ext/899019879/pi_controller.asm
+               __gptrput2   0x002d32    program     extern gptrput2.asm
+                 _lab_01_   0x002d44    program     static gptrput2.asm
+               __gptrput1   0x002d4c    program     extern gptrput1.asm
+                 _lab_01_   0x002d5a    program     static gptrput1.asm
+        ___eeprom16_write   0x002d62    program     extern eeprom16_write.asm
+           wait_till_done   0x002d6c    program     static eeprom16_write.asm
+                   _cinit   0x002d74    program     extern 
                 ___EEPROM   0xf00000    program     extern build/default/production/stepperCon.asm
 
 

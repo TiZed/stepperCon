@@ -1,48 +1,13 @@
-EESchema Schematic File Version 2
-LIBS:stepperCon-rescue
-LIBS:power
-LIBS:device
-LIBS:transistors
-LIBS:conn
-LIBS:linear
-LIBS:regul
-LIBS:74xx
-LIBS:cmos4000
-LIBS:adc-dac
-LIBS:memory
-LIBS:xilinx
-LIBS:microcontrollers
-LIBS:dsp
-LIBS:microchip
-LIBS:analog_switches
-LIBS:motorola
-LIBS:texas
-LIBS:intel
-LIBS:audio
-LIBS:interface
-LIBS:digital-audio
-LIBS:philips
-LIBS:display
-LIBS:cypress
-LIBS:siliconi
-LIBS:opto
-LIBS:atmel
-LIBS:contrib
-LIBS:valves
-LIBS:microchip_pic18mcu
-LIBS:transf
-LIBS:diode
-LIBS:TiZed
-LIBS:cnc
+EESchema Schematic File Version 4
 LIBS:stepperCon-cache
-EELAYER 25 0
+EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "Karsam - Stepper Controller"
 Date "2016-08-04"
-Rev "1.0"
+Rev "2.0"
 Comp "TiZed"
 Comment1 ""
 Comment2 ""
@@ -50,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L PIC18(L)F4xK22-I/PT U101
+L stepperCon-rescue:PIC18(L)F4xK22-I_PT U101
 U 1 1 57A33545
 P 5275 3850
 F 0 "U101" H 4075 5150 50  0000 C CNN
@@ -61,7 +26,7 @@ F 3 "" H 5275 3550 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X06 P108
+L stepperCon-rescue:CONN_01X06 P108
 U 1 1 57A33683
 P 10800 1375
 F 0 "P108" H 10877 1413 50  0000 L CNN
@@ -76,7 +41,7 @@ PGD
 Text Label 7075 4950 0    60   ~ 0
 PGC
 $Comp
-L GND #PWR01
+L stepperCon-rescue:GND #PWR01
 U 1 1 57A33942
 P 5325 5400
 F 0 "#PWR01" H 5325 5150 50  0001 C CNN
@@ -87,7 +52,7 @@ F 3 "" H 5325 5400 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR02
+L stepperCon-rescue:GND #PWR02
 U 1 1 57A339EA
 P 10050 1425
 F 0 "#PWR02" H 10050 1175 50  0001 C CNN
@@ -104,7 +69,7 @@ PGD
 Text Label 10600 925  2    60   ~ 0
 Vpp_Prog
 $Comp
-L VDD #PWR03
+L stepperCon-rescue:VDD #PWR03
 U 1 1 57A33B28
 P 10400 1225
 F 0 "#PWR03" H 10400 1075 50  0001 C CNN
@@ -117,7 +82,7 @@ $EndComp
 Text Label 6825 2750 0    60   ~ 0
 MCLR_Vpp
 $Comp
-L C_Small C111
+L stepperCon-rescue:C_Small C111
 U 1 1 57A33D62
 P 8425 3200
 F 0 "C111" H 8125 3200 50  0000 L CNN
@@ -128,7 +93,7 @@ F 3 "" H 8425 3200 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C112
+L stepperCon-rescue:C_Small C112
 U 1 1 57A33E06
 P 8825 3200
 F 0 "C112" H 8917 3246 50  0000 L CNN
@@ -139,7 +104,7 @@ F 3 "" H 8825 3200 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR04
+L stepperCon-rescue:GND #PWR04
 U 1 1 57A34003
 P 8610 3405
 F 0 "#PWR04" H 8610 3155 50  0001 C CNN
@@ -150,7 +115,7 @@ F 3 "" H 8610 3405 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R_Small R109
+L stepperCon-rescue:R_Small R109
 U 1 1 57A340D7
 P 8125 3050
 F 0 "R109" V 7975 3050 50  0000 C CNN
@@ -195,7 +160,7 @@ STEP_B
 Text GLabel 6950 4200 2    60   Input ~ 0
 DIR_B
 $Comp
-L VDD #PWR05
+L stepperCon-rescue:VDD #PWR05
 U 1 1 57A36C40
 P 5325 2300
 F 0 "#PWR05" H 5325 2150 50  0001 C CNN
@@ -206,7 +171,7 @@ F 3 "" H 5325 2300 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VDD #PWR06
+L stepperCon-rescue:VDD #PWR06
 U 1 1 57A36E6A
 P 2750 1025
 F 0 "#PWR06" H 2750 875 50  0001 C CNN
@@ -217,7 +182,7 @@ F 3 "" H 2750 1025 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VDD #PWR07
+L stepperCon-rescue:VDD #PWR07
 U 1 1 57A36E87
 P 3150 1025
 F 0 "#PWR07" H 3150 875 50  0001 C CNN
@@ -228,7 +193,7 @@ F 3 "" H 3150 1025 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C105
+L stepperCon-rescue:C_Small C105
 U 1 1 57A36EA4
 P 2750 1225
 F 0 "C105" H 2842 1271 50  0000 L CNN
@@ -239,7 +204,7 @@ F 3 "" H 2750 1225 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C106
+L stepperCon-rescue:C_Small C106
 U 1 1 57A36F15
 P 3150 1225
 F 0 "C106" H 3242 1271 50  0000 L CNN
@@ -250,7 +215,7 @@ F 3 "" H 3150 1225 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR08
+L stepperCon-rescue:GND #PWR08
 U 1 1 57A36FD9
 P 3150 1425
 F 0 "#PWR08" H 3150 1175 50  0001 C CNN
@@ -261,7 +226,7 @@ F 3 "" H 3150 1425 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR09
+L stepperCon-rescue:GND #PWR09
 U 1 1 57A36FFC
 P 2750 1425
 F 0 "#PWR09" H 2750 1175 50  0001 C CNN
@@ -272,7 +237,7 @@ F 3 "" H 2750 1425 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_U.FL P107
+L stepperCon-rescue:CONN_U.FL P107
 U 1 1 57A390F4
 P 9290 2950
 F 0 "P107" H 9381 2951 60  0000 L CNN
@@ -283,7 +248,7 @@ F 3 "" H 9290 2950 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR010
+L stepperCon-rescue:GND #PWR010
 U 1 1 57A391A4
 P 9290 3200
 F 0 "#PWR010" H 9290 2950 50  0001 C CNN
@@ -294,29 +259,7 @@ F 3 "" H 9290 3200 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VDD #PWR011
-U 1 1 57A3A4C3
-P 8400 1125
-F 0 "#PWR011" H 8400 975 50  0001 C CNN
-F 1 "VDD" H 8420 1299 50  0000 C CNN
-F 2 "" H 8400 1125 60  0000 C CNN
-F 3 "" H 8400 1125 60  0000 C CNN
-	1    8400 1125
-	1    0    0    -1  
-$EndComp
-$Comp
-L GND #PWR012
-U 1 1 57A3A4EF
-P 8400 1825
-F 0 "#PWR012" H 8400 1575 50  0001 C CNN
-F 1 "GND" H 8408 1651 50  0000 C CNN
-F 2 "" H 8400 1825 60  0000 C CNN
-F 3 "" H 8400 1825 60  0000 C CNN
-	1    8400 1825
-	1    0    0    -1  
-$EndComp
-$Comp
-L R_Small R110
+L stepperCon-rescue:R_Small R110
 U 1 1 57A3A51B
 P 8700 1475
 F 0 "R110" V 8625 1475 50  0000 C CNN
@@ -327,7 +270,7 @@ F 3 "" H 8700 1475 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L R_Small R111
+L stepperCon-rescue:R_Small R111
 U 1 1 57A3A5D1
 P 8950 1275
 F 0 "R111" V 8850 1275 50  0000 C CNN
@@ -338,7 +281,7 @@ F 3 "" H 8950 1275 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L VDD #PWR013
+L stepperCon-rescue:VDD #PWR013
 U 1 1 57A3A663
 P 8950 1125
 F 0 "#PWR013" H 8950 975 50  0001 C CNN
@@ -353,7 +296,7 @@ Vpp_Prog
 Text Label 8250 1475 2    60   ~ 0
 MCLR_Vpp
 $Comp
-L C_Small C102
+L stepperCon-rescue:C_Small C102
 U 1 1 57A3AE20
 P 1475 1825
 F 0 "C102" H 1567 1871 50  0000 L CNN
@@ -364,7 +307,7 @@ F 3 "" H 1475 1825 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R_Small R101
+L stepperCon-rescue:R_Small R101
 U 1 1 57A3AEE0
 P 1275 925
 F 0 "R101" V 1200 925 50  0000 C CNN
@@ -375,7 +318,7 @@ F 3 "" H 1275 925 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L C_Small C101
+L stepperCon-rescue:C_Small C101
 U 1 1 57A3B01D
 P 1475 1125
 F 0 "C101" H 1567 1171 50  0000 L CNN
@@ -386,7 +329,7 @@ F 3 "" H 1475 1125 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R_Small R102
+L stepperCon-rescue:R_Small R102
 U 1 1 57A3B17D
 P 1275 1625
 F 0 "R102" V 1200 1625 50  0000 C CNN
@@ -397,7 +340,7 @@ F 3 "" H 1275 1625 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR014
+L stepperCon-rescue:GND #PWR014
 U 1 1 57A3B225
 P 1475 1275
 F 0 "#PWR014" H 1475 1025 50  0001 C CNN
@@ -408,7 +351,7 @@ F 3 "" H 1475 1275 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR015
+L stepperCon-rescue:GND #PWR015
 U 1 1 57A3B263
 P 1475 1975
 F 0 "#PWR015" H 1475 1725 50  0001 C CNN
@@ -419,7 +362,7 @@ F 3 "" H 1475 1975 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C103
+L stepperCon-rescue:C_Small C103
 U 1 1 57A3B720
 P 1475 2850
 F 0 "C103" H 1567 2896 50  0000 L CNN
@@ -430,7 +373,7 @@ F 3 "" H 1475 2850 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R_Small R103
+L stepperCon-rescue:R_Small R103
 U 1 1 57A3B726
 P 1275 2650
 F 0 "R103" V 1200 2650 50  0000 C CNN
@@ -441,7 +384,7 @@ F 3 "" H 1275 2650 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR016
+L stepperCon-rescue:GND #PWR016
 U 1 1 57A3B72C
 P 1475 3000
 F 0 "#PWR016" H 1475 2750 50  0001 C CNN
@@ -452,7 +395,7 @@ F 3 "" H 1475 3000 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C104
+L stepperCon-rescue:C_Small C104
 U 1 1 57A3B84D
 P 1475 3550
 F 0 "C104" H 1567 3596 50  0000 L CNN
@@ -463,7 +406,7 @@ F 3 "" H 1475 3550 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R_Small R104
+L stepperCon-rescue:R_Small R104
 U 1 1 57A3B853
 P 1275 3350
 F 0 "R104" V 1200 3350 50  0000 C CNN
@@ -474,7 +417,7 @@ F 3 "" H 1275 3350 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L GND #PWR017
+L stepperCon-rescue:GND #PWR017
 U 1 1 57A3B859
 P 1475 3700
 F 0 "#PWR017" H 1475 3450 50  0001 C CNN
@@ -501,7 +444,7 @@ Current_A
 Text GLabel 1825 3350 2    60   Output ~ 0
 Current_B
 $Comp
-L Led_Small D102
+L stepperCon-rescue:Led_Small D102
 U 1 1 57A46EFC
 P 10200 3950
 F 0 "D102" V 10246 3882 50  0000 R CNN
@@ -512,7 +455,7 @@ F 3 "" V 10200 3950 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Led_Small D103
+L stepperCon-rescue:Led_Small D103
 U 1 1 57A4741B
 P 10700 3950
 F 0 "D103" V 10746 3882 50  0000 R CNN
@@ -523,7 +466,7 @@ F 3 "" V 10700 3950 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L R_Small R114
+L stepperCon-rescue:R_Small R114
 U 1 1 57A47595
 P 10200 4250
 F 0 "R114" V 10125 4250 50  0000 C CNN
@@ -534,7 +477,7 @@ F 3 "" H 10200 4250 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R_Small R117
+L stepperCon-rescue:R_Small R117
 U 1 1 57A476E1
 P 10700 4250
 F 0 "R117" V 10625 4250 50  0000 C CNN
@@ -545,7 +488,7 @@ F 3 "" H 10700 4250 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR018
+L stepperCon-rescue:GND #PWR018
 U 1 1 57A47812
 P 10200 4400
 F 0 "#PWR018" H 10200 4150 50  0001 C CNN
@@ -556,7 +499,7 @@ F 3 "" H 10200 4400 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR019
+L stepperCon-rescue:GND #PWR019
 U 1 1 57A47868
 P 10700 4400
 F 0 "#PWR019" H 10700 4150 50  0001 C CNN
@@ -575,7 +518,7 @@ Blue_LED
 Text Label 3425 4750 2    60   ~ 0
 Red_LED
 $Comp
-L CONN_01X04 P102
+L stepperCon-rescue:CONN_01X04 P102
 U 1 1 57A49379
 P 1550 5750
 F 0 "P102" H 1627 5788 50  0000 L CNN
@@ -586,7 +529,7 @@ F 3 "" H 1550 5750 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X04 P103
+L stepperCon-rescue:CONN_01X04 P103
 U 1 1 57A49445
 P 1550 6500
 F 0 "P103" H 1628 6538 50  0000 L CNN
@@ -615,7 +558,7 @@ En_B
 Text GLabel 6950 4350 2    60   Input ~ 0
 ENABLE_B
 $Comp
-L BSS138-RESCUE-stepperCon Q101
+L stepperCon-rescue:BSS138-RESCUE-stepperCon Q101
 U 1 1 57A5214E
 P 4650 6800
 F 0 "Q101" V 4889 6800 50  0000 C CNN
@@ -626,7 +569,7 @@ F 3 "" H 4650 6800 50  0000 L CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L BSS138-RESCUE-stepperCon Q102
+L stepperCon-rescue:BSS138-RESCUE-stepperCon Q102
 U 1 1 57A52242
 P 4675 7350
 F 0 "Q102" V 4914 7350 50  0000 C CNN
@@ -637,7 +580,7 @@ F 3 "" H 4675 7350 50  0000 L CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L R_Small R107
+L stepperCon-rescue:R_Small R107
 U 1 1 57A53EB8
 P 5075 6700
 F 0 "R107" V 5000 6700 50  0000 C CNN
@@ -648,7 +591,7 @@ F 3 "" H 5075 6700 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L R_Small R108
+L stepperCon-rescue:R_Small R108
 U 1 1 57A53FB2
 P 5425 6700
 F 0 "R108" V 5350 6700 50  0000 C CNN
@@ -659,7 +602,7 @@ F 3 "" H 5425 6700 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L R_Small R106
+L stepperCon-rescue:R_Small R106
 U 1 1 57A5403D
 P 4225 6700
 F 0 "R106" V 4150 6700 50  0000 C CNN
@@ -670,7 +613,7 @@ F 3 "" H 4225 6700 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L R_Small R105
+L stepperCon-rescue:R_Small R105
 U 1 1 57A54101
 P 3925 6700
 F 0 "R105" V 3850 6700 50  0000 C CNN
@@ -681,7 +624,7 @@ F 3 "" H 3925 6700 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L VDD #PWR020
+L stepperCon-rescue:VDD #PWR020
 U 1 1 57A56BF2
 P 5425 6500
 F 0 "#PWR020" H 5425 6350 50  0001 C CNN
@@ -692,7 +635,7 @@ F 3 "" H 5425 6500 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VCC #PWR021
+L stepperCon-rescue:VCC #PWR021
 U 1 1 57A56DC2
 P 3925 6500
 F 0 "#PWR021" H 3925 6350 50  0001 C CNN
@@ -717,7 +660,7 @@ PWM DAC LPFs
 Text Notes 550  2450 0    60   ~ 0
 Current Sense Input Filters
 $Comp
-L CONN_01X02 P105
+L stepperCon-rescue:CONN_01X02 P105
 U 1 1 57A5F10F
 P 2500 6750
 F 0 "P105" H 2578 6788 50  0000 L CNN
@@ -728,7 +671,7 @@ F 3 "" H 2500 6750 60  0000 C CNN
 	1    0    0    1   
 $EndComp
 $Comp
-L GND #PWR022
+L stepperCon-rescue:GND #PWR022
 U 1 1 57A5F205
 P 2300 6900
 F 0 "#PWR022" H 2300 6650 50  0001 C CNN
@@ -739,7 +682,7 @@ F 3 "" H 2300 6900 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VDD #PWR023
+L stepperCon-rescue:VDD #PWR023
 U 1 1 57A5F276
 P 2300 6600
 F 0 "#PWR023" H 2300 6450 50  0001 C CNN
@@ -750,7 +693,7 @@ F 3 "" H 2300 6600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X04 P104
+L stepperCon-rescue:CONN_01X04 P104
 U 1 1 57A62A97
 P 1550 7250
 F 0 "P104" H 1627 7288 50  0000 L CNN
@@ -761,7 +704,7 @@ F 3 "" H 1550 7250 60  0000 C CNN
 	1    0    0    1   
 $EndComp
 $Comp
-L VCC #PWR024
+L stepperCon-rescue:VCC #PWR024
 U 1 1 57A6350E
 P 1350 7000
 F 0 "#PWR024" H 1350 6850 50  0001 C CNN
@@ -776,7 +719,7 @@ SCL
 Text GLabel 1200 7175 0    60   Output ~ 0
 SDA
 $Comp
-L GND #PWR025
+L stepperCon-rescue:GND #PWR025
 U 1 1 57A63940
 P 1350 7500
 F 0 "#PWR025" H 1350 7250 50  0001 C CNN
@@ -787,7 +730,7 @@ F 3 "" H 1350 7500 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L MC74VHC1GT50 U104
+L stepperCon-rescue:MC74VHC1GT50 U104
 U 1 1 57A683A4
 P 10525 5325
 F 0 "U104" H 10600 5275 39  0000 C CNN
@@ -798,7 +741,7 @@ F 3 "" H 10525 5325 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L MC74VHC1GT50 U105
+L stepperCon-rescue:MC74VHC1GT50 U105
 U 1 1 57A684A0
 P 10525 6025
 F 0 "U105" H 10575 5950 39  0000 L CNN
@@ -809,7 +752,7 @@ F 3 "" H 10525 6025 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L MC74VHC1GT50 U102
+L stepperCon-rescue:MC74VHC1GT50 U102
 U 1 1 57A68549
 P 9200 5325
 F 0 "U102" H 9250 5250 39  0000 L CNN
@@ -820,7 +763,7 @@ F 3 "" H 9200 5325 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L MC74VHC1GT50 U103
+L stepperCon-rescue:MC74VHC1GT50 U103
 U 1 1 57A68669
 P 9200 6025
 F 0 "U103" H 9400 5900 39  0000 R CNN
@@ -831,7 +774,7 @@ F 3 "" H 9200 6025 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VDD #PWR026
+L stepperCon-rescue:VDD #PWR026
 U 1 1 57A4902B
 P 10525 5200
 F 0 "#PWR026" H 10525 5050 50  0001 C CNN
@@ -842,7 +785,7 @@ F 3 "" H 10525 5200 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VDD #PWR027
+L stepperCon-rescue:VDD #PWR027
 U 1 1 57A490F9
 P 10525 5900
 F 0 "#PWR027" H 10525 5750 50  0001 C CNN
@@ -853,7 +796,7 @@ F 3 "" H 10525 5900 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR028
+L stepperCon-rescue:GND #PWR028
 U 1 1 57A4B03A
 P 10525 5450
 F 0 "#PWR028" H 10525 5200 50  0001 C CNN
@@ -864,7 +807,7 @@ F 3 "" H 10525 5450 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR029
+L stepperCon-rescue:GND #PWR029
 U 1 1 57A4BDD9
 P 10525 6150
 F 0 "#PWR029" H 10525 5900 50  0001 C CNN
@@ -875,7 +818,7 @@ F 3 "" H 10525 6150 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VDD #PWR030
+L stepperCon-rescue:VDD #PWR030
 U 1 1 57A4BE59
 P 9200 5200
 F 0 "#PWR030" H 9200 5050 50  0001 C CNN
@@ -886,7 +829,7 @@ F 3 "" H 9200 5200 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR031
+L stepperCon-rescue:GND #PWR031
 U 1 1 57A50535
 P 9200 5450
 F 0 "#PWR031" H 9200 5200 50  0001 C CNN
@@ -897,7 +840,7 @@ F 3 "" H 9200 5450 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR032
+L stepperCon-rescue:GND #PWR032
 U 1 1 57A5338A
 P 9200 6150
 F 0 "#PWR032" H 9200 5900 50  0001 C CNN
@@ -908,7 +851,7 @@ F 3 "" H 9200 6150 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VCC #PWR033
+L stepperCon-rescue:VCC #PWR033
 U 1 1 57A557DC
 P 9200 5900
 F 0 "#PWR033" H 9200 5750 50  0001 C CNN
@@ -935,7 +878,7 @@ DIR
 Text GLabel 9400 5325 2    60   Input ~ 0
 ENABLE
 $Comp
-L CONN_01X06 P101
+L stepperCon-rescue:CONN_01X06 P101
 U 1 1 57A59294
 P 1550 4800
 F 0 "P101" H 1628 4838 50  0000 L CNN
@@ -946,7 +889,7 @@ F 3 "" H 1550 4800 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VCC #PWR034
+L stepperCon-rescue:VCC #PWR034
 U 1 1 57A59378
 P 1350 4450
 F 0 "#PWR034" H 1350 4300 50  0001 C CNN
@@ -957,7 +900,7 @@ F 3 "" H 1350 4450 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR035
+L stepperCon-rescue:GND #PWR035
 U 1 1 57A5947F
 P 1350 5150
 F 0 "#PWR035" H 1350 4900 50  0001 C CNN
@@ -976,7 +919,7 @@ ENABLE
 Text GLabel 1100 4575 0    60   Input ~ 0
 Fault
 $Comp
-L VDD #PWR036
+L stepperCon-rescue:VDD #PWR036
 U 1 1 57A5E2F4
 P 3700 1050
 F 0 "#PWR036" H 3700 900 50  0001 C CNN
@@ -987,7 +930,7 @@ F 3 "" H 3700 1050 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VDD #PWR037
+L stepperCon-rescue:VDD #PWR037
 U 1 1 57A5E2FA
 P 4100 1050
 F 0 "#PWR037" H 4100 900 50  0001 C CNN
@@ -998,7 +941,7 @@ F 3 "" H 4100 1050 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C107
+L stepperCon-rescue:C_Small C107
 U 1 1 57A5E300
 P 3700 1175
 F 0 "C107" H 3792 1221 50  0000 L CNN
@@ -1009,7 +952,7 @@ F 3 "" H 3700 1175 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C108
+L stepperCon-rescue:C_Small C108
 U 1 1 57A5E306
 P 4100 1175
 F 0 "C108" H 4192 1221 50  0000 L CNN
@@ -1020,7 +963,7 @@ F 3 "" H 4100 1175 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR038
+L stepperCon-rescue:GND #PWR038
 U 1 1 57A5E30C
 P 4100 1300
 F 0 "#PWR038" H 4100 1050 50  0001 C CNN
@@ -1031,7 +974,7 @@ F 3 "" H 4100 1300 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR039
+L stepperCon-rescue:GND #PWR039
 U 1 1 57A5E312
 P 3700 1300
 F 0 "#PWR039" H 3700 1050 50  0001 C CNN
@@ -1042,7 +985,7 @@ F 3 "" H 3700 1300 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VDD #PWR040
+L stepperCon-rescue:VDD #PWR040
 U 1 1 57A5E707
 P 4525 1050
 F 0 "#PWR040" H 4525 900 50  0001 C CNN
@@ -1053,7 +996,7 @@ F 3 "" H 4525 1050 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C109
+L stepperCon-rescue:C_Small C109
 U 1 1 57A5E713
 P 4525 1175
 F 0 "C109" H 4617 1221 50  0000 L CNN
@@ -1064,7 +1007,7 @@ F 3 "" H 4525 1175 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C110
+L stepperCon-rescue:C_Small C110
 U 1 1 57A5E719
 P 4925 1175
 F 0 "C110" H 5017 1221 50  0000 L CNN
@@ -1075,7 +1018,7 @@ F 3 "" H 4925 1175 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR041
+L stepperCon-rescue:GND #PWR041
 U 1 1 57A5E71F
 P 4925 1300
 F 0 "#PWR041" H 4925 1050 50  0001 C CNN
@@ -1086,7 +1029,7 @@ F 3 "" H 4925 1300 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR042
+L stepperCon-rescue:GND #PWR042
 U 1 1 57A5E725
 P 4525 1300
 F 0 "#PWR042" H 4525 1050 50  0001 C CNN
@@ -1097,7 +1040,7 @@ F 3 "" H 4525 1300 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VCC #PWR043
+L stepperCon-rescue:VCC #PWR043
 U 1 1 57A5E838
 P 4925 1050
 F 0 "#PWR043" H 4925 900 50  0001 C CNN
@@ -1108,7 +1051,7 @@ F 3 "" H 4925 1050 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R_Small R115
+L stepperCon-rescue:R_Small R115
 U 1 1 57A61D51
 P 10250 1775
 F 0 "R115" V 10175 1775 50  0000 C CNN
@@ -1119,7 +1062,7 @@ F 3 "" H 10250 1775 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L R_Small R116
+L stepperCon-rescue:R_Small R116
 U 1 1 57A61EA9
 P 10500 1775
 F 0 "R116" V 10425 1775 50  0000 C CNN
@@ -1130,7 +1073,7 @@ F 3 "" H 10500 1775 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L BSS138-RESCUE-stepperCon Q103
+L stepperCon-rescue:BSS138-RESCUE-stepperCon Q103
 U 1 1 57A6DCAA
 P 9050 1725
 F 0 "Q103" H 9275 1725 50  0000 C CNN
@@ -1141,7 +1084,7 @@ F 3 "" H 9050 1725 50  0000 L CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L GND #PWR044
+L stepperCon-rescue:GND #PWR044
 U 1 1 57A6ED42
 P 8950 2325
 F 0 "#PWR044" H 8950 2075 50  0001 C CNN
@@ -1152,7 +1095,7 @@ F 3 "" H 8950 2325 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R_Small R113
+L stepperCon-rescue:R_Small R113
 U 1 1 57A6F12C
 P 9250 1975
 F 0 "R113" V 9150 1975 50  0000 C CNN
@@ -1163,7 +1106,7 @@ F 3 "" H 9250 1975 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L R_Small R112
+L stepperCon-rescue:R_Small R112
 U 1 1 57A6F2EE
 P 8950 2125
 F 0 "R112" V 8850 2125 50  0000 C CNN
@@ -1174,7 +1117,7 @@ F 3 "" H 8950 2125 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR045
+L stepperCon-rescue:GND #PWR045
 U 1 1 57A6F3B3
 P 9250 2325
 F 0 "#PWR045" H 9250 2075 50  0001 C CNN
@@ -1187,7 +1130,7 @@ $EndComp
 Text GLabel 9400 1775 2    60   Input ~ 0
 Reset
 $Comp
-L CONN_01X02 P106
+L stepperCon-rescue:CONN_01X02 P106
 U 1 1 57A700AD
 P 2500 7350
 F 0 "P106" H 2578 7388 50  0000 L CNN
@@ -1200,7 +1143,7 @@ $EndComp
 Text GLabel 2200 7300 0    60   Output ~ 0
 Reset
 $Comp
-L GND #PWR046
+L stepperCon-rescue:GND #PWR046
 U 1 1 57A703BC
 P 2300 7500
 F 0 "#PWR046" H 2300 7250 50  0001 C CNN
@@ -1211,7 +1154,7 @@ F 3 "" H 2300 7500 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mount_hole J101
+L stepperCon-rescue:Mount_hole J101
 U 1 1 57A70E37
 P 6800 5700
 F 0 "J101" H 6887 5738 39  0000 L CNN
@@ -1222,7 +1165,7 @@ F 3 "" H 6800 5700 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mount_hole J103
+L stepperCon-rescue:Mount_hole J103
 U 1 1 57A71091
 P 7450 5700
 F 0 "J103" H 7537 5738 39  0000 L CNN
@@ -1233,7 +1176,7 @@ F 3 "" H 7450 5700 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mount_hole J102
+L stepperCon-rescue:Mount_hole J102
 U 1 1 57A71177
 P 6800 5950
 F 0 "J102" H 6887 5988 39  0000 L CNN
@@ -1244,7 +1187,7 @@ F 3 "" H 6800 5950 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mount_hole J104
+L stepperCon-rescue:Mount_hole J104
 U 1 1 57A7126E
 P 7450 5950
 F 0 "J104" H 7537 5988 39  0000 L CNN
@@ -1255,7 +1198,7 @@ F 3 "" H 7450 5950 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR047
+L stepperCon-rescue:GND #PWR047
 U 1 1 57A71507
 P 6700 6100
 F 0 "#PWR047" H 6700 5850 50  0001 C CNN
@@ -1266,7 +1209,7 @@ F 3 "" H 6700 6100 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR048
+L stepperCon-rescue:GND #PWR048
 U 1 1 57A715B4
 P 7350 6100
 F 0 "#PWR048" H 7350 5850 50  0001 C CNN
@@ -1291,18 +1234,7 @@ LEDs
 Text Notes 7750 625  0    60   ~ 0
 In Circuit Programming and Reset
 $Comp
-L BAV99W D101
-U 1 1 57A61DBA
-P 8400 1475
-F 0 "D101" H 8470 1515 50  0000 L CNN
-F 1 "BAV99W" H 8470 1395 50  0000 L CNN
-F 2 "TO_SOT_Packages_SMD:SOT-323" H 8400 1375 50  0001 C CNN
-F 3 "" H 8400 1375 50  0000 C CNN
-	1    8400 1475
-	1    0    0    -1  
-$EndComp
-$Comp
-L Crystal_GND3 X101
+L stepperCon-rescue:Crystal_GND3 X101
 U 1 1 592755BA
 P 8610 2950
 F 0 "X101" H 8610 3175 50  0000 C CNN
@@ -1323,7 +1255,7 @@ Wire Wire Line
 Wire Wire Line
 	5375 5300 5375 5250
 Wire Wire Line
-	5275 5300 5375 5300
+	5275 5300 5325 5300
 Wire Wire Line
 	5275 5300 5275 5250
 Wire Wire Line
@@ -1418,7 +1350,7 @@ Wire Wire Line
 Wire Wire Line
 	5375 2400 5375 2450
 Wire Wire Line
-	5275 2400 5375 2400
+	5275 2400 5325 2400
 Wire Wire Line
 	5275 2400 5275 2450
 Wire Wire Line
@@ -1436,7 +1368,7 @@ Connection ~ 8825 2950
 Wire Wire Line
 	9340 3150 9340 3100
 Wire Wire Line
-	9240 3150 9340 3150
+	9240 3150 9290 3150
 Wire Wire Line
 	9240 3150 9240 3100
 Wire Wire Line
@@ -1445,30 +1377,30 @@ Connection ~ 9290 3150
 Wire Wire Line
 	8950 1125 8950 1175
 Wire Wire Line
-	8950 1375 8950 1525
+	8950 1375 8950 1475
 Wire Wire Line
-	8800 1475 9100 1475
+	8800 1475 8950 1475
 Connection ~ 8950 1475
 Wire Wire Line
 	1475 1275 1475 1225
 Wire Wire Line
-	1375 925  1825 925 
+	1375 925  1475 925 
 Wire Wire Line
 	1475 925  1475 1025
 Wire Wire Line
-	1375 1625 1825 1625
+	1375 1625 1475 1625
 Wire Wire Line
 	1475 1625 1475 1725
 Wire Wire Line
 	1475 1925 1475 1975
 Wire Wire Line
-	1375 2650 1825 2650
+	1375 2650 1475 2650
 Wire Wire Line
 	1475 2650 1475 2750
 Wire Wire Line
 	1475 2950 1475 3000
 Wire Wire Line
-	1375 3350 1825 3350
+	1375 3350 1475 3350
 Wire Wire Line
 	1475 3350 1475 3450
 Wire Wire Line
@@ -1572,25 +1504,25 @@ Wire Wire Line
 Wire Wire Line
 	6875 4500 6950 4500
 Wire Wire Line
-	4850 6900 5675 6900
+	4850 6900 5075 6900
 Wire Wire Line
 	5075 6900 5075 6800
 Wire Wire Line
-	4875 7450 5675 7450
+	4875 7450 5425 7450
 Wire Wire Line
 	5425 7450 5425 6800
 Wire Wire Line
-	3650 6900 4450 6900
+	3650 6900 3925 6900
 Wire Wire Line
 	3925 6900 3925 6800
 Wire Wire Line
 	4225 6800 4225 7450
 Wire Wire Line
-	3650 7450 4475 7450
+	3650 7450 4225 7450
 Wire Wire Line
-	3925 6500 3925 6600
+	3925 6500 3925 6550
 Wire Wire Line
-	3925 6550 4600 6550
+	3925 6550 4225 6550
 Wire Wire Line
 	4600 6550 4600 6600
 Wire Wire Line
@@ -1607,7 +1539,7 @@ Wire Wire Line
 Wire Wire Line
 	5075 6550 5425 6550
 Wire Wire Line
-	5425 6500 5425 6600
+	5425 6500 5425 6550
 Connection ~ 5425 6550
 Connection ~ 5075 6900
 Connection ~ 5425 7450
@@ -1728,10 +1660,10 @@ Wire Wire Line
 Wire Wire Line
 	2300 7300 2200 7300
 Wire Wire Line
-	6700 5700 6700 6100
+	6700 5700 6700 5950
 Connection ~ 6700 5950
 Wire Wire Line
-	7350 5700 7350 6100
+	7350 5700 7350 5950
 Connection ~ 7350 5950
 Wire Notes Line
 	6550 5500 7950 5500
@@ -1812,29 +1744,21 @@ Wire Wire Line
 Wire Wire Line
 	8825 3350 8825 3300
 Wire Wire Line
-	8425 3350 8825 3350
+	8425 3350 8610 3350
 Wire Wire Line
 	8425 3300 8425 3350
 Wire Wire Line
-	8825 2765 8825 3100
-Connection ~ 8825 3050
+	8825 2765 8825 2950
 Wire Wire Line
-	8250 1475 8600 1475
-Connection ~ 8325 1475
-Wire Wire Line
-	8400 1275 8400 1125
-Wire Wire Line
-	8400 1825 8400 1675
-Wire Wire Line
-	8760 2950 9190 2950
+	8760 2950 8825 2950
 Connection ~ 8425 3050
 Wire Wire Line
-	8610 3150 8610 3405
+	8610 3150 8610 3350
 Connection ~ 8610 3350
 Wire Wire Line
 	8460 2950 8425 2950
 Wire Wire Line
-	8425 2950 8425 3100
+	8425 2950 8425 3050
 Wire Wire Line
 	8425 3050 8425 3045
 Wire Wire Line
@@ -1843,4 +1767,54 @@ Wire Wire Line
 	8325 2765 8325 2950
 Wire Wire Line
 	8325 2950 6675 2950
+Wire Wire Line
+	5325 5300 5375 5300
+Wire Wire Line
+	5325 2400 5375 2400
+Wire Wire Line
+	8825 2950 9190 2950
+Wire Wire Line
+	9290 3150 9340 3150
+Wire Wire Line
+	8950 1475 8950 1525
+Wire Wire Line
+	8950 1475 9100 1475
+Wire Wire Line
+	1475 925  1825 925 
+Wire Wire Line
+	1475 1625 1825 1625
+Wire Wire Line
+	1475 2650 1825 2650
+Wire Wire Line
+	1475 3350 1825 3350
+Wire Wire Line
+	4425 6550 4600 6550
+Wire Wire Line
+	4225 6550 4425 6550
+Wire Wire Line
+	3925 6550 3925 6600
+Wire Wire Line
+	5425 6550 5425 6600
+Wire Wire Line
+	5075 6900 5675 6900
+Wire Wire Line
+	5425 7450 5675 7450
+Wire Wire Line
+	3925 6900 4450 6900
+Wire Wire Line
+	4225 7450 4475 7450
+Wire Wire Line
+	6700 5950 6700 6100
+Wire Wire Line
+	7350 5950 7350 6100
+Wire Wire Line
+	8425 3050 8425 3100
+Wire Wire Line
+	8610 3350 8825 3350
+Wire Wire Line
+	8610 3350 8610 3405
+Wire Wire Line
+	8825 2950 8825 3100
+Wire Wire Line
+	8250 1475 8600 1475
 $EndSCHEMATC

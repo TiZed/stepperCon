@@ -18,3 +18,6 @@ firmware/nbproject/
 # ignore production zip files
 *.zip
 
+.*
+_*
+rescue-backup
