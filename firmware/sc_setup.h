@@ -19,9 +19,6 @@ void intSetup(void) ;
 void adc_setup(void) ;
 void resetCheck(void) ;
 
-void pwmOut(void) ;
-
-
 #ifdef	__cplusplus
 }
 #endif

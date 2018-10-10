@@ -84,14 +84,14 @@
 #define CUR_GAIN 90          // Current sensor gain
 
 // PI Parameters
-#define KP      30           // Proportional coefficient
-#define KI      10           // Integral coefficient
+#define KP      0            // Proportional coefficient
+#define KI      100          // Integral coefficient
 
-#define I2C_ADDRESS 0x44     // X- 0x40, Y- 0x42, Z- 0x44 
+#define I2C_ADDRESS 0x42     // X- 0x40, Y- 0x42, Z- 0x44 
 #define I2C_REGISTERS 11
 
 #define MAX_AMP 1852         // [mA] Maximum driver amperage
-#define SET_AMP 1400         // [mA] Default driver limit
+#define SET_AMP 700          // [mA] Default driver limit
 #define T_BLANK 24           // [62.5nsec.] dead-band for transistors transition
 
 // Stepping modes
@@ -148,6 +148,11 @@ volatile int16_t pid_ki ;            // Reg 0x09 (LSB) & 0x0a (MSB)
 volatile int8_t  dir ;               // Direction
 volatile int8_t  skip ;              // Current steps, based on micro-stepping mode 
 
+volatile int16_t max_current ;
+volatile int16_t min_current ;
+
+volatile uint8_t fault ;
+
 volatile uint16_t pwm_lu[FULL_CYCLE] ;   // PWM lookup table
 volatile uint16_t zero_cross ;
 
@@ -158,14 +163,11 @@ volatile uint8_t i2c_regs[I2C_REGISTERS] ;
 uint8_t i2c_dirty ;         // I2C "dirty", does not match EEPROM
 volatile uint8_t i2c_buf ;
 
-volatile uint16_t adc_wdt ;
 
 // High priority interrupt
 static void highInt(void) __interrupt(1) {
     // ADC Done
     if (PIR1bits.ADIF) {
-        adc_wdt = 0 ;
-        
         if (state != STEP) {
             if (ADCON0bits.CHS == 0b0001) state = CALC_PI_A ;
             else state = CALC_PI_B ;
@@ -280,7 +282,7 @@ void i2cSetup(void) {
 }
 
 // Prepare interrupts
-void activeInts(void) {
+void activeInts(uint8_t has_pid) {
     PIE1bits.SSP1IE = 0 ;       // Disable I2C interrupt
     SSP1CON1bits.SSPEN = 0 ;    // Disable I2C port
     PIE2bits.BCL1IE = 0 ;       // Disable I2C collision detection interrupt
@@ -297,7 +299,12 @@ void activeInts(void) {
     
     INTCONbits.INT0IE = 1 ;     // Enable 'step' interrupt
     INTCON3bits.INT2IE = 1 ;    // Enable 'dir' interrupt
-    PIE1bits.ADIE = 1 ;         // Enable ADC interrupt
+    
+    PIR1bits.ADIF = 0 ;         // Clear ADC interrupt
+    PIR2bits.C1IF = 0 ;         // Clear comparators interrupts   
+    PIR2bits.C2IF = 0 ;   
+    
+    if(has_pid) PIE1bits.ADIE = 1 ;         // Enable ADC interrupt
 }
 
 void idleInts(void) {
@@ -318,6 +325,21 @@ void idleInts(void) {
     SSP1CON1bits.SSPEN = 1 ;    // Enable I2C port
 }
 
+void stop(void) {
+    LATAbits.LATA4 = 0 ;            // Shut phases down
+    LATAbits.LATA5 = 0 ; 
+    
+    idleInts() ;
+                    
+    ECCP2ASbits.CCP2ASE = 1    ;    // Shutdown PWM 
+    ECCP1ASbits.CCP1ASE = 1    ;    
+
+    ADCON0bits.GO = 0 ;
+
+    PORTDbits.RD2 = 0 ;             // Turn blue LED off
+    state = IDLE ;
+}
+
 // Calculate PWM lookup table
 void prep_pwm_lu(void) {
     float ratio, set, bias ;
@@ -326,7 +348,7 @@ void prep_pwm_lu(void) {
     int16_t min = 32000 ;
     
     ratio = (float)set_amp / (float)max_amp ;
-    bias = (float)PWM_MAX / 2.0 + 1 ;
+    bias = ((float)PWM_MAX / 2.0) + 0.5 ;
     
     zero_cross = bias ;
     
@@ -338,11 +360,21 @@ void prep_pwm_lu(void) {
         if ((int16_t)pwm_lu[i] < min) min = pwm_lu[i] ;
     }
     
-    max += 15 ;
-    min -= 15 ;
+    set_max_out(max + 10) ;
+    set_min_out(min - 10) ;
     
-    set_max_out(max) ;
-    set_min_out(min) ;
+    max_current = max + 30 ;
+    min_current = min - 30 ;
+}
+
+void set_fault(void) {
+    // Signal fault to controller
+    LATBbits.LATB4 = 1 ;
+    
+    // Turn on red LED
+    LATCbits.LATC5 = 1 ;
+    
+    fault = 1 ;
 }
 
 // Get operation variables
@@ -386,6 +418,8 @@ int main(void) {
     pi_result_t pi_result_a ;
     pi_result_t pi_result_b ;   
     uint8_t dummy ;
+    uint8_t a_spike, b_spike ;
+    uint16_t adc_wdt ; 
   
     int16_t step_a = 0 ;                         // Current phase A step
     int16_t step_b = 0 ;                         // Current phase B step
@@ -427,11 +461,11 @@ int main(void) {
         switch(state) {
             case START:
                 state = RUNNING ;
+                LATCbits.LATC5 = 0 ;
+                LATBbits.LATB4 = 0 ;
                 
                 // Turn blue LED on
                 LATDbits.LATD2 = 1 ;
-                
-                skip = dir * micro_steps ;
                 
                 // On full step phase A starts at 45 deg, 0 deg otherwise
                 if (micro_steps == STEP_1) step_a = STEPS / 2 ;
@@ -439,6 +473,9 @@ int main(void) {
                 
                 // phase B is +90 deg from phase A
                 step_b = step_a + STEPS ;
+               
+                a_spike = 0 ;
+                b_spike = 0 ;
                 
                 init_result(&pi_result_a, pid_kp, pid_ki) ;
                 init_result(&pi_result_b, pid_kp, pid_ki) ;
@@ -448,16 +485,26 @@ int main(void) {
                 pwm_a = pwm_lu[step_a] ;
                 pwm_b = pwm_lu[step_b] ;
                 
+                adc_wdt = 0 ;
+                
+                pwmSetup(t_blank) ;        // Activate PWM
+                activeInts(pid_kp) ;             // Set active state interrupts
+                skip = dir * micro_steps ;
+                
+                if(pid_kp != 0) {
+                    ADCON0bits.CHS = 0b0001 ;  // Set capture to RA0
+                    ADCON0bits.GO = 1 ;
+                }
+                else {
+                    CCPR2L = pwm_a >> 2 ;
+                    CCP2CONbits.DC2B = pwm_a ;
+                    
+                    CCPR1L = pwm_b >> 2 ;
+                    CCP1CONbits.DC1B = pwm_b ;
+                }
+                
                 LATAbits.LATA4 = 1 ;
                 LATAbits.LATA5 = 1 ; 
-                LATCbits.LATC5 = 0 ;
-               
-                pwmSetup(t_blank) ;        // Activate PWM
-                pwmOut() ;
-                activeInts() ;             // Set active state interrupts
-                
-                ADCON0bits.CHS = 0b0001 ;  // Set capture to RA0
-                ADCON0bits.GO = 1 ;
                 
                 break ;
                 
@@ -467,19 +514,31 @@ int main(void) {
                 step_a += skip ;
                 step_b += skip ;
 
-                if (step_a > FULL_CYCLE - 1) step_a -= FULL_CYCLE ;
+                if (step_a >= FULL_CYCLE) step_a -= FULL_CYCLE ;
                 else if (step_a < 0) step_a += FULL_CYCLE ;
 
-                if (step_b > FULL_CYCLE - 1) step_b -= FULL_CYCLE ; 
+                if (step_b >= FULL_CYCLE) step_b -= FULL_CYCLE ; 
                 else if (step_b < 0) step_b += FULL_CYCLE ;
                 
                 pwm_a = pwm_lu[step_a] ;
                 pwm_b = pwm_lu[step_b] ;
                 
-                if (!PIE2bits.C2IE && !PIE2bits.C1IE && !ADCON0bits.GO) {
-                    dummy = CM1CON0 ;
-                    PIR2bits.C1IF = 0 ; 
-                    PIE2bits.C1IE = 1 ;
+                // Avoid loosing the ADC cycles
+                if (pid_kp != 0) {
+                    if (!PIE2bits.C2IE && !PIE2bits.C1IE && !ADCON0bits.GO) {
+                        dummy = CM1CON0 ;
+                        PIR2bits.C1IF = 0 ; 
+                        PIE2bits.C1IE = 1 ;
+                    }
+                }
+                else {
+                    adc_wdt = 0 ;
+                    
+                    CCPR2L = pwm_a >> 2 ;
+                    CCP2CONbits.DC2B = pwm_a ;
+                    
+                    CCPR1L = pwm_b >> 2 ;
+                    CCP1CONbits.DC1B = pwm_b ;
                 }
                 
                 break ;
@@ -491,19 +550,38 @@ int main(void) {
                 adc_res <<= 8 ;
                 adc_res += ADRESL ;
                 
+                /* Fault and shutdown on over current
+                if (adc_res > max_current || adc_res < min_current) {
+                    a_spike++ ;
+                    
+                    if(a_spike > 10) {
+                        INTCONbits.GIE = 0 ;
+                        stop() ;
+                        set_fault() ;
+                        INTCONbits.GIE = 1 ;
+                        break ;
+                    }
+                }
+                else a_spike = 0 ; */
+                
                 dummy = CM2CON0 ;
                 PIR2bits.C2IF = 0 ; 
                 PIE2bits.C2IE = 1 ;
                 
-                LATCbits.LATC5 = 1 ;
                 calc_pi(&pi_result_a, adc_res, pwm_a) ;
                 
                 CCPR2L = pi_result_a.output >> 2 ;
                 CCP2CONbits.DC2B = pi_result_a.output ;
-                LATCbits.LATC5 = 0 ;
                 
-                CCPR5L = pi_result_a.output >> 3 ;
-                CCP5CONbits.DC5B = pi_result_a.output >> 1 ;
+                if (adc_res <= 31) {
+                    adc_res = 2 ;
+                }
+                else adc_res -= 30 ;
+                
+                CCPR5L = adc_res >> 2 ;
+                CCP5CONbits.DC5B = adc_res ;
+                
+                adc_wdt = 0 ;
                 
                 break ;
 
@@ -513,25 +591,44 @@ int main(void) {
                 adc_res = ADRESH  ;
                 adc_res <<= 8 ;
                 adc_res += ADRESL ;
+                
+                /* Fault and shutdown on over current
+                if (adc_res > max_current || adc_res < min_current) {
+                    b_spike++ ;
+                    
+                    if (b_spike > 10) {
+                        INTCONbits.GIE = 0 ;
+                        stop() ;
+                        set_fault() ;
+                        INTCONbits.GIE = 1 ;
+                        break ;
+                    }
+                }
+                else b_spike = 0 ; */
 
                 dummy = CM1CON0 ;
                 PIR2bits.C1IF = 0 ; 
                 PIE2bits.C1IE = 1 ;
-                        
+                
                 calc_pi(&pi_result_b, adc_res, pwm_b) ;
                 
                 CCPR1L = pi_result_b.output >> 2 ;
                 CCP1CONbits.DC1B = pi_result_b.output ;
                 
-                adc_res >>= 1 ;
+                if (adc_res <= 31) {
+                    adc_res = 2 ;
+                }
+                else adc_res -= 30 ;
                 
-                CCPR4L = pi_result_b.output >> 3 ;
-                CCP4CONbits.DC4B = pi_result_b.output >> 1 ;
+                CCPR4L = adc_res >> 2 ;
+                CCP4CONbits.DC4B = adc_res ;
+                
+                adc_wdt = 0 ;
                 
                 break ;
                 
             case RUNNING:
-                if(++adc_wdt > 600 && !ADCON0bits.GO) {
+                if(++adc_wdt > 500 && !ADCON0bits.GO) {
                     adc_wdt = 0 ;
                     ADCON0bits.CHS = 0b0001 ;  // Set capture to RA0
                     ADCON0bits.GO = 1 ;
@@ -540,25 +637,14 @@ int main(void) {
                 // Enable signal dropped
                 if (!PORTBbits.RB3) {
                     INTCONbits.GIE = 0 ;
-                    idleInts() ;
-                    
-                    LATAbits.LATA4 = 0 ;            // Shut phases down
-                    LATAbits.LATA5 = 0 ; 
-                    
-                    ECCP2ASbits.CCP2ASE = 1    ;    // Shutdown PWM 
-                    ECCP1ASbits.CCP1ASE = 1    ;    
-                    
-                    ADCON0bits.GO = 0 ;
-                    
-                    PORTDbits.RD2 = 0 ;             // Turn blue LED off
-                    state = IDLE ;
+                    stop() ;
                     INTCONbits.GIE = 1 ;
                 }
                 break ;
                 
             case IDLE: 
                 // Enable stepping
-                if (PORTBbits.RB3) state = START ;
+                if (PORTBbits.RB3 && !fault) state = START ;
                 
                 // If I2C registers were written, store to EEPROM
                 if (i2c_dirty) {

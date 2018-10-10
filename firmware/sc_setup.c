@@ -74,8 +74,8 @@ void pwmSetup(uint8_t db_time) {
     CCPTMRS1bits.C4TSEL = 0b01 ;    // Timer4 to CCP4
     
     T6CONbits.TMR6ON = 0 ;          // Turn Timer6 off
-    PR6 = 0xff ;                    // Set Timer6 for 15.625kHz @64MHz, 10-bit res
-    T6CONbits.T6CKPS = 0b01 ;       // Set prescaler to 1:4
+    PR6 = 0xff ;                    // Set Timer6 for 62.5kHz (15.625kHz) @64MHz, 10-bit res
+    T6CONbits.T6CKPS = 0b01 ;       // Set prescaler to 1:1 (0b01 = 1:4)
     
     T4CONbits.TMR4ON = 0 ;          // Turn Timer4 off
     PR4 = 0xff ;                    // Set Timer4 for 62.5kHz @64MHz, 10-bit res
@@ -93,7 +93,7 @@ void pwmSetup(uint8_t db_time) {
     ECCP1ASbits.CCP1ASE = 1    ;    
     
     CCP2CONbits.P2M = 0b10 ;
-    CCP2CONbits.CCP2M = 0b1111 ;    // Phase A Half-bridge mode
+    CCP2CONbits.CCP2M = 0b1111 ;    // Phase A Half-bridge mode 
     CCP1CONbits.P1M = 0b10 ;
     CCP1CONbits.CCP1M = 0b1111 ;    // Phase B Half-bridge mode
     
@@ -129,42 +129,10 @@ void pwmSetup(uint8_t db_time) {
     ECCP1ASbits.CCP1ASE = 0    ;    
 }
 
-void pwmOut(void) {
-    TRISBbits.TRISB5 = 1 ;
-    
-    CCPTMRS0bits.C3TSEL = 0b00 ;    // Timer2 to CCP3
-    
-    T2CONbits.TMR2ON = 0 ;          // Turn Timer6 off
-    PR2 = 0xff ;                    // Set Timer6 for 15.625kHz @64MHz, 10-bit res
-    T2CONbits.T2CKPS = 0b00 ;       // Set prescaler to 1:1
-    
-    CCP3CONbits.P3M = 0b00 ;
-    CCP3CONbits.CCP3M = 0b1100 ; 
-    
-    TRISBbits.TRISB5 = 0 ;
-    
-    CCPR3L = 128 ;
-    CCP3CONbits.DC3B = 0 ;
-    
-    T2CONbits.TMR2ON = 1 ; 
-}
-
 void compsSetup(void) {
-    // Enable Fixed Voltage Reference (FVR)
-    VREFCON0bits.FVREN = 1 ;
-    while (!VREFCON0bits.FVRST) ;   // Wait for FVR to stabilize
-    VREFCON0bits.FVRS = 0b01 ;      // set FVR to 1.024V
-    
-    // Enable DAC
-    VREFCON1bits.DACNSS = 0 ;       // Set DAC neg. ref. to Vss
-    VREFCON1bits.DACPSS = 0b10 ;    // Set DAC pos. ref. to FVR
-    VREFCON1bits.DACOE = 0 ;        // Disable DAC output pin
-    VREFCON1bits.DACEN = 1 ;        // Enable DAC
-    VREFCON2bits.DACR = 7 ;         // = 224mV
-    
     // Comparator 1 (Phase A) setup
     CM1CON0bits.C1CH = 0b01 ;       // C12N1- input to C1-
-    CM1CON0bits.C1R = 0 ;           // C1+ to Vref input
+    CM1CON0bits.C1R = 0 ;           // C1+ to RA3
     CM2CON1bits.C1RSEL = 0 ;        // Use DAC as Vref
     CM1CON0bits.C1POL = 1 ;         // Invert logic
     CM1CON0bits.C1SP = 1 ;          // Normal power, high speed mode
@@ -172,7 +140,7 @@ void compsSetup(void) {
     
     // Comparator 2 (Phase B) setup
     CM2CON0bits.C2CH = 0b00 ;       // C12N0- input to C2-
-    CM2CON0bits.C2R = 0 ;           // C2+ to Vref input
+    CM2CON0bits.C2R = 0 ;           // C2+ to RA2
     CM2CON1bits.C2RSEL = 0 ;        // Use DAC as Vref
     CM2CON0bits.C2POL = 1 ;         // Invert logic
     CM2CON0bits.C2SP = 1 ;          // Normal power, high speed mode

@@ -54,24 +54,20 @@ void calc_pi(pi_result_t * result, int16_t measured, int16_t setpoint) {
     int16_t error ;
     int32_t output ;
     
-    if (result->kp == 0) {
-        output = setpoint ;
+    error = setpoint - measured ;
+    output = mult_int16(result->kp, error) >> 4 ;
+
+    if(result->kp != 0) {
+        result->out_integ += mult_int16(result->ki, error) >> 9 ;
+
+        if (result->out_integ > _integ_sat) result->out_integ = _integ_sat ;
+        if (result->out_integ < -_integ_sat) result->out_integ = -_integ_sat ;
+
+        output += result->out_integ ;
     }
     
-    else {
-        error = setpoint - measured ;
-        output = mult_int16(result->kp, error) >> 4 ;
-
-        if(result->kp != 0) {
-            result->out_integ += mult_int16(result->ki, error) >> 9 ;
-
-            if (result->out_integ > _integ_sat) result->out_integ = _integ_sat ;
-            if (result->out_integ < -_integ_sat) result->out_integ = -_integ_sat ;
-
-            output += result->out_integ ;
-        }
-    }
-   
+//    output += 512 ; 
+  
     if (output > _max_out) output = _max_out ;
     else if (output < _min_out) output = _min_out ;
     
